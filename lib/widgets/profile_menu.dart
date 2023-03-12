@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ProfileMenu extends StatelessWidget {
-  final IconData MenuIcon;
+  final String MenuIcon;
   final String hintText;
+  final bool first;
 
-  const ProfileMenu(this.MenuIcon, this.hintText);
+  const ProfileMenu(this.MenuIcon, this.hintText, this.first);
 
   @override
   Widget build(BuildContext context) {
@@ -12,22 +13,23 @@ class ProfileMenu extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: Colors.black12,
+            color: Color(0xFFA0A0A0),
             width: 1.0,
           ),
           top: BorderSide(
-            color: Colors.black12,
-            width: 1.0,
+            color: first? Color(0xFFA0A0A0): Colors.transparent,
+            width: first? 1.0:0,
           ),
         ),
       ),
-      padding: const EdgeInsets.only(left: 24.0, right: 24.0, top:10, bottom:10),
+      padding:
+          const EdgeInsets.only(left: 24.0, right: 24.0, top: 10, bottom: 10),
       child: Row(
         children: [
-          Icon(
-            Icons.edit,
-            color: Colors.black12,
-            size: 40,
+          Image.asset(
+            MenuIcon,
+            width: 40,
+            height: 40,
           ),
           const SizedBox(width: 17.0),
           Container(
@@ -39,20 +41,13 @@ class ProfileMenu extends StatelessWidget {
               ),
             ),
           ),
-          const Spacer(), 
+          const Spacer(),
           Container(
-            child: Icon(
-              MenuIcon,
-              size: 17,
-              color: Color(0xFF5F5F5F)
-            ),
+            child: Icon(Icons.arrow_forward_ios,
+                size: 17, color: Color(0xFF5E5E5E)),
           )
         ],
       ),
     );
   }
 }
- 
- 
- 
- 

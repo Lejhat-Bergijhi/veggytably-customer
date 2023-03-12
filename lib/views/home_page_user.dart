@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/widgets/filter_button.dart';
@@ -67,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    "LACTO-OVO\nVEGETARIAN",
+                    "LACTO-OVO VEGETARIAN",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black,
@@ -83,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                   children:[
                     Container(
                       height: 38,
-                      width: (MediaQuery.of(context).size.width) *0.7,
+                      width: min((MediaQuery.of(context).size.width) *0.7, MediaQuery.of(context).size.height*0.7),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           color: Color(0xff70cb88),
