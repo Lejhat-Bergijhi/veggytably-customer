@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:veggytably_customer/views/home_page_user.dart';
+import 'package:veggytably_customer/views/signup_page.dart';
 import '/widgets/input_text.dart';
 
 class LoginPage extends StatelessWidget {
@@ -104,7 +106,7 @@ class LoginPage extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  
+                  Get.offAll(() => HomePage(), transition: Transition.fade);
                   // emailController.clear();
                   // passwordController.clear();
                 },
@@ -140,7 +142,7 @@ class LoginPage extends StatelessWidget {
                   ),
                    GestureDetector(
                       onTap: () {
-                        // Get.offAll(() => SignUpPage(), transition: Transition.fade);
+                        Get.offAll(() => SignUpPage(), transition: Transition.fade);
                       },
                       child: Text(
                         'Sign Up',

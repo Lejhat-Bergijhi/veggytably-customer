@@ -72,7 +72,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Container(
-                  width: 300,
+                  // width: 300,
                   child: InputTextField(
                     emailController,
                     'Name',
@@ -91,7 +91,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Container(
-                  width: 300,
+                  // width: 300,
                   child: InputTextField(
                     passwordController,
                     'Email',
@@ -108,8 +108,9 @@ class EditProfile extends StatelessWidget {
                     ),
                     textAlign: TextAlign.left,
                 ),
-                SizedBox(height: 5),                Container(
-                  width: 300,
+                SizedBox(height: 5),                
+                Container(
+                  // width: 300,
                   child: InputTextField(
                     emailController,
                     'Telephone Number',
@@ -128,7 +129,7 @@ class EditProfile extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  
+                  Get.offAll(() => ProfilePage(), transition: Transition.fade);
                   // emailController.clear();
                   // passwordController.clear();
                 },

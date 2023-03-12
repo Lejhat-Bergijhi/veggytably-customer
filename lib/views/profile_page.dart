@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:veggytably_customer/views/restriction_page.dart';
+import 'package:veggytably_customer/views/login_page.dart';
+import 'package:veggytably_customer/views/restriction_page1.dart';
 import 'package:veggytably_customer/widgets/bottom_navbar.dart';
 import 'package:veggytably_customer/widgets/profile_menu.dart';
 import 'package:veggytably_customer/views/edit_profile.dart';
@@ -65,7 +66,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: (){
-                      Get.offAll(() => RestrictionPage(), transition: Transition.fade);
+                      Get.offAll(() => EditRestrictionPage(), transition: Transition.fade);
                     },
                     child: ProfileMenu(
                       "images/foodres.png",
@@ -94,6 +95,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
+                            Get.offAll(() => LoginPage(), transition: Transition.fade);
                             // AuthController.to.logout();
                           },
                           child: const Text("Yes"),
