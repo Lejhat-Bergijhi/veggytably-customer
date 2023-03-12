@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:veggytably_customer/controllers/auth_controller.dart';
 import 'package:veggytably_customer/views/restriction_page.dart';
 import 'views/login_page.dart';
 import 'views/signup_page.dart';
@@ -16,7 +18,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RestrictionPage(),
+      home: LoginPage(),
+      initialBinding: BindingsBuilder(() {
+        Get.put(AuthController());
+      }),
     );
   }
 }
