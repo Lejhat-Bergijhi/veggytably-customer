@@ -63,7 +63,7 @@ class _UploadPicState extends State<UploadPic> {
                     ),
                     // Profile Image preview
                     Image.asset(
-                      "images/img_dummy.png",
+                      "assets/images/img_dummy.png",
                       width: 130,
                       height: 104,
                     ),
@@ -105,7 +105,7 @@ class _UploadPicState extends State<UploadPic> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Image.asset(
-                                  "images/camera.png",
+                                  "assets/images/camera.png",
                                   fit: BoxFit.none,
                                 )),
                             SizedBox(width: 10),
@@ -148,9 +148,9 @@ class _UploadPicState extends State<UploadPic> {
                                   width: 22,
                                   height: 15,
                                   child: Image.asset(
-                                    "images/gallery.png",
-                                    fit: BoxFit.none,)
-                              ),
+                                    "assets/images/gallery.png",
+                                    fit: BoxFit.none,
+                                  )),
                               SizedBox(width: 10),
                               Text(
                                 "Gallery",
@@ -161,7 +161,6 @@ class _UploadPicState extends State<UploadPic> {
                                 ),
                               ),
                               Spacer(),
-                              
                             ],
                           ),
                         )),
@@ -173,7 +172,7 @@ class _UploadPicState extends State<UploadPic> {
         height: 16,
       ),
       // Login button
-      
+
       // Text: Sign Up
     ]);
   }

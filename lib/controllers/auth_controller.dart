@@ -3,6 +3,7 @@ import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart" hide Response;
 import 'package:dio/dio.dart';
 import "package:veggytably_customer/views/dummy_home.dart";
+import "package:veggytably_customer/views/home_page_user.dart";
 import "../api/auth_api.dart";
 import "../models/authentication_response.dart";
 import '../models/user_model.dart';
@@ -121,7 +122,8 @@ class AuthController extends GetxController {
 
       // TODO: Navigate to home page
       Get.offAll(
-        () => const DummyHomePage(),
+        // () => const DummyHomePage(),
+        () => const HomePage(),
         transition: Transition.fade,
       );
     } catch (e) {
