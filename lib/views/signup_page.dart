@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'package:veggytably_customer/views/login_page.dart';
+import 'package:veggytably_customer/views/restriction_page.dart';
+
 import '../controllers/auth_controller.dart';
+
 import '/widgets/input_text.dart';
 import 'login_page.dart';
 
@@ -134,7 +139,6 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16),
-
               // Text: Don't have an account?
               SizedBox(
                   width: MediaQuery.of(context).size.width,

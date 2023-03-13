@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:veggytably_customer/views/home_page_user.dart';
 import 'package:veggytably_customer/views/profile_page.dart';
-
 import '/widgets/input_text.dart';
 
-class RestrictionPage extends StatelessWidget {
-  const RestrictionPage({super.key});
+class EditRestrictionPage extends StatelessWidget {
+  const EditRestrictionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,22 +16,22 @@ class RestrictionPage extends StatelessWidget {
     bool _isChecked = false;
 
     return Scaffold(
-      // appBar: AppBar(
+      appBar: AppBar(
         
-      //   backgroundColor: Colors.white,
-      //   elevation: 0,
-      //   leading: GestureDetector(
-      //     onTap: () {
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: GestureDetector(
+          onTap: () {
 
-      //         Get.offAll(() => ProfilePage(), transition: Transition.fade);
-      //       },
-      //     child: Container(
-      //       padding: const EdgeInsets.only(left: 12.0, top: 10),
-      //       child:Icon(Icons.arrow_back, color: Colors.black),
+              Get.offAll(() => ProfilePage(), transition: Transition.fade);
+            },
+          child: Container(
+            padding: const EdgeInsets.only(left: 12.0, top: 10),
+            child:Icon(Icons.arrow_back, color: Colors.black),
               
             
-      //     ),
-      //   ),
+          ),
+        ),
         // title: Container(
         //   padding: const EdgeInsets.only(top: 10),
         //   child: Text(
@@ -45,10 +43,10 @@ class RestrictionPage extends StatelessWidget {
         //     ),
         //   ),
         // ),
-      //   toolbarHeight: 50,
-      //   leadingWidth: 30,
+        toolbarHeight: 50,
+        leadingWidth: 30,
       
-      // ),
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
@@ -60,15 +58,15 @@ class RestrictionPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 40),
 
               child: Text(
-                  "Your Dietary Preference",
+                  "Edit Your Dietary Preference",
                   style: TextStyle(
                       color: Color(0xff242424),
-                      fontSize: 32,
+                      fontSize: 22,
                       fontFamily: "Rubik",
                       fontWeight: FontWeight.w700,
                   ),
               ),
-
+  
             ),
             SizedBox(height: 5),
 
@@ -109,7 +107,6 @@ class RestrictionPage extends StatelessWidget {
             Container(
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 padding: EdgeInsets.symmetric(horizontal: 16),
-
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 171, 174, 171).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
@@ -187,13 +184,12 @@ class RestrictionPage extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.offAll(() => HomePage(), transition: Transition.fade);
-
+                  Get.offAll(() => ProfilePage(), transition: Transition.fade);
                   // emailController.clear();
                   // passwordController.clear();
                 },
                 child: Text(
-                  'Continue',
+                  'Save',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
