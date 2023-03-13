@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/views/profile_page.dart';
-import 'package:veggytably_customer/widgets/bottom_navbar.dart';
-import 'package:veggytably_customer/widgets/profile_menu.dart';
 import 'package:veggytably_customer/widgets/upload_pic.dart';
 import 'package:veggytably_customer/widgets/input_text.dart';
-
 
 class EditProfile extends StatelessWidget {
   const EditProfile({super.key});
@@ -16,19 +13,15 @@ class EditProfile extends StatelessWidget {
     TextEditingController passwordController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-
-              Get.offAll(() => ProfilePage(), transition: Transition.fade);
-            },
+            Get.offAll(() => ProfilePage(), transition: Transition.fade);
+          },
           child: Container(
             padding: const EdgeInsets.only(left: 12.0, top: 10),
-            child:Icon(Icons.arrow_back, color: Colors.black),
-              
-            
+            child: Icon(Icons.arrow_back, color: Colors.black),
           ),
         ),
         title: Container(
@@ -44,7 +37,6 @@ class EditProfile extends StatelessWidget {
         ),
         toolbarHeight: 50,
         leadingWidth: 30,
-      
       ),
       backgroundColor: Color.fromRGBO(255, 255, 255, 1),
       body: Container(
@@ -52,23 +44,22 @@ class EditProfile extends StatelessWidget {
         child: ListView(
           physics: BouncingScrollPhysics(),
           children: [
-          
             Container(
               // height: 150,
               child: UploadPic(),
             ),
-             Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                    "NAME",
-                    style: TextStyle(
-                        color: Color(0xff9f9f9f),
-                        fontSize: 10,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.left,
+                  "NAME",
+                  style: TextStyle(
+                    color: Color(0xff9f9f9f),
+                    fontSize: 10,
+                    fontFamily: "Rubik",
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.left,
                 ),
                 SizedBox(height: 5),
                 Container(
@@ -80,14 +71,14 @@ class EditProfile extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                    "EMAIL",
-                    style: TextStyle(
-                        color: Color(0xff9f9f9f),
-                        fontSize: 10,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.left,
+                  "EMAIL",
+                  style: TextStyle(
+                    color: Color(0xff9f9f9f),
+                    fontSize: 10,
+                    fontFamily: "Rubik",
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.left,
                 ),
                 SizedBox(height: 5),
                 Container(
@@ -99,16 +90,16 @@ class EditProfile extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                    "TELEPHONE NUMBER",
-                    style: TextStyle(
-                        color: Color(0xff9f9f9f),
-                        fontSize: 10,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.left,
+                  "TELEPHONE NUMBER",
+                  style: TextStyle(
+                    color: Color(0xff9f9f9f),
+                    fontSize: 10,
+                    fontFamily: "Rubik",
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.left,
                 ),
-                SizedBox(height: 5),                
+                SizedBox(height: 5),
                 Container(
                   // width: 300,
                   child: InputTextField(
@@ -117,7 +108,6 @@ class EditProfile extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10),
-                
               ],
             ),
             // Input Email or Telephone Number
@@ -147,29 +137,9 @@ class EditProfile extends StatelessWidget {
                 ),
               ),
             ),
-         ],
+          ],
         ),
       ),
-      bottomNavigationBar: Container(   
-            height: 87.7,                                          
-            decoration: BoxDecoration(          
-                                                   
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
-        
-                boxShadow: [                                                               
-                BoxShadow(color: Color.fromRGBO(0,0,0,230), spreadRadius: 0, blurRadius: 20),       
-                ],
-
-            ),               
-
-            child: ClipRRect( 
-                
-                                                                         
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
-                                                                   
-                child: CustomBottomNavigationBar(initialIndex: 3),
-            )
-      )
     );
   }
 }

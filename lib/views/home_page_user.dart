@@ -150,217 +150,189 @@ class _HomePageState extends State<HomePage> {
     double boxWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        body: CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          slivers: [
-            const SliverPersistentHeader(
-              delegate: SliverSearchAppBar(),
-              pinned: true,
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      body: CustomScrollView(
+        physics: BouncingScrollPhysics(),
+        slivers: [
+          const SliverPersistentHeader(
+            delegate: SliverSearchAppBar(),
+            pinned: true,
+          ),
+          SliverList(
+              delegate: SliverChildListDelegate([
+            Domvet(marginleft: marginleft, boxWidth: boxWidth),
+            SizedBox(
+              height: 24,
             ),
-            SliverList(
-                delegate: SliverChildListDelegate([
-              Domvet(marginleft: marginleft, boxWidth: boxWidth),
-              SizedBox(
-                height: 24,
-              ),
-              Container(
-                margin: EdgeInsets.only(left: marginleft, right: marginleft),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Filter Your Food",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                      ),
+            Container(
+              margin: EdgeInsets.only(left: marginleft, right: marginleft),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Filter Your Food",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: "Rubik",
+                      fontWeight: FontWeight.w600,
                     ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    Row(
-                      children: [
-                        Filterfood(
-                            boxWidth,
-                            'assets/images/Food-restriction.png',
-                            "Food\nRestriction"),
-                        Spacer(),
-                        Filterfood(boxWidth, 'assets/images/orderhistory.png',
-                            "Order\nHistory"),
-                        Spacer(),
-                        Filterfood(boxWidth, 'assets/images/favresto.png',
-                            "Favorite\nResto"),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Container(
-                margin: EdgeInsets.only(left: marginleft, right: marginleft),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Recommendations for You!",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    Row(
-                      children: [
-                        FilterButton('MEAT-FREE', true),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        FilterButton('DAIRY-FREE', false),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        FilterButton('EGG-FREE', false),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        FilterButton('FISH-FREE', false),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                  // margin: EdgeInsets.only(left: marginleft),
-                  width: boxWidth,
-                  height: 168,
-                  child: ListView(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    physics: BouncingScrollPhysics(),
-                    children: <Widget>[
-                      SizedBox(
-                        width: marginleft,
-                      ),
-                      FoodCard('assets/images/image8.png', 'Salad Mix',
-                          'Helti Resto Jaya Makmur', 'Rp32.000'),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      FoodCard('assets/images/food2.png', 'Veg Rice',
-                          'Waras Resto', 'Rp17.000'),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      FoodCard(
-                          'assets/images/food3.png',
-                          'Indo Mix Vegetarian Salad with Egg',
-                          'MakJreng Resto',
-                          'Rp24.000'),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      FoodCard('assets/images/image8.png', 'Salad Mix',
-                          'Helti Resto Jaya Makmur', 'Rp32.000'),
-                      SizedBox(
-                        width: 12,
-                      ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    children: [
+                      Filterfood(boxWidth, 'assets/images/Food-restriction.png',
+                          "Food\nRestriction"),
+                      Spacer(),
+                      Filterfood(boxWidth, 'assets/images/orderhistory.png',
+                          "Order\nHistory"),
+                      Spacer(),
+                      Filterfood(boxWidth, 'assets/images/favresto.png',
+                          "Favorite\nResto"),
                     ],
-                  )),
-              SizedBox(
-                height: 24,
+                  )
+                ],
               ),
-              Container(
-                margin: EdgeInsets.only(left: marginleft, right: marginleft),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Promo Recommendations:",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                  // margin: EdgeInsets.only(left: marginleft),
-                  width: boxWidth,
-                  height: 168,
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      SizedBox(
-                        width: marginleft,
-                      ),
-                      PromoCard('assets/images/promo1.png'),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      PromoCard('assets/images/promo2.png'),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      PromoCard('assets/images/promo3.png'),
-                      SizedBox(
-                        width: 12,
-                      ),
-                    ],
-                  )),
-              SizedBox(
-                height: 100,
-              ),
-            ]))
-          ],
-        ),
-        bottomNavigationBar: Container(
-            height: 87.7,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25.50),
-                topRight: Radius.circular(25.50),
-                bottomLeft: Radius.circular(0),
-                bottomRight: Radius.circular(0),
-              ),
-              boxShadow: [
-                BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 230),
-                    spreadRadius: 0,
-                    blurRadius: 20),
-              ],
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25.50),
-                topRight: Radius.circular(25.50),
-                bottomLeft: Radius.circular(0),
-                bottomRight: Radius.circular(0),
+            SizedBox(
+              height: 24,
+            ),
+            Container(
+              margin: EdgeInsets.only(left: marginleft, right: marginleft),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Recommendations for You!",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: "Rubik",
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Row(
+                    children: [
+                      FilterButton('MEAT-FREE', true),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      FilterButton('DAIRY-FREE', false),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      FilterButton('EGG-FREE', false),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      FilterButton('FISH-FREE', false),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                ],
               ),
-              child: CustomBottomNavigationBar(
-                initialIndex: 0,
+            ),
+            Container(
+                // margin: EdgeInsets.only(left: marginleft),
+                width: boxWidth,
+                height: 168,
+                child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
+                  children: <Widget>[
+                    SizedBox(
+                      width: marginleft,
+                    ),
+                    FoodCard('assets/images/image8.png', 'Salad Mix',
+                        'Helti Resto Jaya Makmur', 'Rp32.000'),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    FoodCard('assets/images/food2.png', 'Veg Rice',
+                        'Waras Resto', 'Rp17.000'),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    FoodCard(
+                        'assets/images/food3.png',
+                        'Indo Mix Vegetarian Salad with Egg',
+                        'MakJreng Resto',
+                        'Rp24.000'),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    FoodCard('assets/images/image8.png', 'Salad Mix',
+                        'Helti Resto Jaya Makmur', 'Rp32.000'),
+                    SizedBox(
+                      width: 12,
+                    ),
+                  ],
+                )),
+            SizedBox(
+              height: 24,
+            ),
+            Container(
+              margin: EdgeInsets.only(left: marginleft, right: marginleft),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Promo Recommendations:",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: "Rubik",
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
               ),
-            )));
+            ),
+            Container(
+                // margin: EdgeInsets.only(left: marginleft),
+                width: boxWidth,
+                height: 168,
+                child: ListView(
+                  physics: BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    SizedBox(
+                      width: marginleft,
+                    ),
+                    PromoCard('assets/images/promo1.png'),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    PromoCard('assets/images/promo2.png'),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    PromoCard('assets/images/promo3.png'),
+                    SizedBox(
+                      width: 12,
+                    ),
+                  ],
+                )),
+            SizedBox(
+              height: 100,
+            ),
+          ]))
+        ],
+      ),
+    );
   }
 }
 
