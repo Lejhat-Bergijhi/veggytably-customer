@@ -6,15 +6,16 @@ import '../widgets/bottom_navbar.dart';
 import 'home_page_user.dart';
 
 class LandingPage extends StatelessWidget {
+  final int initialIndex;
   final List<Widget> pages = [
     const HomePage(),
     const Placeholder(), // discount
     const Placeholder(), // history
     const ProfilePage(),
   ];
-  LandingPage({super.key});
+  LandingPage({super.key, required this.initialIndex});
 
-  final RxInt _selectedIndex = 0.obs;
+  late final RxInt _selectedIndex = initialIndex.obs;
 
   void setSelectedIndex(int index) {
     _selectedIndex.value = index;
@@ -48,7 +49,7 @@ class LandingPage extends StatelessWidget {
                 bottomRight: Radius.circular(0),
               ),
               child: CustomBottomNavigationBar(
-                initialIndex: 0,
+                initialIndex: initialIndex,
                 setSelectedIndex: setSelectedIndex,
               ),
             )));

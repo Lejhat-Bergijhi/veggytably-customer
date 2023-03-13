@@ -2,145 +2,45 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veggytably_customer/widgets/filter_button.dart';
 import 'package:veggytably_customer/widgets/food_card.dart';
 import 'package:veggytably_customer/widgets/sliver_search_app_bar.dart';
 import 'package:veggytably_customer/widgets/filter_card.dart';
-import 'package:veggytably_customer/widgets/filter_button.dart';
-import 'package:veggytably_customer/widgets/bottom_navbar.dart';
 import 'package:veggytably_customer/views/profile_page.dart';
 
+import '../controllers/auth_controller.dart';
+
 class HomePage extends StatefulWidget {
-  @override
   const HomePage({super.key});
+  @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _hasShownDialog = false;
+  Future<void> showOnce(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    final hasShownDialog =
+        prefs.getBool('modalShown_${AuthController.to.user.id}') ?? false;
+    if (!hasShownDialog) {
+      await prefs.setBool('modalShown_${AuthController.to.user.id}', true);
+
+      if (!context.mounted) return;
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const DialogRestriksi();
+        },
+      );
+    }
+  }
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!_hasShownDialog) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return
-                //dialog
-                SimpleDialog(
-              // border
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              title: Column(
-                children: [
-                  Text(
-                    'Welcome!',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Rubik',
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    "Your default food restriction is",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Rubik',
-                    ),
-                  ),
-                  Container(
-                    // height: 204,
-                    // width: 204,
-                    child: Image.asset(
-                      'assets/images/illustration1.png',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    "LACTO-OVO VEGETARIAN",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 22,
-                      fontFamily: "Rubik",
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              children: <Widget>[
-                Column(children: [
-                  Container(
-                    height: 38,
-                    width: min((MediaQuery.of(context).size.width) * 0.7,
-                        MediaQuery.of(context).size.height * 0.7),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Color(0xff70cb88),
-                    ),
-                    child: TextButton(
-                        onPressed: () {
-                          Get.offAll(() => ProfilePage(),
-                              transition: Transition.fade);
-                        },
-                        child: Text(
-                          "Customize Restriction",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontFamily: "Rubik",
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(
-                        "Customize Later",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xff9f9f9f),
-                          fontSize: 12,
-                          decoration: TextDecoration.underline,
-                        ),
-                      )),
-                  SizedBox(height: 12)
-                ]),
-              ],
-            );
-            // AlertDialog(
-            //   title: Text('Welcome'),
-            //   content: Text('Thank you for using our app.'),
-            //   actions: <Widget>[
-            //     TextButton(
-            //       child: Text('OK'),
-            //       onPressed: () {
-            //         Navigator.of(context).pop();
-            //       },
-            //     ),
-            //   ],
-            // );
-          },
-        );
-        setState(() {
-          _hasShownDialog = true;
-        });
-      }
-    });
+    showOnce(context);
   }
 
   @override
@@ -332,6 +232,108 @@ class _HomePageState extends State<HomePage> {
           ]))
         ],
       ),
+    );
+  }
+}
+
+class DialogRestriksi extends StatelessWidget {
+  const DialogRestriksi({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SimpleDialog(
+      // border
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      title: Column(
+        children: [
+          Text(
+            'Welcome!',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+              fontFamily: 'Rubik',
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 8),
+          Text(
+            "Your default food restriction is",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 17,
+              fontWeight: FontWeight.w400,
+              fontFamily: 'Rubik',
+            ),
+          ),
+          Container(
+            // height: 204,
+            // width: 204,
+            child: Image.asset(
+              'assets/images/illustration1.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            "LACTO-OVO VEGETARIAN",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 22,
+              fontFamily: "Rubik",
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+      children: <Widget>[
+        Column(children: [
+          Container(
+            height: 38,
+            width: min((MediaQuery.of(context).size.width) * 0.7,
+                MediaQuery.of(context).size.height * 0.7),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Color(0xff70cb88),
+            ),
+            child: TextButton(
+                onPressed: () {
+                  // set preferences
+                  Get.to(() => ProfilePage(), transition: Transition.fade);
+                },
+                child: Text(
+                  "Customize Restriction",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontFamily: "Rubik",
+                    fontWeight: FontWeight.w500,
+                  ),
+                )),
+          ),
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Customize Later",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color(0xff9f9f9f),
+                  fontSize: 12,
+                  decoration: TextDecoration.underline,
+                ),
+              )),
+          SizedBox(height: 12)
+        ]),
+      ],
     );
   }
 }

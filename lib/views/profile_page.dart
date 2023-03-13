@@ -6,6 +6,8 @@ import 'package:veggytably_customer/widgets/bottom_navbar.dart';
 import 'package:veggytably_customer/widgets/profile_menu.dart';
 import 'package:veggytably_customer/views/edit_profile.dart';
 
+import '../controllers/auth_controller.dart';
+
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
@@ -28,25 +30,25 @@ class ProfilePage extends StatelessWidget {
               SizedBox(
                 height: 14,
               ),
-              Text(
-                "NadiahhhHasna",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xff242424),
-                  fontSize: 22,
-                ),
-              ),
+              Obx(() => Text(
+                    AuthController.to.user.username,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xff242424),
+                      fontSize: 22,
+                    ),
+                  )),
               SizedBox(
                 height: 7,
               ),
-              Text(
-                "+6234567891011",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xff6482a6),
-                  fontSize: 12,
-                ),
-              ),
+              Obx(() => Text(
+                    "+62 ${AuthController.to.user.phone}",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xff6482a6),
+                      fontSize: 12,
+                    ),
+                  )),
               SizedBox(
                 height: 61,
               ),
@@ -56,8 +58,8 @@ class ProfilePage extends StatelessWidget {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
-                      Get.offAll(() => EditProfile(),
-                          transition: Transition.fade);
+                      Get.to(() => const EditProfile(),
+                          transition: Transition.rightToLeft);
                     },
                     child: ProfileMenu(
                       "assets/images/editprofile.png",
@@ -69,8 +71,8 @@ class ProfilePage extends StatelessWidget {
                       "assets/images/notif.png", "Notifications", false),
                   GestureDetector(
                     onTap: () {
-                      Get.offAll(() => EditRestrictionPage(),
-                          transition: Transition.fade);
+                      Get.to(() => EditRestrictionPage(),
+                          transition: Transition.rightToLeft);
                     },
                     child: ProfileMenu(
                         "assets/images/foodres.png", "Food Restriction", false),
