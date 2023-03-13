@@ -123,9 +123,7 @@ class AuthController extends GetxController {
 
       setUser(authenticationResponse.data.user);
 
-      // TODO: Navigate to home page
       Get.offAll(
-        // () => const DummyHomePage(),
         () => LandingPage(
           initialIndex: 0,
         ),
@@ -190,6 +188,53 @@ class AuthController extends GetxController {
     } catch (e) {
       print(e);
       Get.snackbar("Error", e.toString());
+    }
+  }
+
+  Future<void> updateUser(
+    TextEditingController usernameController,
+    TextEditingController emailController,
+    TextEditingController phoneController,
+  ) async {
+    try {
+      isLoading.value = true;
+      String? refreshToken = await _storage.read(key: "refreshToken");
+
+      if (refreshToken == null) {
+        throw Exception("Refresh token not found");
+      }
+
+      Map<String, String> body = {
+        "username": usernameController.text,
+        "email": emailController.text.trim(),
+        "phone": phoneController.text,
+      };
+
+      Response response = await AuthApi.instance.updateUser(body);
+
+      if (response.statusCode != 200) {
+        if (response.statusCode == 401) {
+          clearUser();
+        }
+
+        String errorMessage = ExceptionResponse.getMessage(response.data);
+        throw Exception(errorMessage);
+      }
+
+      User user = User.fromJson(response.data["data"]["user"]);
+
+      Get.snackbar("Success", "Update profile success!");
+      Get.offAll(
+        () => LandingPage(initialIndex: 3),
+        transition: Transition.fade,
+      );
+
+      setUser(user);
+    } catch (e) {
+      print(e);
+      Get.snackbar("Error", e.toString());
+    } finally {
+      isLoading.value = false;
     }
   }
 

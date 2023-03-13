@@ -30,25 +30,25 @@ class ProfilePage extends StatelessWidget {
               SizedBox(
                 height: 14,
               ),
-              Text(
-                AuthController.to.user.username,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xff242424),
-                  fontSize: 22,
-                ),
-              ),
+              Obx(() => Text(
+                    AuthController.to.user.username,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xff242424),
+                      fontSize: 22,
+                    ),
+                  )),
               SizedBox(
                 height: 7,
               ),
-              Text(
-                "+62 ${AuthController.to.user.phone}",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xff6482a6),
-                  fontSize: 12,
-                ),
-              ),
+              Obx(() => Text(
+                    "+62 ${AuthController.to.user.phone}",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xff6482a6),
+                      fontSize: 12,
+                    ),
+                  )),
               SizedBox(
                 height: 61,
               ),

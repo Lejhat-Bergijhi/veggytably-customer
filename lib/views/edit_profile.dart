@@ -112,26 +112,29 @@ class EditProfile extends StatelessWidget {
             SizedBox(
               width: 300,
               height: 45,
-              child: ElevatedButton(
-                onPressed: () {
-                  Get.offAll(() => const ProfilePage(),
-                      transition: Transition.fade);
-                  // emailController.clear();
-                  // passwordController.clear();
-                },
-                child: const Text(
-                  'Save',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(0xff70cb88),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
+              child: Obx(() => ElevatedButton(
+                    onPressed: () {
+                      AuthController.to.updateUser(
+                        usernameController,
+                        emailController,
+                        phoneController,
+                      );
+                    },
+                    child: const Text(
+                      'Save',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: AuthController.to.isLoading.value
+                          ? Color.fromARGB(255, 189, 189, 189)
+                          : Color(0xff70cb88),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  )),
             ),
           ],
         ),
