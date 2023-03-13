@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/views/home_page_user.dart';
 import 'package:veggytably_customer/views/profile_page.dart';
+
 import '/widgets/input_text.dart';
 
 class RestrictionPage extends StatelessWidget {
@@ -67,7 +68,7 @@ class RestrictionPage extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                   ),
               ),
-  
+
             ),
             SizedBox(height: 5),
 
@@ -108,6 +109,7 @@ class RestrictionPage extends StatelessWidget {
             Container(
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 padding: EdgeInsets.symmetric(horizontal: 16),
+
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 171, 174, 171).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
@@ -186,6 +188,7 @@ class RestrictionPage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Get.offAll(() => HomePage(), transition: Transition.fade);
+
                   // emailController.clear();
                   // passwordController.clear();
                 },
