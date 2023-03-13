@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/views/profile_page.dart';
 import '/widgets/input_text.dart';
+import 'landing_page.dart';
 
 class EditRestrictionPage extends StatelessWidget {
   const EditRestrictionPage({super.key});
@@ -17,19 +18,15 @@ class EditRestrictionPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-
-              Get.offAll(() => ProfilePage(), transition: Transition.fade);
-            },
+            Get.back();
+          },
           child: Container(
             padding: const EdgeInsets.only(left: 12.0, top: 10),
-            child:Icon(Icons.arrow_back, color: Colors.black),
-              
-            
+            child: Icon(Icons.arrow_back, color: Colors.black),
           ),
         ),
         // title: Container(
@@ -45,7 +42,6 @@ class EditRestrictionPage extends StatelessWidget {
         // ),
         toolbarHeight: 50,
         leadingWidth: 30,
-      
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -56,17 +52,15 @@ class EditRestrictionPage extends StatelessWidget {
 
             Container(
               padding: EdgeInsets.symmetric(horizontal: 40),
-
               child: Text(
-                  "Edit Your Dietary Preference",
-                  style: TextStyle(
-                      color: Color(0xff242424),
-                      fontSize: 22,
-                      fontFamily: "Rubik",
-                      fontWeight: FontWeight.w700,
-                  ),
+                "Edit Your Dietary Preference",
+                style: TextStyle(
+                  color: Color(0xff242424),
+                  fontSize: 22,
+                  fontFamily: "Rubik",
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-  
             ),
             SizedBox(height: 5),
 
@@ -88,7 +82,7 @@ class EditRestrictionPage extends StatelessWidget {
             SizedBox(height: 16),
 
             Padding(
-               padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.symmetric(horizontal: 40),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -105,44 +99,43 @@ class EditRestrictionPage extends StatelessWidget {
             SizedBox(height: 10),
 
             Container(
-                margin: EdgeInsets.symmetric(horizontal: 40),
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 171, 174, 171).withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: DropdownButton<String>(
-                  
-                  value: _selectedOption,
-                  isExpanded: true,
-                  underline: Container(),
-                  items: [
-                    'Lacto-vegetarian',
-                    'Ovo-vegetarian',
-                    'Pollo-vegetarian',
-                    'Lacto-ovo vegetarian',
-                    'Pesco-vegetarian'
-                  ].map((String option) {
-                    return DropdownMenuItem<String>(
-                      value: option,
-                      child: Text(option),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    _selectedOption = newValue;
-                  },
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
-                  ),
-                  dropdownColor: Color.fromARGB(255, 254, 254, 254),
-                ),
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 171, 174, 171).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
               ),
-              SizedBox(height: 16),
+              child: DropdownButton<String>(
+                value: _selectedOption,
+                isExpanded: true,
+                underline: Container(),
+                items: [
+                  'Lacto-vegetarian',
+                  'Ovo-vegetarian',
+                  'Pollo-vegetarian',
+                  'Lacto-ovo vegetarian',
+                  'Pesco-vegetarian'
+                ].map((String option) {
+                  return DropdownMenuItem<String>(
+                    value: option,
+                    child: Text(option),
+                  );
+                }).toList(),
+                onChanged: (String? newValue) {
+                  _selectedOption = newValue;
+                },
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                ),
+                dropdownColor: Color.fromARGB(255, 254, 254, 254),
+              ),
+            ),
+            SizedBox(height: 16),
 
             Padding(
-               padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.symmetric(horizontal: 40),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -160,23 +153,24 @@ class EditRestrictionPage extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    checkbox('Dairy-Free (no milk products)', isChecked: _isChecked),
-                    SizedBox(height: 10),
-                    checkbox('Meat-Free', isChecked: _isChecked),
-                    SizedBox(height: 10),
-                    checkbox('Fish-Free', isChecked: _isChecked),
-                    SizedBox(height: 10),
-                    checkbox('Glutten-Free', isChecked: _isChecked),
-                    SizedBox(height: 10),
-                    checkbox('Egg-Free', isChecked: _isChecked),
-                    SizedBox(height: 10),
-                    checkbox('Nut-Free', isChecked: _isChecked),
-                  ],
+                shrinkWrap: true,
+                children: [
+                  checkbox('Dairy-Free (no milk products)',
+                      isChecked: _isChecked),
+                  SizedBox(height: 10),
+                  checkbox('Meat-Free', isChecked: _isChecked),
+                  SizedBox(height: 10),
+                  checkbox('Fish-Free', isChecked: _isChecked),
+                  SizedBox(height: 10),
+                  checkbox('Glutten-Free', isChecked: _isChecked),
+                  SizedBox(height: 10),
+                  checkbox('Egg-Free', isChecked: _isChecked),
+                  SizedBox(height: 10),
+                  checkbox('Nut-Free', isChecked: _isChecked),
+                ],
               ),
             ),
-            
+
             SizedBox(height: 20),
             // Login button
             Container(
@@ -203,7 +197,6 @@ class EditRestrictionPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16),
-
           ]),
         ),
       ),
@@ -213,10 +206,10 @@ class EditRestrictionPage extends StatelessWidget {
 
 class checkbox extends StatelessWidget {
   final String content;
-  const checkbox(this.content,{
+  const checkbox(
+    this.content, {
     super.key,
     required bool isChecked,
-    
   }) : _isChecked = isChecked;
 
   final bool _isChecked;

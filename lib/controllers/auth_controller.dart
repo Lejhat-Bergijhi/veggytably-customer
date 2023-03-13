@@ -82,7 +82,9 @@ class AuthController extends GetxController {
 
       // TODO: Navigate to home page
       Get.offAll(
-        () => const DummyHomePage(),
+        () => LandingPage(
+          initialIndex: 0,
+        ),
         transition: Transition.rightToLeft,
       );
     } catch (e) {
@@ -124,7 +126,9 @@ class AuthController extends GetxController {
       // TODO: Navigate to home page
       Get.offAll(
         // () => const DummyHomePage(),
-        () => LandingPage(),
+        () => LandingPage(
+          initialIndex: 0,
+        ),
         transition: Transition.fade,
       );
     } catch (e) {

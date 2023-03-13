@@ -9,7 +9,7 @@ class DummyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dummy Home'),
+        title: const Text('Dummy Home'),
       ),
       body: Center(
         child: Column(

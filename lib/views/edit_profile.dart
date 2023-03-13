@@ -1,32 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:veggytably_customer/views/landing_page.dart';
 import 'package:veggytably_customer/views/profile_page.dart';
 import 'package:veggytably_customer/widgets/upload_pic.dart';
 import 'package:veggytably_customer/widgets/input_text.dart';
+
+import '../controllers/auth_controller.dart';
 
 class EditProfile extends StatelessWidget {
   const EditProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+    TextEditingController usernameController =
+        TextEditingController(text: AuthController.to.user.username);
+    TextEditingController emailController =
+        TextEditingController(text: AuthController.to.user.email);
+    TextEditingController phoneController =
+        TextEditingController(text: AuthController.to.user.phone);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-            Get.offAll(() => ProfilePage(), transition: Transition.fade);
+            Get.back();
           },
           child: Container(
             padding: const EdgeInsets.only(left: 12.0, top: 10),
-            child: Icon(Icons.arrow_back, color: Colors.black),
+            child: const Icon(Icons.arrow_back, color: Colors.black),
           ),
         ),
         title: Container(
           padding: const EdgeInsets.only(top: 10),
-          child: Text(
+          child: const Text(
             "Edit Profile",
             style: TextStyle(
               color: Colors.black,
@@ -38,20 +45,17 @@ class EditProfile extends StatelessWidget {
         toolbarHeight: 50,
         leadingWidth: 30,
       ),
-      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: Container(
-        padding: EdgeInsets.only(top: 11, left: 40, right: 40),
+        padding: const EdgeInsets.only(top: 11, left: 40, right: 40),
         child: ListView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           children: [
-            Container(
-              // height: 150,
-              child: UploadPic(),
-            ),
+            const UploadPic(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "NAME",
                   style: TextStyle(
                     color: Color(0xff9f9f9f),
@@ -61,16 +65,13 @@ class EditProfile extends StatelessWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                SizedBox(height: 5),
-                Container(
-                  // width: 300,
-                  child: InputTextField(
-                    emailController,
-                    'Name',
-                  ),
+                const SizedBox(height: 5),
+                InputTextField(
+                  usernameController,
+                  'Name',
                 ),
-                SizedBox(height: 5),
-                Text(
+                const SizedBox(height: 5),
+                const Text(
                   "EMAIL",
                   style: TextStyle(
                     color: Color(0xff9f9f9f),
@@ -80,16 +81,13 @@ class EditProfile extends StatelessWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                SizedBox(height: 5),
-                Container(
-                  // width: 300,
-                  child: InputTextField(
-                    passwordController,
-                    'Email',
-                  ),
+                const SizedBox(height: 5),
+                InputTextField(
+                  emailController,
+                  'Email',
                 ),
-                SizedBox(height: 5),
-                Text(
+                const SizedBox(height: 5),
+                const Text(
                   "TELEPHONE NUMBER",
                   style: TextStyle(
                     color: Color(0xff9f9f9f),
@@ -99,38 +97,36 @@ class EditProfile extends StatelessWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                SizedBox(height: 5),
-                Container(
-                  // width: 300,
-                  child: InputTextField(
-                    emailController,
-                    'Telephone Number',
-                  ),
+                const SizedBox(height: 5),
+                InputTextField(
+                  phoneController,
+                  'Telephone Number',
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
               ],
             ),
             // Input Email or Telephone Number
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // Login button
-            Container(
+            SizedBox(
               width: 300,
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.offAll(() => ProfilePage(), transition: Transition.fade);
+                  Get.offAll(() => const ProfilePage(),
+                      transition: Transition.fade);
                   // emailController.clear();
                   // passwordController.clear();
                 },
-                child: Text(
+                child: const Text(
                   'Save',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Color(0xff70cb88),
+                  primary: const Color(0xff70cb88),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
