@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/views/profile_page.dart';
 import '../controllers/restriction_controller.dart';
-import '/widgets/input_text.dart';
-import 'landing_page.dart';
 
 class EditRestrictionPage extends StatelessWidget {
   const EditRestrictionPage({super.key});
@@ -12,12 +10,8 @@ class EditRestrictionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     RestrictionController restrictionController =
         Get.put(RestrictionController());
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
 
-    String? _selectedOption = 'Lacto-ovo vegetarian';
-    final ValueNotifier<bool> _isCheckedNotifier = ValueNotifier<bool>(false);
-    bool _isChecked = false;
+    bool isChecked = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +23,7 @@ class EditRestrictionPage extends StatelessWidget {
           },
           child: Container(
             padding: const EdgeInsets.only(left: 12.0, top: 10),
-            child: Icon(Icons.arrow_back, color: Colors.black),
+            child: const Icon(Icons.arrow_back, color: Colors.black),
           ),
         ),
         toolbarHeight: 50,
@@ -40,11 +34,11 @@ class EditRestrictionPage extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width,
           child: ListView(children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: Text(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: const Text(
                 "Edit Your Dietary Preference",
                 style: TextStyle(
                   color: Color(0xff242424),
@@ -54,9 +48,9 @@ class EditRestrictionPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -71,9 +65,9 @@ class EditRestrictionPage extends StatelessWidget {
               ),
             ),
             // Text:
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -88,12 +82,13 @@ class EditRestrictionPage extends StatelessWidget {
               ),
             ),
             // Text:
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 40),
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              margin: const EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 171, 174, 171).withOpacity(0.1),
+                color:
+                    const Color.fromARGB(255, 171, 174, 171).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Obx(
@@ -109,20 +104,20 @@ class EditRestrictionPage extends StatelessWidget {
                   }).toList(),
                   onChanged: (String? newValue) {
                     if (newValue == null) return;
-                    restrictionController.selectedOption = newValue!;
+                    restrictionController.selectedOption = newValue;
                   },
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
                     fontSize: 15,
                   ),
-                  dropdownColor: Color.fromARGB(255, 254, 254, 254),
+                  dropdownColor: const Color.fromARGB(255, 254, 254, 254),
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -137,54 +132,54 @@ class EditRestrictionPage extends StatelessWidget {
               ),
             ),
             // Text:
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: ListView(
                 shrinkWrap: true,
                 children: [
-                  checkbox('Dairy-Free (no milk products)',
-                      isChecked: _isChecked),
-                  SizedBox(height: 10),
-                  checkbox('Meat-Free', isChecked: _isChecked),
-                  SizedBox(height: 10),
-                  checkbox('Fish-Free', isChecked: _isChecked),
-                  SizedBox(height: 10),
-                  checkbox('Glutten-Free', isChecked: _isChecked),
-                  SizedBox(height: 10),
-                  checkbox('Egg-Free', isChecked: _isChecked),
-                  SizedBox(height: 10),
-                  checkbox('Nut-Free', isChecked: _isChecked),
+                  CustomCheckbox('Dairy-Free (no milk products)'),
+                  const SizedBox(height: 10),
+                  CustomCheckbox('Meat-Free'),
+                  const SizedBox(height: 10),
+                  CustomCheckbox('Fish-Free'),
+                  const SizedBox(height: 10),
+                  CustomCheckbox('Glutten-Free'),
+                  const SizedBox(height: 10),
+                  CustomCheckbox('Egg-Free'),
+                  const SizedBox(height: 10),
+                  CustomCheckbox('Nut-Free'),
                 ],
               ),
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Login button
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.offAll(() => ProfilePage(), transition: Transition.fade);
+                  Get.offAll(() => const ProfilePage(),
+                      transition: Transition.fade);
                   // emailController.clear();
                   // passwordController.clear();
                 },
-                child: Text(
+                child: const Text(
                   'Save',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Color(0xff70cb88),
+                  primary: const Color(0xff70cb88),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
           ]),
         ),
       ),
@@ -192,33 +187,31 @@ class EditRestrictionPage extends StatelessWidget {
   }
 }
 
-class checkbox extends StatelessWidget {
+class CustomCheckbox extends StatelessWidget {
   final String content;
-  const checkbox(
+  final RxBool isChecked = false.obs;
+  CustomCheckbox(
     this.content, {
     super.key,
-    required bool isChecked,
-  }) : _isChecked = isChecked;
-
-  final bool _isChecked;
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       // width: 300,
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 171, 174, 171).withOpacity(0.1),
+        color: const Color.fromARGB(255, 171, 174, 171).withOpacity(0.1),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: CheckboxListTile(
-        title: Text(content),
-        controlAffinity: ListTileControlAffinity.trailing,
-        value: _isChecked,
-        onChanged: (bool? value) {
-          /*setState(() {
-            _isChecked = value!;
-          });*/
-        },
+      child: Obx(
+        () => CheckboxListTile(
+          title: Text(content),
+          controlAffinity: ListTileControlAffinity.trailing,
+          value: isChecked.value,
+          onChanged: (bool? value) {
+            isChecked.value = !isChecked.value;
+          },
+        ),
       ),
     );
   }
