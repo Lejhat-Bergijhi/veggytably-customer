@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         slivers: [
           const SliverPersistentHeader(
             delegate: SliverSearchAppBar(),
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
           SliverList(
               delegate: SliverChildListDelegate([
             Domvet(marginleft: marginleft, boxWidth: boxWidth),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Container(
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Filter Your Food",
                     style: TextStyle(
                       color: Colors.black,
@@ -80,17 +80,17 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Row(
                     children: [
                       Filterfood(boxWidth, 'assets/images/Food-restriction.png',
                           "Food\nRestriction"),
-                      Spacer(),
+                      const Spacer(),
                       Filterfood(boxWidth, 'assets/images/orderhistory.png',
                           "Order\nHistory"),
-                      Spacer(),
+                      const Spacer(),
                       Filterfood(boxWidth, 'assets/images/favresto.png',
                           "Favorite\nResto"),
                     ],
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Container(
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Recommendations for You!",
                     style: TextStyle(
                       color: Colors.black,
@@ -116,27 +116,27 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Row(
                     children: [
-                      FilterButton('MEAT-FREE', true),
-                      SizedBox(
+                      const FilterButton('MEAT-FREE', true),
+                      const SizedBox(
                         width: 8,
                       ),
-                      FilterButton('DAIRY-FREE', false),
-                      SizedBox(
+                      const FilterButton('DAIRY-FREE', false),
+                      const SizedBox(
                         width: 8,
                       ),
-                      FilterButton('EGG-FREE', false),
-                      SizedBox(
+                      const FilterButton('EGG-FREE', false),
+                      const SizedBox(
                         width: 8,
                       ),
-                      FilterButton('FISH-FREE', false),
+                      const FilterButton('FISH-FREE', false),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                 ],
@@ -149,37 +149,37 @@ class _HomePageState extends State<HomePage> {
                 child: ListView(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   children: <Widget>[
                     SizedBox(
                       width: marginleft,
                     ),
-                    FoodCard('assets/images/image8.png', 'Salad Mix',
+                    const FoodCard('assets/images/image8.png', 'Salad Mix',
                         'Helti Resto Jaya Makmur', 'Rp32.000'),
-                    SizedBox(
+                    const SizedBox(
                       width: 12,
                     ),
-                    FoodCard('assets/images/food2.png', 'Veg Rice',
+                    const FoodCard('assets/images/food2.png', 'Veg Rice',
                         'Waras Resto', 'Rp17.000'),
-                    SizedBox(
+                    const SizedBox(
                       width: 12,
                     ),
-                    FoodCard(
+                    const FoodCard(
                         'assets/images/food3.png',
                         'Indo Mix Vegetarian Salad with Egg',
                         'MakJreng Resto',
                         'Rp24.000'),
-                    SizedBox(
+                    const SizedBox(
                       width: 12,
                     ),
-                    FoodCard('assets/images/image8.png', 'Salad Mix',
+                    const FoodCard('assets/images/image8.png', 'Salad Mix',
                         'Helti Resto Jaya Makmur', 'Rp32.000'),
-                    SizedBox(
+                    const SizedBox(
                       width: 12,
                     ),
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Container(
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Promo Recommendations:",
                     style: TextStyle(
                       color: Colors.black,
@@ -205,28 +205,28 @@ class _HomePageState extends State<HomePage> {
                 width: boxWidth,
                 height: 168,
                 child: ListView(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
                     SizedBox(
                       width: marginleft,
                     ),
-                    PromoCard('assets/images/promo1.png'),
-                    SizedBox(
+                    const PromoCard('assets/images/promo1.png'),
+                    const SizedBox(
                       width: 12,
                     ),
-                    PromoCard('assets/images/promo2.png'),
-                    SizedBox(
+                    const PromoCard('assets/images/promo2.png'),
+                    const SizedBox(
                       width: 12,
                     ),
-                    PromoCard('assets/images/promo3.png'),
-                    SizedBox(
+                    const PromoCard('assets/images/promo3.png'),
+                    const SizedBox(
                       width: 12,
                     ),
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
           ]))
@@ -250,7 +250,7 @@ class DialogRestriksi extends StatelessWidget {
       ),
       title: Column(
         children: [
-          Text(
+          const Text(
             'Welcome!',
             style: TextStyle(
               color: Colors.black,
@@ -260,8 +260,8 @@ class DialogRestriksi extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 8),
-          Text(
+          const SizedBox(height: 8),
+          const Text(
             "Your default food restriction is",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -279,8 +279,8 @@ class DialogRestriksi extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-          SizedBox(height: 8),
-          Text(
+          const SizedBox(height: 8),
+          const Text(
             "LACTO-OVO VEGETARIAN",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -300,14 +300,15 @@ class DialogRestriksi extends StatelessWidget {
                 MediaQuery.of(context).size.height * 0.7),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Color(0xff70cb88),
+              color: const Color(0xff70cb88),
             ),
             child: TextButton(
                 onPressed: () {
                   // set preferences
-                  Get.to(() => ProfilePage(), transition: Transition.fade);
+                  Get.to(() => const ProfilePage(),
+                      transition: Transition.fade);
                 },
-                child: Text(
+                child: const Text(
                   "Customize Restriction",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -322,7 +323,7 @@ class DialogRestriksi extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(
+              child: const Text(
                 "Customize Later",
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -331,7 +332,7 @@ class DialogRestriksi extends StatelessWidget {
                   decoration: TextDecoration.underline,
                 ),
               )),
-          SizedBox(height: 12)
+          const SizedBox(height: 12)
         ]),
       ],
     );
@@ -379,7 +380,7 @@ class Domvet extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
-          BoxShadow(
+          const BoxShadow(
             color: Color(0x19000000),
             blurRadius: 12,
             offset: Offset(0, 0),
@@ -394,19 +395,19 @@ class Domvet extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(
+          const SizedBox(
             width: 23,
           ),
           Container(
             width: (boxWidth - marginleft * 2) * 1 / 2,
-            padding: EdgeInsets.only(bottom: 21.18, top: 21.82),
+            padding: const EdgeInsets.only(bottom: 21.18, top: 21.82),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 //saldo domvet
                 Container(
-                  child: Text(
+                  child: const Text(
                     "SALDO DOMVET",
                     style: TextStyle(
                       color: Color(0xff5192a3),
@@ -420,7 +421,7 @@ class Domvet extends StatelessWidget {
 
                 //nominal saldo
                 Container(
-                  child: Text(
+                  child: const Text(
                     "Rp 1.234.245,00",
                     style: TextStyle(
                       color: Colors.black,
@@ -434,13 +435,13 @@ class Domvet extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Container(
             width: 59,
-            margin: EdgeInsets.all(17),
+            margin: const EdgeInsets.all(17),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Color(0xff5192a3),
+              color: const Color(0xff5192a3),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -456,7 +457,7 @@ class Domvet extends StatelessWidget {
 
                 //top up
                 Container(
-                  child: Text(
+                  child: const Text(
                     "Top Up",
                     textAlign: TextAlign.center,
                     style: TextStyle(

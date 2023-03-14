@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/views/profile_page.dart';
+import '../controllers/restriction_controller.dart';
 import '/widgets/input_text.dart';
 import 'landing_page.dart';
 
@@ -9,6 +10,8 @@ class EditRestrictionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    RestrictionController restrictionController =
+        Get.put(RestrictionController());
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
@@ -29,17 +32,6 @@ class EditRestrictionPage extends StatelessWidget {
             child: Icon(Icons.arrow_back, color: Colors.black),
           ),
         ),
-        // title: Container(
-        //   padding: const EdgeInsets.only(top: 10),
-        //   child: Text(
-        //     "Edit Profile",
-        //     style: TextStyle(
-        //       color: Colors.black,
-        //       fontSize: 18,
-        //       fontWeight: FontWeight.bold,
-        //     ),
-        //   ),
-        // ),
         toolbarHeight: 50,
         leadingWidth: 30,
       ),
@@ -97,7 +89,6 @@ class EditRestrictionPage extends StatelessWidget {
             ),
             // Text:
             SizedBox(height: 10),
-
             Container(
               margin: EdgeInsets.symmetric(horizontal: 40),
               padding: EdgeInsets.symmetric(horizontal: 16),
@@ -105,31 +96,28 @@ class EditRestrictionPage extends StatelessWidget {
                 color: Color.fromARGB(255, 171, 174, 171).withOpacity(0.1),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: DropdownButton<String>(
-                value: _selectedOption,
-                isExpanded: true,
-                underline: Container(),
-                items: [
-                  'Lacto-vegetarian',
-                  'Ovo-vegetarian',
-                  'Pollo-vegetarian',
-                  'Lacto-ovo vegetarian',
-                  'Pesco-vegetarian'
-                ].map((String option) {
-                  return DropdownMenuItem<String>(
-                    value: option,
-                    child: Text(option),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  _selectedOption = newValue;
-                },
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15,
+              child: Obx(
+                () => DropdownButton<String>(
+                  value: restrictionController.selectedOption,
+                  isExpanded: true,
+                  underline: Container(),
+                  items: restrictionController.options.map((String option) {
+                    return DropdownMenuItem<String>(
+                      value: option,
+                      child: Text(option),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    if (newValue == null) return;
+                    restrictionController.selectedOption = newValue!;
+                  },
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                  ),
+                  dropdownColor: Color.fromARGB(255, 254, 254, 254),
                 ),
-                dropdownColor: Color.fromARGB(255, 254, 254, 254),
               ),
             ),
             SizedBox(height: 16),
