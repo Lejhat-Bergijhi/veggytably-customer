@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/views/profile_page.dart';
 import '../controllers/restriction_controller.dart';
+import '../widgets/custom_checkbox.dart';
 
 class EditRestrictionPage extends StatelessWidget {
   const EditRestrictionPage({super.key});
@@ -10,8 +11,6 @@ class EditRestrictionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     RestrictionController restrictionController =
         Get.put(RestrictionController());
-
-    bool isChecked = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -181,36 +180,6 @@ class EditRestrictionPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
           ]),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomCheckbox extends StatelessWidget {
-  final String content;
-  final RxBool isChecked = false.obs;
-  CustomCheckbox(
-    this.content, {
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // width: 300,
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 171, 174, 171).withOpacity(0.1),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Obx(
-        () => CheckboxListTile(
-          title: Text(content),
-          controlAffinity: ListTileControlAffinity.trailing,
-          value: isChecked.value,
-          onChanged: (bool? value) {
-            isChecked.value = !isChecked.value;
-          },
         ),
       ),
     );
