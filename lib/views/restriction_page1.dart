@@ -159,10 +159,9 @@ class EditRestrictionPage extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.offAll(() => const ProfilePage(),
-                      transition: Transition.fade);
-                  // emailController.clear();
-                  // passwordController.clear();
+                  // Get.offAll(() => const ProfilePage(),
+                  //     transition: Transition.fade);
+                  Get.back();
                 },
                 child: const Text(
                   'Save',

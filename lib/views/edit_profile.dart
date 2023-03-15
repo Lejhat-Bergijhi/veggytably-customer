@@ -51,7 +51,6 @@ class EditProfile extends StatelessWidget {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
-            const UploadPic(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:veggytably_customer/views/restriction_page1.dart';
 import 'package:veggytably_customer/widgets/filter_button.dart';
 import 'package:veggytably_customer/widgets/food_card.dart';
 import 'package:veggytably_customer/widgets/sliver_search_app_bar.dart';
 import 'package:veggytably_customer/widgets/filter_card.dart';
-import 'package:veggytably_customer/views/profile_page.dart';
 
 import '../controllers/auth_controller.dart';
 
@@ -305,7 +305,9 @@ class DialogRestriksi extends StatelessWidget {
             child: TextButton(
                 onPressed: () {
                   // set preferences
-                  Get.to(() => const ProfilePage(),
+                  // Get.to(() => const ProfilePage(),
+                  //     transition: Transition.fade);
+                  Get.to(() => const EditRestrictionPage(),
                       transition: Transition.fade);
                 },
                 child: const Text(
@@ -404,33 +406,29 @@ class Domvet extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 //saldo domvet
-                Container(
-                  child: const Text(
-                    "SALDO DOMVET",
-                    style: TextStyle(
-                      color: Color(0xff5192a3),
-                      fontSize: 12,
-                      fontFamily: "Rubik",
-                      fontWeight: FontWeight.w600,
-                    ),
-                    // textAlign: TextAlign.left,
+                Text(
+                  "SALDO DOMVET",
+                  style: TextStyle(
+                    color: Color(0xff5192a3),
+                    fontSize: 12,
+                    fontFamily: "Rubik",
+                    fontWeight: FontWeight.w600,
                   ),
+                  // textAlign: TextAlign.left,
                 ),
 
                 //nominal saldo
-                Container(
-                  child: const Text(
-                    "Rp 1.234.245,00",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 19,
-                      fontFamily: "Rubik",
-                      fontWeight: FontWeight.bold,
-                    ),
-                    // textAlign: TextAlign.left,
+                Text(
+                  "Rp 1.234.245,00",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 19,
+                    fontFamily: "Rubik",
+                    fontWeight: FontWeight.bold,
                   ),
+                  // textAlign: TextAlign.left,
                 ),
               ],
             ),
