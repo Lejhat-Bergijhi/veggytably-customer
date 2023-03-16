@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:veggytably_customer/views/login_page.dart';
-import 'package:veggytably_customer/views/restriction_page.dart';
-
 import '../controllers/auth_controller.dart';
-
 import '/widgets/input_text.dart';
-import 'login_page.dart';
 
 class SignUpPage extends StatelessWidget {
   TextEditingController usernameController = TextEditingController();
@@ -24,26 +20,27 @@ class SignUpPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Center(
-            child: Column(children: [
-              SizedBox(height: 145),
+          padding: const EdgeInsets.only(left: 36, right: 36),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 145),
 
-              Padding(
-                padding: EdgeInsets.only(left: 36),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Image.asset(
-                    'assets/images/Subtract.png',
-                    width: 39.0,
-                    height: 35.93,
+                Container(
+                  alignment: Alignment.center,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Image.asset(
+                      'assets/images/Subtract.png',
+                      width: 39.0,
+                      height: 35.93,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 5),
+                const SizedBox(height: 5),
 
-              Padding(
-                padding: EdgeInsets.only(left: 36),
-                child: Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Sign Up',
@@ -53,12 +50,9 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 5),
+                const SizedBox(height: 5),
 
-              Padding(
-                padding: EdgeInsets.only(left: 36),
-                child: Align(
+                const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Create an account to start your dietary journey!',
@@ -69,113 +63,99 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 8),
+                const SizedBox(height: 8),
 
-              Column(
-                children: [
-                  Container(
-                    width: 300,
-                    child: InputTextField(
+                Column(
+                  children: [
+                    InputTextField(
                       usernameController,
                       'Name',
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    width: 300,
-                    child: InputTextField(
+                    const SizedBox(height: 10),
+                    InputTextField(
                       emailController,
                       'Email',
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    width: 300,
-                    child: InputTextField(
+                    const SizedBox(height: 10),
+                    InputTextField(
                       phoneController,
                       'Telephone Number',
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    width: 300,
-                    child: InputTextField(
+                    const SizedBox(height: 10),
+                    InputTextField(
                       passwordController,
                       'Password',
                     ),
-                  ),
-                  SizedBox(height: 10),
-                ],
-              ),
-              // Input Email or Telephone Number
-              SizedBox(height: 10),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+                // Input Email or Telephone Number
+                const SizedBox(height: 10),
 
-              // Login Continue button
-              Container(
-                width: 300,
-                height: 45,
-                child: ElevatedButton(
-                  onPressed: () {
-                    AuthController.to.signUp(
-                      usernameController,
-                      emailController,
-                      phoneController,
-                      passwordController,
-                    );
-                  },
-                  child: Text(
-                    'Continue',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                // Login Continue button
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      AuthController.to.signUp(
+                        usernameController,
+                        emailController,
+                        phoneController,
+                        passwordController,
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color(0xff70cb88),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xff70cb88),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                    child: const Text(
+                      'Continue',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 16),
-              // Text: Don't have an account?
-              SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 21,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Already have an account? ",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.offAll(() => LoginPage(),
-                              transition: Transition.fade);
-                        },
-                        child: Text(
-                          'Login',
+                const SizedBox(height: 16),
+                // Text: Don't have an account?
+                SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 21,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Already have an account? ",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff356631),
-                            //underline
-                            decoration: TextDecoration.underline,
                           ),
                         ),
-                      ),
-                    ],
-                  )),
-              SizedBox(height: 5),
+                        GestureDetector(
+                          onTap: () {
+                            Get.offAll(() => const LoginPage(),
+                                transition: Transition.fade);
+                          },
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff356631),
+                              //underline
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+                const SizedBox(height: 5),
 
-              // Text: Sign Up
-            ]),
-          ),
+                // Text: Sign Up
+              ]),
         ),
       ),
     );
