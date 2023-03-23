@@ -10,6 +10,7 @@ import 'views/home_page_user.dart';
 import 'package:veggytably_customer/controllers/auth_controller.dart';
 import 'package:veggytably_customer/views/restriction_page.dart';
 import 'views/restriction_page.dart';
+import 'views/list_menu_page.dart';
 
 
 void main() {
@@ -23,7 +24,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: ListMenuPage(),
       initialBinding: BindingsBuilder(() {
         Get.put(AuthController());
       }),
