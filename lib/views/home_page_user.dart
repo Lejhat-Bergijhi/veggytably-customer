@@ -20,12 +20,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Future<void> showOnce(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
-    final hasShownDialog =
-        prefs.getBool('modalShown_${AuthController.to.user.id}') ?? false;
+    final hasShownDialog = 
+      false; //buat display dialog fe
+    // prefs.getBool('modalShown_${AuthController.to.user.id}') ?? false;
     if (!hasShownDialog) {
-      await prefs.setBool('modalShown_${AuthController.to.user.id}', true);
+      // await prefs.setBool('modalShown_${AuthController.to.user.id}', true);
 
-      if (!context.mounted) return;
+      // if (!context.mounted) return;
 
       showDialog(
         context: context,
@@ -119,7 +120,6 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 12,
                   ),
-                  
                 ],
               ),
             ),
@@ -231,27 +231,21 @@ class DialogRestriksi extends StatelessWidget {
       ),
       title: Column(
         children: [
+          SizedBox(
+            height: 12,
+          ),
           const Text(
             'Welcome!',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 22,
+              fontSize: 26,
               fontWeight: FontWeight.w600,
               fontFamily: 'Rubik',
             ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
-          const Text(
-            "Your default food restriction is",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 17,
-              fontWeight: FontWeight.w400,
-              fontFamily: 'Rubik',
-            ),
-          ),
+         
           Container(
             // height: 204,
             // width: 204,
@@ -261,14 +255,25 @@ class DialogRestriksi extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            "LACTO-OVO VEGETARIAN",
+          RichText(
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 22,
-              fontFamily: "Rubik",
-              fontWeight: FontWeight.bold,
+            text: TextSpan(
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 17,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'Rubik',
+              ),
+              children: [
+                TextSpan(
+                  text: "Your default food restriction is ",
+                ),
+                WidgetSpan(child: FilterButton("MEAT-FREE")),
+                TextSpan(
+                  text: " and ",
+                ),
+                WidgetSpan(child: FilterButton("FISH-FREE")),
+              ],
             ),
           ),
         ],
