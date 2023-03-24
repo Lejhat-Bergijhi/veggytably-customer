@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatelessWidget {
+class SearchBar2 extends StatelessWidget {
   final pink = const Color(0xFFFACCCC);
   final grey = const Color(0xFFF2F2F7);
 
-  const SearchBar({Key? key}) : super(key: key);
+  const SearchBar2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class SearchBar extends StatelessWidget {
           focusedBorder: _border(pink),
           border: _border(grey),
           enabledBorder: _border(grey),
-          hintText: 'Looking for something to eat today?',
+          hintText: 'Salad',
           hintStyle: const TextStyle(
               color: Color(0xff9f9f9f),
               fontSize: 15,
