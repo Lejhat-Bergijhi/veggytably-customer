@@ -6,10 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veggytably_customer/views/restriction_page1.dart';
 import 'package:veggytably_customer/widgets/filter_button.dart';
 import 'package:veggytably_customer/widgets/food_card.dart';
+import 'package:veggytably_customer/widgets/search_bar2.dart';
 import 'package:veggytably_customer/widgets/sliver_search_page_app_bar.dart';
 import 'package:veggytably_customer/widgets/filter_card.dart';
 
 import '../controllers/auth_controller.dart';
+import '../widgets/background_wave.dart';
+import '../widgets/switcher.dart';
 
 class SearchPage1 extends StatefulWidget {
   const SearchPage1({super.key});
@@ -42,68 +45,21 @@ class _SearchPage1State extends State<SearchPage1> {
     // AuthController authController = Get.put(AuthController());
     double marginleft = 24;
     double boxWidth = MediaQuery.of(context).size.width;
+    double topPadding = MediaQuery.of(context).padding.top + 15;
+
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      body: SafeArea(child: Column(
+  
+      body: SafeArea(child: ListView(
         children: [
-          const SizedBox(height: 25),
+          RegularSearchAppBar(topPadding),
+          const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.only(left: 30),
             child:
-              Row(
-                  // mainAxisSize: MainAxisSize.min,
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[
-                      Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children:[
-                              SizedBox(
-                                  width: 83,
-                                  child: Text(
-                                      "Food",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                                      ),
-                                  ),
-                              ),
-                              SizedBox(height: 3),
-                              Container(
-                                  width: 83.50,
-                                  height: 1.50,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Color(0xff4b875b), width: 0.50, ),
-                                  ),
-                              ),
-                          ],
-                      ),
-                      SizedBox(width: 11),
-                      Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children:[
-                              SizedBox(
-                                  width: 83,
-                                  child: Text(
-                                      "Restaurants",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Color(0xff9f9f9f),
-                                          fontSize: 15,
-                                      ),
-                                  ),
-                              ),
-                          ],
-                      ),
-                  ],
-              ),
+              switcher(),
           ),
           const SizedBox(height: 80),
           Center(
@@ -118,3 +74,4 @@ class _SearchPage1State extends State<SearchPage1> {
     );
   }
 }
+
