@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'package:veggytably_customer/views/edit_profile.dart';
 import 'package:veggytably_customer/views/profile_page.dart';
+import '../widgets/detail_menu.dart';
 import 'views/login_page.dart';
 import 'views/signup_page.dart';
 import 'views/home_page_user.dart';
@@ -23,7 +24,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: ViewMenu(),
       initialBinding: BindingsBuilder(() {
         Get.put(AuthController());
       }),
