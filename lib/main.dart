@@ -15,6 +15,7 @@ import 'views/search_page4.dart';
 import 'package:veggytably_customer/controllers/auth_controller.dart';
 import 'package:veggytably_customer/views/restriction_page.dart';
 import 'views/restriction_page.dart';
+import 'views/list_menu_page.dart';
 
 
 void main() {
