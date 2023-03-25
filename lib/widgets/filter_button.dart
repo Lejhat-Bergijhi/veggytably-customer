@@ -3,35 +3,55 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FilterButton extends StatelessWidget {
+  double sizetext = 10;
+  Map<String, dynamic> style = {
+    "MEAT-FREE": BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: Color(0xffffd2dc),
+    ),
+    "DAIRY-FREE": BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: Color(0xffd8f2ee),
+    ),
+    "NUT-FREE": BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: Color(0xffe3d2b9),
+    ),
+    "EGG-FREE": BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: Color(0xfffee7a2),
+    ),
+    "FISH-FREE": BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: Color.fromARGB(255, 221, 196, 244),
+    ),
+    "GLLUTEN-FREE": BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: Color.fromARGB(255, 228, 253, 215),
+    ),
+  };
+
   final String title;
-  final bool Recomendation_selected;
-  const FilterButton(this.title, this.Recomendation_selected, {super.key});
+  FilterButton(this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Recomendation_selected? Color(0xffb1e4be):Color(0xffefefef),
-      ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 4,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Recomendation_selected? Colors.black:Color(0xff9f9f9f),
-              fontSize: 10,
-            ),
+      // width: 80,
+      //make width adjustable with text length
+
+      width: title.length * 7.0,
+      decoration: style[title],
+      padding: EdgeInsets.symmetric(horizontal: sizetext*0.2, vertical: 1),
+      child: Center(
+        child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: sizetext,
           ),
-        ],
+        ),
       ),
     );
   }
