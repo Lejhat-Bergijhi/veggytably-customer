@@ -7,12 +7,9 @@ class SearchApi {
 
   Future<dynamic> searchMerchant(String query) async {
     try {
-      Response response = await Dio().get(
-        ApiEndPoints.baseUrl +
-            ApiEndPoints.customerEndpoints
-                .searchMerchant(search: query, limit: 20) +
-            query,
-      );
+      Response response = await Dio().get(ApiEndPoints.baseUrl +
+          ApiEndPoints.customerEndpoints
+              .searchMerchant(search: query, limit: 20));
 
       return response;
     } on DioError catch (e) {
@@ -25,8 +22,6 @@ class SearchApi {
 
   Future<dynamic> searchMenu(String query) async {
     try {
-      print(ApiEndPoints.baseUrl +
-          ApiEndPoints.customerEndpoints.searchMenu(search: query, limit: 20));
       Response response = await Dio().get(ApiEndPoints.baseUrl +
           ApiEndPoints.customerEndpoints.searchMenu(search: query, limit: 20));
 
