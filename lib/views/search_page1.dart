@@ -29,7 +29,6 @@ class _SearchPage1State extends State<SearchPage1> {
       await prefs.setBool('modalShown_${AuthController.to.user.id}', true);
 
       if (!context.mounted) return;
-
     }
   }
 
@@ -47,31 +46,28 @@ class _SearchPage1State extends State<SearchPage1> {
     double boxWidth = MediaQuery.of(context).size.width;
     double topPadding = MediaQuery.of(context).padding.top + 15;
 
-
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-  
-      body: SafeArea(child: ListView(
-        children: [
-          RegularSearchAppBar(topPadding),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.only(left: 30),
-            child:
-              switcher(),
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: SafeArea(
+          child: ListView(
+            children: [
+              RegularSearchAppBar(topPadding),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: switcher(),
+              ),
+              const SizedBox(height: 80),
+              Center(
+                child: Container(
+                  height: 300,
+                  width: 300,
+                  child: Image.asset('assets/images/loading_search_page.png'),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 80),
-          Center(
-            child: Container(
-              height: 300,
-              width: 300,
-              child: Image.asset('assets/images/loading_search_page.png'),
-            ),
-          ),
-        ],
-      ),)
-    );
+        ));
   }
 }
-

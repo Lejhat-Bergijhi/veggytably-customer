@@ -5,13 +5,12 @@ import '../controllers/auth_controller.dart';
 import '/widgets/input_text.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -90,7 +89,7 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   // Login button
-                  Container(
+                  SizedBox(
                     // width: 300,
                     width: MediaQuery.of(context).size.width,
                     height: 45,

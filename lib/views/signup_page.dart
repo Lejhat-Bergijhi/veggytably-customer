@@ -136,7 +136,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.offAll(() => const LoginPage(),
+                            Get.offAll(() => LoginPage(),
                                 transition: Transition.fade);
                           },
                           child: const Text(

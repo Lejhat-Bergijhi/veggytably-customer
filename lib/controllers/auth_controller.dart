@@ -42,7 +42,7 @@ class AuthController extends GetxController {
       );
     } else {
       Get.offAll(
-        () => const LoginPage(),
+        () => LoginPage(),
         transition: Transition.rightToLeft,
       );
     }
@@ -152,7 +152,7 @@ class AuthController extends GetxController {
       }
 
       Get.offAll(
-        () => const LoginPage(),
+        () => LoginPage(),
         transition: Transition.fade,
       );
     } catch (e) {
