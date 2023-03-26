@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart" hide Response;
 import 'package:dio/dio.dart';
-import "package:veggytably_customer/views/dummy_home.dart";
 import "package:veggytably_customer/views/home_page_user.dart";
 import "package:veggytably_customer/views/landing_page.dart";
 import "../api/auth_api.dart";
@@ -30,14 +29,16 @@ class AuthController extends GetxController {
   void onReady() {
     super.onReady();
     // TODO uncomment code if ready to implement
-    // checkAuth();
-    // ever(isLogin, _initialScreen);
+    checkAuth();
+    ever(isLogin, _initialScreen);
   }
 
   void _initialScreen(bool isLogin) {
     if (isLogin) {
       Get.offAll(
-        () => const DummyHomePage(),
+        () => LandingPage(
+          initialIndex: 0,
+        ),
         transition: Transition.rightToLeft,
       );
     } else {

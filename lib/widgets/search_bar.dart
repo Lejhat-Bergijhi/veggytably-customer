@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:veggytably_customer/views/search_page1.dart';
+import 'package:veggytably_customer/views/search_page.dart';
 
 class SearchBar extends StatelessWidget {
   final pink = const Color(0xFFFACCCC);
@@ -15,7 +15,10 @@ class SearchBar extends StatelessWidget {
       height: 34,
       child: TextFormField(
         onTap: () {
-          Get.to(() => const SearchPage1(), transition: Transition.fade);
+          Get.to(
+            () => const SearchPage(),
+            transition: Transition.fade,
+          );
         },
         decoration: InputDecoration(
           filled: true,

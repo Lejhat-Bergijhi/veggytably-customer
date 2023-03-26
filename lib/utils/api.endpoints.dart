@@ -16,4 +16,26 @@ class _AuthEndPoints {
 
 class _CustomerEndPoints {
   final String updateProfile = "customers/profile";
+  String searchMerchant({
+    String search = "",
+    int limit = 10,
+    int offset = 0,
+  }) =>
+      "merchants?limit=$limit&offset=$offset&search=$search";
+
+  String searchMenu({
+    String search = "",
+    int limit = 10,
+    int offset = 0,
+  }) =>
+      "merchants/menu/query?limit=$limit&offset=$offset&search=$search";
 }
+/**
+ * query merchant
+ * http://localhost:5000/merchants?limit=10&offset=0&search=chant
+ */
+
+/**
+ * query menu
+ * http://localhost:5000/merchants/menu/query?limit=10&offset=0&search=ayam
+ */
