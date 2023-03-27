@@ -16,6 +16,7 @@ class SearchBar2 extends StatelessWidget {
       width: MediaQuery.of(context).size.width - 32,
       height: 34,
       child: TextFormField(
+        autofocus: true,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,

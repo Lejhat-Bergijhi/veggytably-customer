@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:veggytably_customer/controllers/search_controller.dart';
 import 'package:veggytably_customer/widgets/sliver_search_page_app_bar.dart';
 
+import '../controllers/merchant_controller.dart';
 import '../widgets/food_menu_card.dart';
 import '../widgets/resto_menu_card.dart';
 import '../widgets/switcher.dart';
@@ -11,6 +12,7 @@ class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
   @override
   Widget build(BuildContext context) {
+    Get.put(MerchantController());
     Get.put(SearchController());
     double marginleft = 24;
     double boxWidth = MediaQuery.of(context).size.width;
@@ -29,7 +31,7 @@ class SearchPage extends StatelessWidget {
                   RegularSearchAppBar(topPadding),
                   const SizedBox(height: 20),
                   Padding(
-                    padding: EdgeInsets.only(left: 30),
+                    padding: const EdgeInsets.only(left: 30),
                     child: Switcher(),
                   ),
                   const SizedBox(height: 20),
