@@ -63,7 +63,7 @@ class Switcher extends StatelessWidget {
                   searchController.setShowMenu(false);
                 },
                 child: SizedBox(
-                  width: 83,
+                  width: 92,
                   child: Text(
                     "Restaurants",
                     textAlign: TextAlign.center,
