@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:veggytably_customer/controllers/merchant_controller.dart';
 import '../models/search_merchant.dart';
 import '../views/list_menu_page.dart';
 
@@ -14,7 +15,14 @@ class RestoMenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => ListMenuPage());
+        // set merchant to controller
+        Get.find<MerchantController>().setMerchant(merchant);
+        // fetch menu list
+        Get.find<MerchantController>().getMenuList(merchant.id);
+        Get.to(
+          () => ListMenuPage(),
+          transition: Transition.fade,
+        );
       },
       child: Container(
         height: 112,

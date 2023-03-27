@@ -29,6 +29,14 @@ class _CustomerEndPoints {
     int offset = 0,
   }) =>
       "merchants/menu/query?limit=$limit&offset=$offset&search=$search";
+
+  String getMerchantMenu({
+    String merchantId = "",
+    int limit = 10,
+    int offset = 0,
+    String restrictions = "000000",
+  }) =>
+      "merchants/$merchantId/menu?limit=$limit&restrictions=$restrictions&offset=$offset";
 }
 /**
  * query merchant
@@ -38,4 +46,9 @@ class _CustomerEndPoints {
 /**
  * query menu
  * http://localhost:5000/merchants/menu/query?limit=10&offset=0&search=ayam
+ */
+
+/**
+ * get menu by merchant id
+ * http://localhost:5000/merchants/64171e03c849eff0eeb7a441/menu?limit=10&restrictions=000000&offset=0
  */
