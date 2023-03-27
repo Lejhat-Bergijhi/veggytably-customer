@@ -21,11 +21,13 @@ class SearchController extends GetxController {
   // method to search (just search both menu and restaurant)
   void searchAll(String query) async {
     try {
+      if (query.length < 3) {
+        return;
+      }
       isLoading(true);
       update();
 
       search = query;
-      print(query);
       Response merchantResponse =
           await SearchApi.instance.searchMerchant(query);
       Response menuResponse = await SearchApi.instance.searchMenu(query);

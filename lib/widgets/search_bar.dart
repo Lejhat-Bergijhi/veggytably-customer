@@ -20,6 +20,7 @@ class SearchBar extends StatelessWidget {
             transition: Transition.fade,
           );
         },
+        readOnly: true,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
