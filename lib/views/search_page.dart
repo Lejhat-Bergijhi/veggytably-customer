@@ -4,14 +4,14 @@ import 'package:veggytably_customer/controllers/search_controller.dart';
 import 'package:veggytably_customer/widgets/sliver_search_page_app_bar.dart';
 
 import '../widgets/food_menu_card.dart';
+import '../widgets/resto_menu_card.dart';
 import '../widgets/switcher.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
   @override
   Widget build(BuildContext context) {
-    SearchController searchController = Get.put(SearchController());
-    // AuthController authController = Get.put(AuthController());
+    Get.put(SearchController());
     double marginleft = 24;
     double boxWidth = MediaQuery.of(context).size.width;
     double topPadding = MediaQuery.of(context).padding.top + 15;
@@ -28,11 +28,11 @@ class SearchPage extends StatelessWidget {
                 children: [
                   RegularSearchAppBar(topPadding),
                   const SizedBox(height: 20),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(left: 30),
                     child: Switcher(),
                   ),
-                  const SizedBox(height: 80),
+                  const SizedBox(height: 20),
                   // menu list here
                   GetBuilder<SearchController>(
                     builder: (controller) {
@@ -51,29 +51,52 @@ class SearchPage extends StatelessWidget {
                         return const SizedBox();
                       }
 
-                      if (controller.search.length > 3 &&
-                          controller.menuSearchResult.isEmpty) {
-                        return Center(
-                          child: SizedBox(
-                              height: 300,
-                              width: 300,
-                              child: Image.asset(
-                                  'assets/images/sorry_search_page.png')),
-                        );
+                      if (controller.search.length > 3) {
+                        if (controller.showMenu.value &&
+                            controller.menuSearchResult.isEmpty) {
+                          return Center(
+                            child: SizedBox(
+                                height: 300,
+                                width: 300,
+                                child: Image.asset(
+                                    'assets/images/sorry_search_page.png')),
+                          );
+                        }
+
+                        if (!controller.showMenu.value &&
+                            controller.merchantSearchResult.isEmpty) {
+                          return Center(
+                            child: SizedBox(
+                                height: 300,
+                                width: 300,
+                                child: Image.asset(
+                                    'assets/images/sorry_search_page.png')),
+                          );
+                        }
                       }
 
                       return Expanded(
-                        child: ListView.builder(
-                          itemCount: controller.menuSearchResult.length,
-                          itemBuilder: (context, index) {
-                            return FoodMenuCard(
-                                // menu: controller.menuSearchResult[index],
-                                'assets/images/food1.png',
-                                "Gurino Salado",
-                                "Rp 10.000",
-                                "Helty Resto Jaya");
-                          },
-                        ),
+                        child: controller.showMenu.value
+                            ? ListView.builder(
+                                physics: const AlwaysScrollableScrollPhysics(
+                                    parent: BouncingScrollPhysics()),
+                                itemCount: controller.menuSearchResult.length,
+                                itemBuilder: (context, index) {
+                                  return FoodMenuCard(
+                                    menu: controller.menuSearchResult[index],
+                                  );
+                                },
+                              )
+                            : ListView.builder(
+                                itemCount:
+                                    controller.merchantSearchResult.length,
+                                itemBuilder: (context, index) {
+                                  return RestoMenuCard(
+                                    merchant:
+                                        controller.merchantSearchResult[index],
+                                  );
+                                },
+                              ),
                       );
                     },
                   )

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import '../models/search_merchant.dart';
 
 class RestoMenuCard extends StatelessWidget {
-  final String image;
-  final String name, location, deliverydetail;
-  const RestoMenuCard(this.image, this.name, this.location, this.deliverydetail,
-      {super.key});
+  final Merchant merchant;
+  const RestoMenuCard({
+    super.key,
+    required this.merchant,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +29,7 @@ class RestoMenuCard extends StatelessWidget {
             //     borderRadius: BorderRadius.circular(8),
             //   ),
             //   child:image,
-              
-              
-      
+
             // ),
             //curved image
             Container(
@@ -40,11 +39,32 @@ class RestoMenuCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(image, fit: BoxFit.fitHeight),
-              ),
+                  borderRadius: BorderRadius.circular(8),
+                  child:
+                      // merchant.imageUrl != null
+                      //       ? Image.network(
+                      //           merchant.imageUrl!,
+                      //           loadingBuilder: (context, child, loadingProgress) {
+                      //             if (loadingProgress == null) return child;
+
+                      //             return const SizedBox(
+                      //               width: 100,
+                      //               height: 100,
+                      //               child: Center(
+                      //                 child: CircularProgressIndicator(),
+                      //               ),
+                      //             );
+                      //           },
+                      //           errorBuilder: (context, error, stackTrace) {
+                      //             return Image.asset("assets/image7.png");
+                      //           },
+                      //         )
+                      //       :
+                      Image.asset("assets/images/food1.png",
+                          fit: BoxFit.cover)),
+              // ),
             ),
-            
+
             const SizedBox(width: 12),
             Container(
                 child: Align(
@@ -53,7 +73,7 @@ class RestoMenuCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            name,
+                            merchant.restaurantName,
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 17,
@@ -63,7 +83,7 @@ class RestoMenuCard extends StatelessWidget {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            location,
+                            merchant.restaurantAddress,
                             style: TextStyle(
                               fontFamily: "Rubik",
                               color: Colors.black,
@@ -72,7 +92,7 @@ class RestoMenuCard extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            deliverydetail,
+                            "${merchant.duration} mins",
                             style: TextStyle(
                               color: Color(0xff70cb88),
                               fontFamily: "Rubik",

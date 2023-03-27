@@ -54,13 +54,13 @@ class _SearchPage4State extends State<SearchPage4> {
           child: Column(
             children: [
               RegularSearchAppBar(topPadding),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Switcher(),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 25),
+              //   child: Switcher(),
+              // ),
               const SizedBox(height: 20),
-              RestoMenuCard('images/food3.png', "Merasa BerSalad",
-                  "Wonogiri Desa (3.90 Km)", "Rp 12.000, 37 Minutes"),
+              // RestoMenuCard('images/food3.png', "Merasa BerSalad",
+              //     "Wonogiri Desa (3.90 Km)", "Rp 12.000, 37 Minutes"),
             ],
           ),
         ));

@@ -45,10 +45,10 @@ class _SearchPage1State extends State<SearchPage1> {
             children: [
               RegularSearchAppBar(topPadding),
               const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Switcher(),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 30),
+              //   child: Switcher(),
+              // ),
               const SizedBox(height: 80),
               Center(
                 child: Container(

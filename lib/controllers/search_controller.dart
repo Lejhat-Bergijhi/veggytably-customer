@@ -12,6 +12,7 @@ class SearchController extends GetxController {
   set search(String value) => _search.value = value;
 
   RxBool isLoading = false.obs;
+  RxBool showMenu = true.obs;
 
   String get search => _search.value;
   List<Menu> get menuSearchResult => _menuSearchResult;
@@ -48,6 +49,11 @@ class SearchController extends GetxController {
       isLoading(false);
       update();
     }
+  }
+
+  void setShowMenu(bool value) {
+    showMenu.value = value;
+    update();
   }
 
   void setSearch(String query) {

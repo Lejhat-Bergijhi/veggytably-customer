@@ -69,10 +69,10 @@ class _SearchPage2State extends State<SearchPage2> {
           child: Column(
             children: [
               RegularSearchAppBar(topPadding),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Switcher(),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 30),
+              //   child: Switcher(),
+              // ),
               const SizedBox(height: 80),
               ListView(children: [
                 Center(

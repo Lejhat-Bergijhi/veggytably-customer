@@ -30,7 +30,6 @@ class _SearchPage3State extends State<SearchPage3> {
       await prefs.setBool('modalShown_${AuthController.to.user.id}', true);
 
       if (!context.mounted) return;
-
     }
   }
 
@@ -48,23 +47,21 @@ class _SearchPage3State extends State<SearchPage3> {
     double boxWidth = MediaQuery.of(context).size.width;
     double topPadding = MediaQuery.of(context).padding.top + 15;
 
-
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      body: SafeArea(child: Column(
-        children: [
-          RegularSearchAppBar(topPadding),
-           Padding(
-            padding: const EdgeInsets.only(left: 30),
-            child:
-              Switcher(),
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: SafeArea(
+          child: Column(
+            children: [
+              RegularSearchAppBar(topPadding),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 30),
+              //   child: Switcher(),
+              // ),
+              const SizedBox(height: 20),
+              // FoodMenuCard('images/food1.png',"Gurino Salado", "Rp 10.000", "Helty Resto Jaya"),
+            ],
           ),
-          const SizedBox(height: 20),
-          FoodMenuCard('images/food1.png',"Gurino Salado", "Rp 10.000", "Helty Resto Jaya"),
-        ],
-      ),)
-    );
+        ));
   }
 }
-
