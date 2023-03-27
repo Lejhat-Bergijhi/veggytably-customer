@@ -38,6 +38,7 @@ class SearchBar2 extends StatelessWidget {
           if (value.length < 2) {
             return;
           } else {
+            searchController.setSearch(value);
             searchController.searchAll(value);
           }
         },

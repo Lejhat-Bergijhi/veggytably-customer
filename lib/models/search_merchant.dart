@@ -1,5 +1,5 @@
 class SearchMerchant {
-  List<Merchant?>? merchantList;
+  List<Merchant>? merchantList;
 
   SearchMerchant({this.merchantList});
 
@@ -15,7 +15,7 @@ class SearchMerchant {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (merchantList != null) {
-      data['merchantList'] = merchantList!.map((v) => v!.toJson()).toList();
+      data['merchantList'] = merchantList!.map((v) => v.toJson()).toList();
     }
     return data;
   }

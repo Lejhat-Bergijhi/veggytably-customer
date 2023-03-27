@@ -4,7 +4,8 @@ import 'package:flutter/widgets.dart';
 class FoodMenuCard extends StatelessWidget {
   final String image;
   final String name, price, resto;
-  const FoodMenuCard(this.image, this.name, this.price, this.resto, {super.key});
+  const FoodMenuCard(this.image, this.name, this.price, this.resto,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class FoodMenuCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-           Container(
+            Container(
               width: 100.0,
               height: 100,
               decoration: BoxDecoration(

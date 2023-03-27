@@ -7,13 +7,15 @@ import '../models/search_merchant.dart';
 
 class SearchController extends GetxController {
   final _search = ''.obs;
-  final _menuSearchResult = [].obs;
-  final _merchantSearchResult = [].obs;
+  final RxList<Menu> _menuSearchResult = <Menu>[].obs;
+  final RxList<Merchant> _merchantSearchResult = <Merchant>[].obs;
   set search(String value) => _search.value = value;
 
   RxBool isLoading = false.obs;
 
   String get search => _search.value;
+  List<Menu> get menuSearchResult => _menuSearchResult;
+  List<Merchant> get merchantSearchResult => _merchantSearchResult;
 
   // method to search (just search both menu and restaurant)
   void searchAll(String query) async {
@@ -31,7 +33,14 @@ class SearchController extends GetxController {
           SearchMerchant.fromJson(merchantResponse.data["data"]);
       SearchMenu searchMenu = SearchMenu.fromJson(menuResponse.data["data"]);
 
-      print("merchants: ${searchMerchant.merchantList?.length}}");
+      if (searchMenu.menuList == null || searchMerchant.merchantList == null) {
+        throw Exception("Error loading search data.");
+      }
+
+      _menuSearchResult.value = searchMenu.menuList!;
+      _merchantSearchResult.value = searchMerchant.merchantList!;
+
+      print("merchants: ${searchMerchant.merchantList?.length}");
       print("menus: ${searchMenu.menuList?.length}");
     } catch (e) {
       print(e);
@@ -39,5 +48,10 @@ class SearchController extends GetxController {
       isLoading(false);
       update();
     }
+  }
+
+  void setSearch(String query) {
+    search = query;
+    update();
   }
 }
