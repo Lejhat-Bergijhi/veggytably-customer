@@ -25,9 +25,10 @@ class SearchPage extends StatelessWidget {
               const SizedBox(height: 20),
               const Padding(
                 padding: EdgeInsets.only(left: 30),
-                child: switcher(),
+                child: Switcher(),
               ),
               const SizedBox(height: 80),
+              // menu list here
               Center(
                 child: Container(
                   height: 300,

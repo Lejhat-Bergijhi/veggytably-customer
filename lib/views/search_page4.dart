@@ -30,7 +30,6 @@ class _SearchPage4State extends State<SearchPage4> {
       await prefs.setBool('modalShown_${AuthController.to.user.id}', true);
 
       if (!context.mounted) return;
-
     }
   }
 
@@ -49,21 +48,21 @@ class _SearchPage4State extends State<SearchPage4> {
     double topPadding = MediaQuery.of(context).padding.top + 15;
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      body: SafeArea(child: Column(
-        children: [
-          RegularSearchAppBar(topPadding),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child:
-              switcher(),
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: SafeArea(
+          child: Column(
+            children: [
+              RegularSearchAppBar(topPadding),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Switcher(),
+              ),
+              const SizedBox(height: 20),
+              RestoMenuCard('images/food3.png', "Merasa BerSalad",
+                  "Wonogiri Desa (3.90 Km)", "Rp 12.000, 37 Minutes"),
+            ],
           ),
-          const SizedBox(height: 20),
-          RestoMenuCard('images/food3.png', "Merasa BerSalad", "Wonogiri Desa (3.90 Km)", "Rp 12.000, 37 Minutes"),
-        ],
-      ),)
-    );
+        ));
   }
 }
-

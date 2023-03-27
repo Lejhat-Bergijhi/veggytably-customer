@@ -58,7 +58,7 @@ class _SearchPage3State extends State<SearchPage3> {
            Padding(
             padding: const EdgeInsets.only(left: 30),
             child:
-              switcher(),
+              Switcher(),
           ),
           const SizedBox(height: 20),
           FoodMenuCard('images/food1.png',"Gurino Salado", "Rp 10.000", "Helty Resto Jaya"),

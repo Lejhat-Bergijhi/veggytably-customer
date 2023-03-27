@@ -47,7 +47,7 @@ class _SearchPage1State extends State<SearchPage1> {
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(left: 30),
-                child: switcher(),
+                child: Switcher(),
               ),
               const SizedBox(height: 80),
               Center(
