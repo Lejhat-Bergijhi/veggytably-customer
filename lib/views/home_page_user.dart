@@ -20,13 +20,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Future<void> showOnce(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
-    final hasShownDialog = 
-      false; //buat display dialog fe
-    // prefs.getBool('modalShown_${AuthController.to.user.id}') ?? false;
+    const hasShownDialog = false; //buat display dialog fe
+    prefs.getBool('modalShown_${AuthController.to.user.id}') ?? false;
     if (!hasShownDialog) {
-      // await prefs.setBool('modalShown_${AuthController.to.user.id}', true);
+      await prefs.setBool('modalShown_${AuthController.to.user.id}', true);
 
-      // if (!context.mounted) return;
+      if (!context.mounted) return;
 
       showDialog(
         context: context,
@@ -107,8 +106,8 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
+                children: const [
+                  Text(
                     "Recommendations for You!",
                     style: TextStyle(
                       color: Colors.black,
@@ -117,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 12,
                   ),
                 ],
@@ -245,7 +244,6 @@ class DialogRestriksi extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
-         
           Container(
             // height: 204,
             // width: 204,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:veggytably_customer/views/search_page.dart';
 
 class SearchBar extends StatelessWidget {
   final pink = const Color(0xFFFACCCC);
@@ -12,7 +14,12 @@ class SearchBar extends StatelessWidget {
       width: MediaQuery.of(context).size.width - 32,
       height: 34,
       child: TextFormField(
-        
+        onTap: () {
+          Get.to(
+            () => const SearchPage(),
+            transition: Transition.fade,
+          );
+        },
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
@@ -22,8 +29,8 @@ class SearchBar extends StatelessWidget {
           enabledBorder: _border(grey),
           hintText: 'Looking for something to eat today?',
           hintStyle: const TextStyle(
-              color: Color(0xff9f9f9f),
-              fontSize: 15,
+            color: Color(0xff9f9f9f),
+            fontSize: 15,
           ),
           contentPadding: const EdgeInsets.symmetric(vertical: 10),
           prefixIcon: const Icon(
@@ -37,7 +44,7 @@ class SearchBar extends StatelessWidget {
   }
 
   OutlineInputBorder _border(Color color) => OutlineInputBorder(
-    borderSide: BorderSide(width: 0.5, color: color),
-    borderRadius: BorderRadius.circular(12),
-  );
+        borderSide: BorderSide(width: 0.5, color: color),
+        borderRadius: BorderRadius.circular(12),
+      );
 }

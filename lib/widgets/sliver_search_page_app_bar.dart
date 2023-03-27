@@ -7,9 +7,9 @@ import 'search_bar2.dart';
 class RegularSearchAppBar extends StatelessWidget {
   final double topPadding;
   const RegularSearchAppBar(
-    this.topPadding, 
-    {super.key,}
-  );
+    this.topPadding, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,9 @@ class RegularSearchAppBar extends StatelessWidget {
         ),
         Positioned(
           top: topPadding + 46,
-          child: const SearchBar2(),
           left: 16,
           right: 16,
+          child: SearchBar2(),
         ),
       ],
     );
