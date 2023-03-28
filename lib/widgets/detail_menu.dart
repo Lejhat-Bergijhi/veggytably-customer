@@ -21,9 +21,7 @@ void _showViewMenu(BuildContext context) {
     useRootNavigator: true,
     enableDrag: true,
     isDismissible: true,
-
     shape: const RoundedRectangleBorder(
-
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(15),
         topRight: Radius.circular(15),
@@ -31,10 +29,11 @@ void _showViewMenu(BuildContext context) {
     ),
     context: context,
     builder: (BuildContext context) {
-      return Stack(
-        children: [Container(
-          height:  MediaQuery.of(context).size.height * 0.8,
-          padding: EdgeInsets.only(left: 25, right: 25, bottom: boxWidth*0.15+45),
+      return Stack(children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.8,
+          padding: EdgeInsets.only(
+              left: 25, right: 25, bottom: boxWidth * 0.15 + 45),
           child: ListView(
             children: [
               SizedBox(height: 15),
@@ -57,9 +56,10 @@ void _showViewMenu(BuildContext context) {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 width: MediaQuery.of(context).size.width * 0.9,
-                child: Image.asset('images/menu_food1.png', fit: BoxFit.cover),
+                child: Image.asset('assets/images/menu_food1.png',
+                    fit: BoxFit.cover),
               ),
-        
+
               SizedBox(height: 12),
               //food name
               Text(
@@ -71,45 +71,44 @@ void _showViewMenu(BuildContext context) {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-        
+
               SizedBox(height: 12),
               //food detail
               Text(
-                  "Perpaduan nanas, tahu, paprika, brambang, ditambah sego thiwul yang sangat lejhat.",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 12,
-                        fontFamily: 'Rubik',
-                  ),
+                "Perpaduan nanas, tahu, paprika, brambang, ditambah sego thiwul yang sangat lejhat.",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontFamily: 'Rubik',
+                ),
               ),
-      
+
               SizedBox(height: 12),
               //food price
               Text(
-                  "Rp15.000",
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                      fontFamily: "Rubik",
-                      fontWeight: FontWeight.bold,
-                  ),
+                "Rp15.000",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17,
+                  fontFamily: "Rubik",
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-      
+
               SizedBox(height: 12),
               //tags
               Container(
                 height: 20,
-                width: boxWidth*0.9,
+                width: boxWidth * 0.9,
                 child: ListView(
                   shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
                   children: [
                     FilterButton('NUT-FREE'),
                     SizedBox(width: 4),
                     FilterButton('DAIRY-FREE'),
                     SizedBox(width: 4),
-      
                     FilterButton('MEAT-FREE'),
                     SizedBox(width: 4),
                     FilterButton('EGG-FREE'),
@@ -132,11 +131,11 @@ void _showViewMenu(BuildContext context) {
           ),
         ),
         Positioned(
-          left: boxWidth*0.15/2,
-          right: boxWidth*0.15/2,
+          left: boxWidth * 0.15 / 2,
+          right: boxWidth * 0.15 / 2,
           bottom: 30,
           child: Container(
-            width: boxWidth*0.85,
+            width: boxWidth * 0.85,
             height: 45,
             child: ElevatedButton(
               onPressed: () {
@@ -149,7 +148,7 @@ void _showViewMenu(BuildContext context) {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
-                   fontFamily: "Rubik",
+                  fontFamily: "Rubik",
                 ),
               ),
               style: ElevatedButton.styleFrom(
@@ -161,8 +160,7 @@ void _showViewMenu(BuildContext context) {
             ),
           ),
         ),
-        ]
-      );
+      ]);
     },
   );
 }
