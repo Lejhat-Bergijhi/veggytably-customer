@@ -20,8 +20,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Future<void> showOnce(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
-    const hasShownDialog = false; //buat display dialog fe
-    prefs.getBool('modalShown_${AuthController.to.user.id}') ?? false;
+    bool? hasShownDialog =
+        prefs.getBool('modalShown_${AuthController.to.user.id}') ?? false;
     if (!hasShownDialog) {
       await prefs.setBool('modalShown_${AuthController.to.user.id}', true);
 

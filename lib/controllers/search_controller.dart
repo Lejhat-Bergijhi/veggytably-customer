@@ -9,6 +9,7 @@ class SearchController extends GetxController {
   final _search = ''.obs;
   final RxList<Menu> _menuSearchResult = <Menu>[].obs;
   final RxList<Merchant> _merchantSearchResult = <Merchant>[].obs;
+
   set search(String value) => _search.value = value;
 
   RxBool isLoading = false.obs;
