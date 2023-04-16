@@ -56,4 +56,5 @@ class MerchantController extends GetxController {
     this.menuList.value = menuList;
     update();
   }
+
 }

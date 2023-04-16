@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/controllers/merchant_controller.dart';
@@ -166,6 +168,12 @@ class ListMenuPage extends StatelessWidget {
                         }),
                   );
                 }),
+
+
+
+
+
+
 
                 // ListMenu(
                 //     gambar: "assets/images/image11.png",
