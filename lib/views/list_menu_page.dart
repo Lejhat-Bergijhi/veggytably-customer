@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:veggytably_customer/controllers/merchant_controller.dart';
 import 'package:veggytably_customer/widgets/filter_button.dart';
 
+import '../controllers/cart_controller.dart';
 import '../models/search_menu.dart';
 import '../widgets/counter_button.dart';
 import 'cart_page.dart';
 
 class ListMenuPage extends StatelessWidget {
   final MerchantController merchantController = Get.find<MerchantController>();
+  final CartController cartController = Get.put(CartController());
 
   ListMenuPage({super.key});
 
@@ -148,25 +150,25 @@ class ListMenuPage extends StatelessWidget {
                           left: boxWidth * 0.15 / 2,
                           right: boxWidth * 0.15 / 2,
                           bottom: 30,
-                          child: Container(
+                          child: SizedBox(
                             width: boxWidth * 0.85,
                             height: 45,
                             child: ElevatedButton(
                               onPressed: () {
                                 Get.to(() => const CartPage());
                               },
-                              child: const Text(
-                                'View Cart Details',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  fontFamily: "Rubik",
-                                ),
-                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xff70cb88),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                              child: Text(
+                                'View Cart Details (${cartController.cart.cartItem.length})',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  fontFamily: "Rubik",
                                 ),
                               ),
                             ),
@@ -215,6 +217,7 @@ class ListMenu extends StatelessWidget {
               padding: EdgeInsets.only(
                   left: 25, right: 25, bottom: boxWidth * 0.15 + 45),
               child: ListView(
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   const SizedBox(height: 15),
                   //swipe up line
@@ -303,7 +306,7 @@ class ListMenu extends StatelessWidget {
 
                   const SizedBox(height: 12),
                   //tags
-                  Container(
+                  SizedBox(
                     height: 20,
                     width: boxWidth * 0.9,
                     child: ListView(
@@ -322,7 +325,7 @@ class ListMenu extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Container(
+                  SizedBox(
                     width: boxWidth,
                     child: Row(
                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -340,29 +343,29 @@ class ListMenu extends StatelessWidget {
               left: boxWidth * 0.15 / 2,
               right: boxWidth * 0.15 / 2,
               bottom: 30,
-              child: Container(
+              child: SizedBox(
                 width: boxWidth * 0.85,
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Get.offAll(() => ProfilePage(), transition: Transition.fade);
-                    // emailController.clear();
-                    // passwordController.clear();
                     print(counter.value);
                     print(menu.toString());
+
+                    // add menu to cart then close modal
+                    Get.back();
                   },
+                  style: ElevatedButton.styleFrom(
+                    primary: const Color(0xff70cb88),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                   child: const Text(
                     'Add to Cart',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       fontFamily: "Rubik",
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: const Color(0xff70cb88),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 ),
@@ -385,10 +388,6 @@ class ListMenu extends StatelessWidget {
               color: Colors.black12,
               width: 1.0,
             ),
-            // top: BorderSide(
-            //   color: Colors.black12,
-            //   width: 1.0,
-            // ),
           ),
         ),
         padding: const EdgeInsets.all(15),
@@ -398,10 +397,6 @@ class ListMenu extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Divider(),
-              // Image(
-              //   image: AssetImage(gambar),
-              //   width: 75.0,
-              // ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
                 child: menu.imageUrl != null

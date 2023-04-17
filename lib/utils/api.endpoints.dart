@@ -37,6 +37,16 @@ class _CustomerEndPoints {
     String restrictions = "000000",
   }) =>
       "merchants/$merchantId/menu?limit=$limit&restrictions=$restrictions&offset=$offset";
+
+  String getCart({
+    String merchantId = "",
+  }) =>
+      "customers/cart/$merchantId";
+
+  String updateCart({
+    String merchantId = "",
+  }) =>
+      "customers/cart/$merchantId";
 }
 /**
  * query merchant
@@ -51,4 +61,14 @@ class _CustomerEndPoints {
 /**
  * get menu by merchant id
  * http://localhost:5000/merchants/64171e03c849eff0eeb7a441/menu?limit=10&restrictions=000000&offset=0
+ */
+
+/**
+ * get cart by merchant id
+ * http://localhost:5000/customers/cart/64171e03c849eff0eeb7a441
+ */
+
+/**
+ * update cart by merchant id
+ * http://localhost:5000/customers/cart/64171e03c849eff0eeb7a441
  */

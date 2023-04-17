@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:veggytably_customer/api/search_api.dart';
 import 'package:veggytably_customer/models/search_menu.dart';
 
 import '../api/merchant_api.dart';
 import '../models/search_merchant.dart';
 
 class MerchantController extends GetxController {
+  static MerchantController to = Get.find();
   final Rx<Merchant> _merchant = Merchant(
     id: "",
     duration: 0,
@@ -56,5 +56,4 @@ class MerchantController extends GetxController {
     this.menuList.value = menuList;
     update();
   }
-
 }
