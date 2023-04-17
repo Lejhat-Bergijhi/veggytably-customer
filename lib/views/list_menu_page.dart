@@ -1,5 +1,3 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/controllers/merchant_controller.dart';
@@ -7,13 +5,16 @@ import 'package:veggytably_customer/widgets/filter_button.dart';
 
 import '../models/search_menu.dart';
 import '../widgets/counter_button.dart';
+import 'cart_page.dart';
 
 class ListMenuPage extends StatelessWidget {
   final MerchantController merchantController = Get.find<MerchantController>();
+
   ListMenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double boxWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -110,35 +111,6 @@ class ListMenuPage extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                // TODO: menus that match your restriction
-                // const Padding(
-                //     padding: EdgeInsets.only(left: 16),
-                //     child: Text(
-                //       'MENU THAT MATCHES YOUR RESTRICTIONS',
-                //       style: TextStyle(
-                //         color: Color.fromARGB(131, 88, 83, 83),
-                //         fontSize: 10,
-                //         fontWeight: FontWeight.bold,
-                //       ),
-                //     )),
-                // ListMenu(
-                //     gambar: "assets/images/image9.png",
-                //     text: "Salad Yammy",
-                //     harga: "Rp 15.000",
-                //     syarat1: "MEAT-FREE",
-                //     syarat2: "DAIRY-FREE"),
-                // ListMenu(
-                //     gambar: "assets/images/image7.png",
-                //     text: "Tomyum Guwrih",
-                //     harga: "Rp 35.000",
-                //     syarat1: "EGG-FREE",
-                //     syarat2: "DAIRY-FREE"),
-                // ListMenu(
-                //     gambar: "assets/images/image6.png",
-                //     text: "Gado-gado Wuenak",
-                //     harga: "Rp 12.000",
-                //     syarat1: "MEAT-FREE",
-                //     syarat2: "DAIRY-FREE"),
                 const Padding(
                   padding: EdgeInsets.only(left: 16, top: 8),
                   child: Text(
@@ -151,6 +123,7 @@ class ListMenuPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                // Menu List
                 GetBuilder<MerchantController>(builder: (controller) {
                   if (controller.isLoading.value) {
                     return const Center(
@@ -161,38 +134,48 @@ class ListMenuPage extends StatelessWidget {
                   List<Menu> menuList = controller.menuList;
 
                   return Expanded(
-                    child: ListView.builder(
-                        itemCount: menuList.length,
-                        itemBuilder: (context, index) {
-                          return ListMenu(menu: menuList[index]);
-                        }),
+                    child: Stack(
+                      children: [
+                        ListView.builder(
+                            physics: const AlwaysScrollableScrollPhysics(
+                                parent: BouncingScrollPhysics()),
+                            itemCount: menuList.length,
+                            itemBuilder: (context, index) {
+                              return ListMenu(menu: menuList[index]);
+                            }),
+                        // cart details button
+                        Positioned(
+                          left: boxWidth * 0.15 / 2,
+                          right: boxWidth * 0.15 / 2,
+                          bottom: 30,
+                          child: Container(
+                            width: boxWidth * 0.85,
+                            height: 45,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Get.to(() => const CartPage());
+                              },
+                              child: const Text(
+                                'View Cart Details',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15,
+                                  fontFamily: "Rubik",
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff70cb88),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 }),
-
-
-
-
-
-
-
-                // ListMenu(
-                //     gambar: "assets/images/image11.png",
-                //     text: "Roasted Chic",
-                //     harga: "Rp 60.000",
-                //     syarat1: "NUT-FREE",
-                //     syarat2: "FISH-FREE"),
-                // ListMenu(
-                //     gambar: "assets/images/image9.png",
-                //     text: "Salad Yammy",
-                //     harga: "Rp 15.000",
-                //     syarat1: "MEAT-FREE",
-                //     syarat2: "GLLUTEN-FREE"),
-                // ListMenu(
-                //     gambar: "assets/images/image6.png",
-                //     text: "Salad Juowo",
-                //     harga: "Rp 9.000",
-                //     syarat1: "MEAT-FREE",
-                //     syarat2: "DAIRY-FREE")
               ],
             ),
           ),
@@ -204,12 +187,13 @@ class ListMenuPage extends StatelessWidget {
 
 class ListMenu extends StatelessWidget {
   final Menu menu;
+  final RxInt counter = 1.obs;
 
-  const ListMenu({super.key, required this.menu});
+  ListMenu({super.key, required this.menu});
 
   @override
   Widget build(BuildContext context) {
-    void _showViewMenu(BuildContext context) {
+    void showViewMenu(BuildContext context) {
       double boxWidth = MediaQuery.of(context).size.width;
       showModalBottomSheet(
         backgroundColor: Colors.white,
@@ -232,7 +216,7 @@ class ListMenu extends StatelessWidget {
                   left: 25, right: 25, bottom: boxWidth * 0.15 + 45),
               child: ListView(
                 children: [
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   //swipe up line
                   Center(
                     child: Container(
@@ -240,11 +224,11 @@ class ListMenu extends StatelessWidget {
                       height: 5,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
-                        color: Color(0xffd1d1d6),
+                        color: const Color(0xffd1d1d6),
                       ),
                     ),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   //food pic
                   Container(
                     decoration: BoxDecoration(
@@ -282,11 +266,11 @@ class ListMenu extends StatelessWidget {
                           ),
                   ),
 
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   //food name
                   Text(
                     menu.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontFamily: 'Rubik',
                       fontSize: 23,
@@ -294,22 +278,22 @@ class ListMenu extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   //food detail
                   Text(
                     menu.description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 12,
                       fontFamily: 'Rubik',
                     ),
                   ),
 
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   //food price
                   Text(
                     "Rp ${menu.price}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 17,
                       fontFamily: "Rubik",
@@ -317,7 +301,7 @@ class ListMenu extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   //tags
                   Container(
                     height: 20,
@@ -328,24 +312,24 @@ class ListMenu extends StatelessWidget {
                       physics: const BouncingScrollPhysics(),
                       children: [
                         FilterButton('NUT-FREE'),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                         FilterButton('DAIRY-FREE'),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                         FilterButton('MEAT-FREE'),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                         FilterButton('EGG-FREE'),
                       ],
                     ),
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Container(
                     width: boxWidth,
                     child: Row(
                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Spacer(),
-                        Counter(),
-                        Spacer(),
+                        const Spacer(),
+                        Counter(counter: counter),
+                        const Spacer(),
                       ],
                     ),
                   )
@@ -364,8 +348,10 @@ class ListMenu extends StatelessWidget {
                     // Get.offAll(() => ProfilePage(), transition: Transition.fade);
                     // emailController.clear();
                     // passwordController.clear();
+                    print(counter.value);
+                    print(menu.toString());
                   },
-                  child: Text(
+                  child: const Text(
                     'Add to Cart',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -374,7 +360,7 @@ class ListMenu extends StatelessWidget {
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: Color(0xff70cb88),
+                    primary: const Color(0xff70cb88),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -390,7 +376,7 @@ class ListMenu extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // Get.to(() => ViewMenu());
-        _showViewMenu(context);
+        showViewMenu(context);
       },
       child: Container(
         decoration: const BoxDecoration(

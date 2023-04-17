@@ -1,19 +1,31 @@
-//template
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'counter_button.dart';
 import 'filter_button.dart';
 
-import '../views/restriction_page1.dart';
+class ViewMenu extends StatelessWidget {
+  const ViewMenu({super.key});
 
-class ViewMenu extends StatefulWidget {
   @override
-  _ViewMenuState createState() => _ViewMenuState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My App'),
+      ),
+      body: Center(
+        child: TextButton(
+          onPressed: () {
+            _showViewMenu(context);
+          },
+          child: Text('Open Bottom Sheet'),
+        ),
+      ),
+    );
+  }
 }
 
 void _showViewMenu(BuildContext context) {
+  final RxInt counter = 2.obs;
   double boxWidth = MediaQuery.of(context).size.width;
   showModalBottomSheet(
     backgroundColor: Colors.white,
@@ -122,7 +134,7 @@ void _showViewMenu(BuildContext context) {
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Spacer(),
-                    Counter(),
+                    Counter(counter: counter),
                     Spacer(),
                   ],
                 ),
@@ -163,23 +175,4 @@ void _showViewMenu(BuildContext context) {
       ]);
     },
   );
-}
-
-class _ViewMenuState extends State<ViewMenu> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My App'),
-      ),
-      body: Center(
-        child: TextButton(
-          onPressed: () {
-            _showViewMenu(context);
-          },
-          child: Text('Open Bottom Sheet'),
-        ),
-      ),
-    );
-  }
 }

@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
         Get.put(AuthController());
       }),
       debugShowCheckedModeBanner: false,
-      home: CartPage(),
+      home: LoginPage(),
     );
   }
 }
