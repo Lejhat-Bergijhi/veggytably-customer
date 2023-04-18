@@ -4,6 +4,7 @@ import 'package:veggytably_customer/controllers/merchant_controller.dart';
 import 'package:veggytably_customer/widgets/filter_button.dart';
 
 import '../controllers/cart_controller.dart';
+import '../models/cart.dart';
 import '../models/search_menu.dart';
 import '../widgets/counter_button.dart';
 import 'cart_page.dart';
@@ -143,36 +144,49 @@ class ListMenuPage extends StatelessWidget {
                                 parent: BouncingScrollPhysics()),
                             itemCount: menuList.length,
                             itemBuilder: (context, index) {
-                              return ListMenu(menu: menuList[index]);
+                              try {
+                                return ListMenu(
+                                  menu: menuList[index],
+                                  cartIndex: index,
+                                );
+                              } catch (e) {
+                                return const SizedBox();
+                              }
                             }),
                         // cart details button
-                        Positioned(
-                          left: boxWidth * 0.15 / 2,
-                          right: boxWidth * 0.15 / 2,
-                          bottom: 30,
-                          child: SizedBox(
-                            width: boxWidth * 0.85,
-                            height: 45,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Get.to(() => const CartPage());
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xff70cb88),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              ),
-                              child: Text(
-                                'View Cart Details (${cartController.cart.cartItem.length})',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  fontFamily: "Rubik",
-                                ),
-                              ),
-                            ),
-                          ),
+                        Obx(
+                          () => cartController.cart.cartItem.isNotEmpty
+                              ? Positioned(
+                                  left: boxWidth * 0.15 / 2,
+                                  right: boxWidth * 0.15 / 2,
+                                  bottom: 30,
+                                  child: SizedBox(
+                                    width: boxWidth * 0.85,
+                                    height: 45,
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        Get.to(() => const CartPage());
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            const Color(0xff70cb88),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'View Cart Details (${cartController.cart.cartItem.length})',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          fontFamily: "Rubik",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox(),
                         ),
                       ],
                     ),
@@ -188,10 +202,17 @@ class ListMenuPage extends StatelessWidget {
 }
 
 class ListMenu extends StatelessWidget {
+  final CartController cartController = Get.find<CartController>();
   final Menu menu;
-  final RxInt counter = 1.obs;
+  final int cartIndex;
+  late final RxInt counter;
 
-  ListMenu({super.key, required this.menu});
+  ListMenu({
+    super.key,
+    required this.menu,
+    required this.cartIndex,
+  }) : counter =
+            Get.find<CartController>().cart.cartItem[cartIndex].quantity.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -346,26 +367,34 @@ class ListMenu extends StatelessWidget {
               child: SizedBox(
                 width: boxWidth * 0.85,
                 height: 45,
-                child: ElevatedButton(
-                  onPressed: () {
-                    print(counter.value);
-                    print(menu.toString());
-
-                    // add menu to cart then close modal
-                    Get.back();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: const Color(0xff70cb88),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                child: Obx(
+                  () => ElevatedButton(
+                    onPressed: counter > 0
+                        ? () {
+                            // add menu to cart then close modal
+                            CartItem cartItem = CartItem(
+                              cartId: cartController.cart.id,
+                              menuId: menu.id,
+                              menu: menu,
+                              quantity: counter.value,
+                            );
+                            cartController.insertCartItem(cartItem);
+                          }
+                        : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xff70cb88),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      disabledBackgroundColor: const Color(0xffd1d1d6),
                     ),
-                  ),
-                  child: const Text(
-                    'Add to Cart',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      fontFamily: "Rubik",
+                    child: const Text(
+                      'Add to Cart',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        fontFamily: "Rubik",
+                      ),
                     ),
                   ),
                 ),
@@ -378,7 +407,6 @@ class ListMenu extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        // Get.to(() => ViewMenu());
         showViewMenu(context);
       },
       child: Container(

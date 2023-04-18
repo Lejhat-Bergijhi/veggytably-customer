@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
-import '../models/search_menu.dart';
+import 'package:veggytably_customer/models/cart.dart';
+import '../controllers/cart_controller.dart';
+import '../controllers/merchant_controller.dart';
+import '../utils/number_formatter.dart';
 import '../widgets/counter_mini.dart';
 
 class CartPage extends StatelessWidget {
@@ -13,7 +17,7 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 10,
-        shadowColor: Color.fromARGB(25, 78, 54, 54),
+        shadowColor: const Color.fromARGB(25, 78, 54, 54),
         toolbarHeight: 74.72,
         leading: IconButton(
           icon: Image.asset('assets/images/arrow-left.png'),
@@ -25,8 +29,8 @@ class CartPage extends StatelessWidget {
         ),
         titleSpacing: 0,
         title: Text(
-          'Resto Tanah Air Jaya',
-          style: TextStyle(
+          MerchantController.to.merchant.restaurantName,
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 22,
             fontFamily: "Rubik",
@@ -45,98 +49,25 @@ class CartPage extends StatelessWidget {
       body: SafeArea(
           child: Stack(
         children: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 18,
-                ),
-                Text(
-                  "ADDRESS",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xff9f9f9f),
-                    fontSize: 10,
-                    fontFamily: "Rubik",
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(
-                  height: 11.62,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SingleChildScrollView(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset('assets/images/location.png'),
-                    SizedBox(
-                      width: 10,
+                    const SizedBox(
+                      height: 18,
                     ),
-                    Text(
-                      "Pogung Kidul",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 22,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Change Address",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xff4b875b),
-                          fontSize: 12,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                      style: ButtonStyle(
-                        overlayColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        padding: MaterialStateProperty.all(EdgeInsets.zero),
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(height: 8),
-                Container(
-                  width: MediaQuery.of(context).size.width - 48,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Color(0xfff6f7fb),
-                  ),
-                  padding: const EdgeInsets.only(
-                      left: 26, right: 10, bottom: 10, top: 10),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Add address details and delivery instructions",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xff9f9f9f),
-                          fontSize: 10,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Cart Item
-                SizedBox(
-                  height: 32,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "ORDERS",
+                    const Text(
+                      "ADDRESS",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Color(0xff9f9f9f),
                         fontSize: 10,
@@ -144,165 +75,272 @@ class CartPage extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Add Order",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color(0xff4b875b),
-                          fontSize: 12,
-                          decoration: TextDecoration.underline,
+                    const SizedBox(
+                      height: 11.62,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/images/location.png'),
+                        const SizedBox(
+                          width: 10,
                         ),
+                        const Text(
+                          "Pogung Kidul",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 22,
+                            fontFamily: "Rubik",
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            padding: MaterialStateProperty.all(EdgeInsets.zero),
+                          ),
+                          child: const Text(
+                            "Change Address",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xff4b875b),
+                              fontSize: 12,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Container(
+                      width: MediaQuery.of(context).size.width - 48,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: const Color(0xfff6f7fb),
                       ),
-                      style: ButtonStyle(
-                        overlayColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        padding: MaterialStateProperty.all(EdgeInsets.zero),
+                      padding: const EdgeInsets.only(
+                          left: 26, right: 10, bottom: 10, top: 10),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "Add address details and delivery instructions",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xff9f9f9f),
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
 
-                SizedBox(
-                  height: 8,
-                ),
-
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Tomyum Guwrih",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontFamily: "Rubik",
-                                fontWeight: FontWeight.bold,
-                              ),
+                    // Cart Item
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          "ORDERS",
+                          style: TextStyle(
+                            color: Color(0xff9f9f9f),
+                            fontSize: 10,
+                            fontFamily: "Rubik",
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const Spacer(),
+                        TextButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            padding: MaterialStateProperty.all(EdgeInsets.zero),
+                          ),
+                          child: const Text(
+                            "Add Order",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xff4b875b),
+                              fontSize: 12,
+                              decoration: TextDecoration.underline,
                             ),
-                            SizedBox(height: 4),
-                            Text(
-                              "Rp35.000",
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(
+                      height: 8,
+                    ),
+
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height,
+                          minHeight: 56.0),
+                      child: GetBuilder<CartController>(
+                        builder: (controller) {
+                          List<CartItem> cartItem = controller.cart.cartItem;
+                          return ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: cartItem.length,
+                              separatorBuilder: (context, index) {
+                                return const SizedBox(height: 8);
+                              },
+                              itemBuilder: (context, index) {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          cartItem[index].menu.name,
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                            fontFamily: "Rubik",
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          NumberFormatter.instance.idr(
+                                              cartItem[index].menu.price *
+                                                  cartItem[index].quantity),
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    CounterMini(
+                                      cartIndex: index,
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    //line
+                    Container(
+                      width: MediaQuery.of(context).size.width - 48,
+                      height: 1,
+                      color: const Color(0xffd1d1d6),
+                    ),
+
+                    //voucher
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    Container(
+                        padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: const Color(0xfff6f7fb),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 42,
+                              height: 42,
+                              child: Image.asset('assets/images/voucher.png'),
+                            ),
+                            const SizedBox(width: 10),
+                            const Text(
+                              "Place a voucher to get a discount!",
                               style: TextStyle(
-                                color: Colors.black,
+                                color: Color(0xff242424),
                                 fontSize: 15,
                               ),
                             ),
                           ],
-                        ),
-                      ),
-                      Spacer(),
-                      CounterMini(),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 8),
-                //line
-                Container(
-                  width: MediaQuery.of(context).size.width - 48,
-                  height: 1,
-                  color: Color(0xffd1d1d6),
-                ),
+                        )),
+                    const SizedBox(height: 32),
 
-                //voucher
-                SizedBox(
-                  height: 32,
-                ),
-                Container(
-                    padding: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Color(0xfff6f7fb),
+                    const Text(
+                      "PAYMENT SUMMARY",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xff9f9f9f),
+                        fontSize: 10,
+                        fontFamily: "Rubik",
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                    child: Row(
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
                       children: [
-                        Container(
-                          child: Image.asset('assets/images/voucher.png'),
-                          width: 42,
-                          height: 42,
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          "Place a voucher to get a discount!",
+                        const Text(
+                          "Total Order",
                           style: TextStyle(
-                            color: Color(0xff242424),
+                            color: Colors.black,
+                            fontSize: 15,
+                          ),
+                        ),
+                        const Spacer(),
+                        GetBuilder<CartController>(builder: (controller) {
+                          return Text(
+                            NumberFormatter.instance
+                                .idr(controller.totalPrice.value),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                            ),
+                          );
+                        }),
+                      ],
+                    ),
+
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: const [
+                        Text(
+                          "Delivery Fee",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          "Rp 10.000",
+                          style: TextStyle(
+                            color: Colors.black,
                             fontSize: 15,
                           ),
                         ),
                       ],
-                    )),
-                SizedBox(height: 32),
-
-                Text(
-                  "PAYMENT SUMMARY",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0xff9f9f9f),
-                    fontSize: 10,
-                    fontFamily: "Rubik",
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "Total Order",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      "Rp 119.000",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    ),
+                    )
                   ],
                 ),
-
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "Delivery Fee",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      "Rp 10.000",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ],
-                )
-              ],
+              ),
             ),
           ),
           Positioned(
             bottom: 0,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -313,13 +351,13 @@ class CartPage extends StatelessWidget {
                   ),
                 ],
               ),
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               height: 134,
               width: MediaQuery.of(context).size.width,
               child: Column(children: [
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Total Price",
                       style: TextStyle(
                         color: Colors.black,
@@ -328,38 +366,41 @@ class CartPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Spacer(),
-                    Text(
-                      "Rp129.000",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 22,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    const Spacer(),
+                    GetBuilder<CartController>(builder: (controller) {
+                      return Text(
+                        NumberFormatter.instance
+                            .idr(controller.totalPrice.value + 10000),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 22,
+                          fontFamily: "Rubik",
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    }),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Color(0xb2ffffff),
                         blurRadius: 30,
                         offset: Offset(0, 0),
                       ),
                     ],
-                    color: Color(0xff70cb88),
+                    color: const Color(0xff70cb88),
                   ),
                   width: MediaQuery.of(context).size.width - 48,
                   height: 44,
                   child: TextButton(
                     onPressed: () {},
-                    child: Text(
+                    child: const Text(
                       "Confirm Order",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -380,66 +421,66 @@ class CartPage extends StatelessWidget {
   }
 }
 
-class ListMenu extends StatelessWidget {
-  final Menu menu;
+// class ListMenu extends StatelessWidget {
+//   final Menu menu;
 
-  const ListMenu({super.key, required this.menu});
+//   const ListMenu({super.key, required this.menu});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 8,
-        ),
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         const SizedBox(
+//           height: 8,
+//         ),
 
-        Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      // menu.name,
-                      "Tomyum Guwrih",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      "Rp35.000",
-                      // "Rp ${menu.price}",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Spacer(),
-              CounterMini(),
-            ],
-          ),
-        ),
-        SizedBox(height: 8),
-        //line
-        Container(
-          width: MediaQuery.of(context).size.width - 48,
-          height: 1,
-          color: Color(0xffd1d1d6),
-        ),
-      ],
-    );
+//         Container(
+//           child: Row(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               Container(
+//                 child: Column(
+//                   mainAxisAlignment: MainAxisAlignment.start,
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     const Text(
+//                       // menu.name,
+//                       "Tomyum Guwrih",
+//                       style: TextStyle(
+//                         color: Colors.black,
+//                         fontSize: 15,
+//                         fontFamily: "Rubik",
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                     ),
+//                     const SizedBox(height: 4),
+//                     const Text(
+//                       "Rp35.000",
+//                       // "Rp ${menu.price}",
+//                       style: TextStyle(
+//                         color: Colors.black,
+//                         fontSize: 15,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//               const Spacer(),
+//               CounterMini(),
+//             ],
+//           ),
+//         ),
+//         const SizedBox(height: 8),
+//         //line
+//         Container(
+//           width: MediaQuery.of(context).size.width - 48,
+//           height: 1,
+//           color: const Color(0xffd1d1d6),
+//         ),
+//       ],
+//     );
 
-    //  Divider();
-  }
-}
+//     //  Divider();
+//   }
+// }

@@ -41,14 +41,14 @@ class Cart {
 }
 
 class CartItem {
-  late String id;
+  late String? id;
   late int quantity;
   late String cartId;
   late String menuId;
   late Menu menu;
 
   CartItem({
-    required this.id,
+    this.id,
     required this.quantity,
     required this.cartId,
     required this.menuId,
