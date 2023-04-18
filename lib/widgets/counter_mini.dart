@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/cart_controller.dart';
+import '../models/cart.dart';
 
 class CounterMini extends StatelessWidget {
   final int cartIndex;
@@ -20,7 +21,10 @@ class CounterMini extends StatelessWidget {
           actions: <CupertinoDialogAction>[
             CupertinoDialogAction(
                 onPressed: () {
-                  Navigator.pop(context);
+                  CartController cartController = Get.find<CartController>();
+                  CartItem cartItem = cartController.cart.cartItem[cartIndex];
+                  cartItem.quantity--;
+                  cartController.updateCartItem(cartItem);
                 },
                 child: const Text(
                   "Yes",
@@ -53,10 +57,15 @@ class CounterMini extends StatelessWidget {
         borderRadius: BorderRadius.circular(5.73),
         splashColor: Colors.transparent,
         onTap: () {
-          if (Get.find<CartController>().cart.cartItem[cartIndex].quantity ==
-              1) {
+          // update cart
+          CartController cartController = Get.find<CartController>();
+          if (cartController.cart.cartItem[cartIndex].quantity == 1) {
             showAlertDialog(context);
+            return;
           }
+          CartItem cartItem = cartController.cart.cartItem[cartIndex];
+          cartItem.quantity--;
+          cartController.updateCartItem(cartItem);
         },
         child: Container(
           width: 22,
@@ -110,8 +119,11 @@ class CounterMini extends StatelessWidget {
       const SizedBox(width: 10),
       InkWell(
         onTap: () {
-          // int quantity = quantityController.getQuantity('ayam lonly');
-          // quantityController.updateQuantity(1, quantity + 1);
+          // update cart
+          CartController cartController = Get.find<CartController>();
+          CartItem cartItem = cartController.cart.cartItem[cartIndex];
+          cartItem.quantity++;
+          cartController.updateCartItem(cartItem);
         },
         borderRadius: BorderRadius.circular(5.73),
         splashColor: Colors.transparent,

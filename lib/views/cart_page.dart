@@ -183,17 +183,32 @@ class CartPage extends StatelessWidget {
 
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.height,
-                          minHeight: 56.0),
+                        maxHeight: MediaQuery.of(context).size.height,
+                        minHeight: 56.0,
+                      ),
                       child: GetBuilder<CartController>(
                         builder: (controller) {
+                          if (controller.isLoading.value) {
+                            return SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: const Center(
+                                heightFactor: 2,
+                                widthFactor: 2,
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }
+
                           List<CartItem> cartItem = controller.cart.cartItem;
                           return ListView.separated(
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: cartItem.length,
                               separatorBuilder: (context, index) {
-                                return const SizedBox(height: 8);
+                                return const Divider(
+                                  color: Color(0xffd1d1d6),
+                                  thickness: 1,
+                                );
                               },
                               itemBuilder: (context, index) {
                                 return Row(

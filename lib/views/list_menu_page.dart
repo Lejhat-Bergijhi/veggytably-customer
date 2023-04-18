@@ -6,6 +6,7 @@ import 'package:veggytably_customer/widgets/filter_button.dart';
 import '../controllers/cart_controller.dart';
 import '../models/cart.dart';
 import '../models/search_menu.dart';
+import '../utils/number_formatter.dart';
 import '../widgets/counter_button.dart';
 import 'cart_page.dart';
 
@@ -139,20 +140,23 @@ class ListMenuPage extends StatelessWidget {
                   return Expanded(
                     child: Stack(
                       children: [
-                        ListView.builder(
-                            physics: const AlwaysScrollableScrollPhysics(
-                                parent: BouncingScrollPhysics()),
-                            itemCount: menuList.length,
-                            itemBuilder: (context, index) {
-                              try {
-                                return ListMenu(
-                                  menu: menuList[index],
-                                  cartIndex: index,
-                                );
-                              } catch (e) {
-                                return const SizedBox();
-                              }
-                            }),
+                        GetBuilder<CartController>(builder: (controller) {
+                          return ListView.builder(
+                              physics: const AlwaysScrollableScrollPhysics(
+                                  parent: BouncingScrollPhysics()),
+                              itemCount: menuList.length,
+                              itemBuilder: (context, index) {
+                                try {
+                                  return ListMenu(
+                                    menu: menuList[index],
+                                    cartIndex: index,
+                                  );
+                                } catch (e) {
+                                  return ListMenu(
+                                      menu: menuList[index], cartIndex: 0);
+                                }
+                              });
+                        }),
                         // cart details button
                         Obx(
                           () => cartController.cart.cartItem.isNotEmpty
@@ -175,12 +179,23 @@ class ListMenuPage extends StatelessWidget {
                                               BorderRadius.circular(8),
                                         ),
                                       ),
-                                      child: Text(
-                                        'View Cart Details (${cartController.cart.cartItem.length})',
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          fontFamily: "Rubik",
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              'Cart - ${cartController.cart.cartItem.length} Menu',
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
+                                                fontFamily: "Rubik",
+                                              ),
+                                            ),
+                                            const Spacer(),
+                                            Text(NumberFormatter.instance.idr(
+                                                cartController
+                                                    .totalPrice.value)),
+                                          ],
                                         ),
                                       ),
                                     ),
@@ -205,14 +220,13 @@ class ListMenu extends StatelessWidget {
   final CartController cartController = Get.find<CartController>();
   final Menu menu;
   final int cartIndex;
-  late final RxInt counter;
+  final RxInt counter = 1.obs;
 
   ListMenu({
     super.key,
     required this.menu,
     required this.cartIndex,
-  }) : counter =
-            Get.find<CartController>().cart.cartItem[cartIndex].quantity.obs;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -316,7 +330,7 @@ class ListMenu extends StatelessWidget {
                   const SizedBox(height: 12),
                   //food price
                   Text(
-                    "Rp ${menu.price}",
+                    NumberFormatter.instance.idr(menu.price),
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 17,
@@ -369,16 +383,19 @@ class ListMenu extends StatelessWidget {
                 height: 45,
                 child: Obx(
                   () => ElevatedButton(
-                    onPressed: counter > 0
+                    onPressed: counter.value > 0
                         ? () {
                             // add menu to cart then close modal
-                            CartItem cartItem = CartItem(
-                              cartId: cartController.cart.id,
-                              menuId: menu.id,
-                              menu: menu,
-                              quantity: counter.value,
-                            );
-                            cartController.insertCartItem(cartItem);
+                            // CartItem cartItem = CartItem(
+                            //   cartId: cartController.cart.id,
+                            //   menuId: menu.id,
+                            //   menu: menu,
+                            //   quantity: counter.value,
+                            // );
+                            // cartController.updateCartItem(cartItem);
+                            cartController.incrementCartItemQuantity(
+                                menu, counter.value);
+                            Get.back();
                           }
                         : null,
                     style: ElevatedButton.styleFrom(
@@ -469,7 +486,7 @@ class ListMenu extends StatelessWidget {
                             ),
                             const SizedBox(height: 5),
                             Text(
-                              "Rp ${menu.price}",
+                              NumberFormatter.instance.idr(menu.price),
                               style: const TextStyle(
                                   fontSize: 11.0,
                                   fontWeight: FontWeight.w500,

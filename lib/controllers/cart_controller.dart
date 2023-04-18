@@ -5,6 +5,7 @@ import 'package:veggytably_customer/controllers/merchant_controller.dart';
 import '../api/cart_api.dart';
 import '../models/cart.dart';
 import '../models/exception_response.dart';
+import '../models/search_menu.dart';
 import 'auth_controller.dart';
 
 class CartController extends GetxController {
@@ -85,7 +86,7 @@ class CartController extends GetxController {
     }
   }
 
-  Future<void> insertCartItem(CartItem cartItem) async {
+  Future<void> updateCartItem(CartItem cartItem) async {
     try {
       isLoading(true);
       update();
@@ -106,7 +107,47 @@ class CartController extends GetxController {
       // if response is succesful refetch cart
       getCart(MerchantController.to.merchant.id);
 
-      Get.snackbar("Success", "Item added to cart!");
+      // Get.back();
+    } catch (e) {
+      print(e);
+      Get.snackbar("Failed to insert item to cart.", e.toString());
+    } finally {
+      isLoading(false);
+      update();
+    }
+  }
+
+  Future<void> incrementCartItemQuantity(Menu menu, int counter) async {
+    try {
+      isLoading(true);
+      update();
+
+      CartItem cartItem = _cart.value.cartItem
+              .firstWhereOrNull((element) => element.menuId == menu.id) ??
+          CartItem(
+            cartId: cart.id,
+            menuId: menu.id,
+            menu: menu,
+            quantity: 0,
+          );
+
+      Map<String, dynamic> body = {
+        "menuId": cartItem.menuId,
+        "quantity": cartItem.quantity + counter,
+      };
+
+      Response response = await CartApi.instance
+          .updateCartByMerchantId(MerchantController.to.merchant.id, body);
+
+      if (response.statusCode != 200) {
+        String errorMessage = ExceptionResponse.getMessage(response.data);
+        throw Exception(errorMessage);
+      }
+
+      // if response is succesful refetch cart
+      getCart(MerchantController.to.merchant.id);
+
+      // Get.back();
     } catch (e) {
       print(e);
       Get.snackbar("Failed to insert item to cart.", e.toString());
