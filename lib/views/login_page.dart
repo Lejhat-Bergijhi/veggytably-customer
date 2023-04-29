@@ -91,7 +91,7 @@ class LoginPage extends StatelessWidget {
                   // Login button
                   SizedBox(
                     // width: 300,
-                    width: MediaQuery.of(context).size.width,
+                    width: 300,
                     height: 45,
                     child: ElevatedButton(
                       onPressed: () {
