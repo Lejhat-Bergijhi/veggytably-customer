@@ -2,63 +2,63 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:veggytably_customer/models/cart.dart';
+import 'package:veggytably_customer/views/voucher.dart';
 import '../controllers/cart_controller.dart';
 import '../controllers/merchant_controller.dart';
+import '../controllers/voucher_controller.dart';
 import '../utils/number_formatter.dart';
 import '../widgets/counter_mini.dart';
 import '../widgets/custom_checkbox_voucher1.dart';
 
-int index = 1;
+// int index = 1;
 List voucherList = [
-    {
-      "id": 0,
-      'isChecked': false,
-      "name": "Disc 10% up to 20.000",
-      "description":
-          "Minimal Spending of Rp 50.000. Rp 4.000 delivery discount.",
-      "discount": 10,
-      "maxDiscount": 20000,
-      "image": "assets/images/vc1.png",
-    },
-    {
-      "id": 1,
-      'isChecked': false,
-      "name": "Disc 40% up to 30.000",
-      "description": "Minimal Spending of Rp 50.000. With SVB Payment.",
-      "discount": 40,
-      "maxDiscount": 30000,
-      "image": "assets/images/vc2.png",
-    },
-    {
-      "id": 2,
-      'isChecked': false,
-      "name": "Disc 10% up to 80.000",
-      "description": "MMinimal Spending of Rp 0. Rp 4.000 delivery discount.",
-      "discount": 10,
-      "maxDiscount": 80000,
-      "image": "assets/images/vc3.png",
-    },
-    {
-      "id": 3,
-      'isChecked': false,
-      "name": "Disc 50% up to 25.000",
-      "description":
-          "Minimal Spending of Rp 80.000. Rp 8.000 delivery discount. With FWBenefit Payment.",
-      "discount": 50,
-      "maxDiscount": 25000,
-      "image": "assets/images/vc4.png",
-    },
-    {
-      "id": 4,
-      'isChecked': false,
-      "name": "Disc 20% up to 40.000",
-      "description": "Minimal Spending of Rp 60.000. With FFS Payment.",
-      "discount": 20,
-      "maxDiscount": 40000,
-      "image": "assets/images/vc5.png",
-    },
-  ];
-
+  {
+    "id": 0,
+    'isChecked': false,
+    "name": "Disc 10% up to 20.000",
+    "description": "Minimal Spending of Rp 50.000. Rp 4.000 delivery discount.",
+    "discount": 10,
+    "maxDiscount": 20000,
+    "image": "assets/images/vc1.png",
+  },
+  {
+    "id": 1,
+    'isChecked': false,
+    "name": "Disc 40% up to 30.000",
+    "description": "Minimal Spending of Rp 50.000. With SVB Payment.",
+    "discount": 40,
+    "maxDiscount": 30000,
+    "image": "assets/images/vc2.png",
+  },
+  {
+    "id": 2,
+    'isChecked': false,
+    "name": "Disc 10% up to 80.000",
+    "description": "MMinimal Spending of Rp 0. Rp 4.000 delivery discount.",
+    "discount": 10,
+    "maxDiscount": 80000,
+    "image": "assets/images/vc3.png",
+  },
+  {
+    "id": 3,
+    'isChecked': false,
+    "name": "Disc 50% up to 25.000",
+    "description":
+        "Minimal Spending of Rp 80.000. Rp 8.000 delivery discount. With FWBenefit Payment.",
+    "discount": 50,
+    "maxDiscount": 25000,
+    "image": "assets/images/vc4.png",
+  },
+  {
+    "id": 4,
+    'isChecked': false,
+    "name": "Disc 20% up to 40.000",
+    "description": "Minimal Spending of Rp 60.000. With FFS Payment.",
+    "discount": 20,
+    "maxDiscount": 40000,
+    "image": "assets/images/vc5.png",
+  },
+];
 
 class CartPage extends StatefulWidget {
   @override
@@ -66,12 +66,14 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  
   @override
   Widget build(BuildContext context) {
-  
-    if (index==-1) return CartWithoutVoucher();
-    else return CartWithVoucher();
+    VoucherController voucherController = Get.put(VoucherController());
+    int index = voucherController.getIndex();
+    if (index == -1)
+      return CartWithoutVoucher();
+    else
+      return CartWithVoucher(index:index);
   }
 }
 
@@ -334,29 +336,35 @@ class CartWithoutVoucher extends StatelessWidget {
                     const SizedBox(
                       height: 32,
                     ),
-                    Container(
-                        padding: const EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: const Color(0xfff6f7fb),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 42,
-                              height: 42,
-                              child: Image.asset('assets/images/voucher.png'),
-                            ),
-                            const SizedBox(width: 10),
-                            const Text(
-                              "Place a voucher to get a discount!",
-                              style: TextStyle(
-                                color: Color(0xff242424),
-                                fontSize: 15,
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => VoucherPage(),
+                          transition: Transition.rightToLeft);
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: const Color(0xfff6f7fb),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 42,
+                                height: 42,
+                                child: Image.asset('assets/images/voucher.png'),
                               ),
-                            ),
-                          ],
-                        )),
+                              const SizedBox(width: 10),
+                              const Text(
+                                "Place a voucher to get a discount!",
+                                style: TextStyle(
+                                  color: Color(0xff242424),
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
                     const SizedBox(height: 32),
 
                     const Text(
@@ -507,8 +515,10 @@ class CartWithoutVoucher extends StatelessWidget {
 }
 
 class CartWithVoucher extends StatelessWidget {
+  final int index;
   const CartWithVoucher({
     super.key,
+    required this.index,
   });
 
   @override
@@ -765,15 +775,20 @@ class CartWithVoucher extends StatelessWidget {
                     const SizedBox(
                       height: 32,
                     ),
-                    
+
                     //
-                    CustomCheckboxVoucher1(
-                      value: true,
-                      image: voucherList[index]['image'],
-                      title: voucherList[index]['name'],
-                      description: voucherList[index]['description'],
-                      onChanged: null,
-                      
+                    GestureDetector(
+                      onTap: () {
+                       Get.to(() => VoucherPage(),
+                          transition: Transition.rightToLeft);
+                      },
+                      child: CustomCheckboxVoucher1(
+                        value: true,
+                        image: voucherList[index]['image'],
+                        title: voucherList[index]['name'],
+                        description: voucherList[index]['description'],
+                        onChanged: null,
+                      ),
                     ),
 
                     const SizedBox(height: 32),

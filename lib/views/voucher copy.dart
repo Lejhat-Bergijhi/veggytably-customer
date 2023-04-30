@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/voucher_controller.dart';
 import '../widgets/custom_checkbox_voucher1.dart';
 import '../widgets/custom_checkbox_voucher2.dart';
 
 
- List voucherList = [
+int chosen = -1;
+
+
+class VoucherPage extends StatefulWidget {
+  @override
+  _VoucherPageState createState() => _VoucherPageState();
+}
+
+class _VoucherPageState extends State<VoucherPage> {
+
+
+  //TODO: fetch dari API, ini masih dummy
+  List voucherList = [
     {
       "id": 0,
       'isChecked': false,
@@ -55,16 +66,8 @@ import '../widgets/custom_checkbox_voucher2.dart';
     },
   ];
 
-
-class VoucherPage extends StatelessWidget {
-  VoucherPage({super.key});
-  
   @override
-  
   Widget build(BuildContext context) {
-    VoucherController voucherController = Get.put(VoucherController());
-    int chosen = voucherController.getIndex();
-    
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -121,15 +124,19 @@ class VoucherPage extends StatelessWidget {
                                 description: voucherList[index]['description'],
                                 onChanged: (value) {
                                   if (chosen == -1) {
+                                    setState(() {
                                       voucherList[index]['isChecked'] =
                                           !voucherList[index]['isChecked'];
                                       chosen = voucherList[index]['id'];
-                                      //
+                                      // value = false;
+                                    });
                                   } else if (chosen != -1) {
+                                    setState(() {
                                       voucherList[index]['isChecked'] =
                                           !voucherList[index]['isChecked'];
                                       chosen = -1;
-                                      
+                                      // value = true;
+                                    });
                                   }
                                 },
                               );
@@ -143,18 +150,19 @@ class VoucherPage extends StatelessWidget {
                               description: voucherList[index]['description'],
                               onChanged: (value) {
                                 if (chosen == -1) {
-                                  
+                                  setState(() {
                                     voucherList[index]['isChecked'] =
                                         !voucherList[index]['isChecked'];
                                     chosen = voucherList[index]['id'];
                                     // value = false;
-                                  }
-                                else if (chosen != -1) {
-                                  
+                                  });
+                                } else if (chosen != -1) {
+                                  setState(() {
                                     voucherList[index]['isChecked'] =
                                         !voucherList[index]['isChecked'];
                                     chosen = -1;
-                                    //
+                                    // value = true;
+                                  });
                                 }
                               },
                             );
