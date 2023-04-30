@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../views/list_menu_page.dart';
 
+import 'views/cart_page.dart';
 import 'views/voucher.dart';
 import 'views/restriction_page.dart';
 //import '../controllers/auth_controller.dart';
@@ -20,7 +21,7 @@ class MainApp extends StatelessWidget {
         Get.put(AuthController());
       }),*/
       debugShowCheckedModeBanner: false,
-      home: VoucherPage(),
+      home: CartPage(),
     );
   }
 }

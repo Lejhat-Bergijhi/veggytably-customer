@@ -169,7 +169,7 @@ class ListMenuPage extends StatelessWidget {
                                     height: 45,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        Get.to(() => const CartPage());
+                                        Get.to(() => CartPage());
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:
