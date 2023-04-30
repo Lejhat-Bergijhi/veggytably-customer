@@ -18,8 +18,8 @@ class MainApp extends StatelessWidget {
     return GetMaterialApp(
       /*initialBinding: BindingsBuilder(() {
         Get.put(AuthController());
-      }),
-      debugShowCheckedModeBanner: false,*/
+      }),*/
+      debugShowCheckedModeBanner: false,
       home: VoucherPage(),
     );
   }
