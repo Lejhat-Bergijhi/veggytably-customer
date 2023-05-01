@@ -4,67 +4,63 @@ import '../controllers/voucher_controller.dart';
 import '../widgets/custom_checkbox_voucher1.dart';
 import '../widgets/custom_checkbox_voucher2.dart';
 
-
- List voucherList = [
-    {
-      "id": 0,
-      'isChecked': false,
-      "name": "Disc 10% up to 20.000",
-      "description":
-          "Minimal Spending of Rp 50.000. Rp 4.000 delivery discount.",
-      "discount": 10,
-      "maxDiscount": 20000,
-      "image": "assets/images/vc1.png",
-    },
-    {
-      "id": 1,
-      'isChecked': false,
-      "name": "Disc 40% up to 30.000",
-      "description": "Minimal Spending of Rp 50.000. With SVB Payment.",
-      "discount": 40,
-      "maxDiscount": 30000,
-      "image": "assets/images/vc2.png",
-    },
-    {
-      "id": 2,
-      'isChecked': false,
-      "name": "Disc 10% up to 80.000",
-      "description": "MMinimal Spending of Rp 0. Rp 4.000 delivery discount.",
-      "discount": 10,
-      "maxDiscount": 80000,
-      "image": "assets/images/vc3.png",
-    },
-    {
-      "id": 3,
-      'isChecked': false,
-      "name": "Disc 50% up to 25.000",
-      "description":
-          "Minimal Spending of Rp 80.000. Rp 8.000 delivery discount. With FWBenefit Payment.",
-      "discount": 50,
-      "maxDiscount": 25000,
-      "image": "assets/images/vc4.png",
-    },
-    {
-      "id": 4,
-      'isChecked': false,
-      "name": "Disc 20% up to 40.000",
-      "description": "Minimal Spending of Rp 60.000. With FFS Payment.",
-      "discount": 20,
-      "maxDiscount": 40000,
-      "image": "assets/images/vc5.png",
-    },
-  ];
-
+List voucherList = [
+  {
+    "id": 0,
+    'isChecked': false,
+    "name": "Disc 10% up to 20.000",
+    "description": "Minimal Spending of Rp 50.000. Rp 4.000 delivery discount.",
+    "discount": 10,
+    "maxDiscount": 20000,
+    "image": "assets/images/vc1.png",
+  },
+  {
+    "id": 1,
+    'isChecked': false,
+    "name": "Disc 40% up to 30.000",
+    "description": "Minimal Spending of Rp 50.000. With SVB Payment.",
+    "discount": 40,
+    "maxDiscount": 30000,
+    "image": "assets/images/vc2.png",
+  },
+  {
+    "id": 2,
+    'isChecked': false,
+    "name": "Disc 10% up to 80.000",
+    "description": "MMinimal Spending of Rp 0. Rp 4.000 delivery discount.",
+    "discount": 10,
+    "maxDiscount": 80000,
+    "image": "assets/images/vc3.png",
+  },
+  {
+    "id": 3,
+    'isChecked': false,
+    "name": "Disc 50% up to 25.000",
+    "description":
+        "Minimal Spending of Rp 80.000. Rp 8.000 delivery discount. With FWBenefit Payment.",
+    "discount": 50,
+    "maxDiscount": 25000,
+    "image": "assets/images/vc4.png",
+  },
+  {
+    "id": 4,
+    'isChecked': false,
+    "name": "Disc 20% up to 40.000",
+    "description": "Minimal Spending of Rp 60.000. With FFS Payment.",
+    "discount": 20,
+    "maxDiscount": 40000,
+    "image": "assets/images/vc5.png",
+  },
+];
 
 class VoucherPage extends StatelessWidget {
   VoucherPage({super.key});
-  
+
   @override
-  
   Widget build(BuildContext context) {
     VoucherController voucherController = Get.put(VoucherController());
     int chosen = voucherController.getIndex();
-    
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -101,246 +97,237 @@ class VoucherPage extends StatelessWidget {
         ),
         body: SafeArea(
             child: Stack(
+          children: [
+            Column(
               children: [
-                Column(
-                  children: [
-                    SizedBox(height: 10),
+                SizedBox(height: 10),
 
-                    Expanded(
-                      child: ListView.builder(
-                        physics: const AlwaysScrollableScrollPhysics(
-                            parent: BouncingScrollPhysics()),
-                        itemCount: voucherList.length,
-                        itemBuilder: (context, index) {
-                          if (chosen==index || chosen==-1)
-                          {
-                              return CustomCheckboxVoucher1(
-                                value: voucherList[index]['isChecked'],
-                                image: voucherList[index]['image'],
-                                title: voucherList[index]['name'],
-                                description: voucherList[index]['description'],
-                                onChanged: (value) {
-                                  if (chosen == -1) {
-                                      voucherList[index]['isChecked'] =
-                                          !voucherList[index]['isChecked'];
-                                      chosen = voucherList[index]['id'];
-                                      voucherController.setVoucher(chosen);
-                                      //
-                                  } 
-                                  else if (chosen ==index) {
-                                      voucherList[index]['isChecked'] =
-                                          !voucherList[index]['isChecked'];
-                                      chosen = -1;
-                                      voucherController.setVoucher(chosen);
-                                      
-                                  }
-                                },
-                              );
-                          }
-                          else
-                          {
-                            return CustomCheckboxVoucher2(
-                              value: voucherList[index]['isChecked'],
-                              image: voucherList[index]['image'],
-                              title: voucherList[index]['name'],
-                              description: voucherList[index]['description'],
-                              onChanged: (value) {
-                                if (chosen == -1) {
-                                  
-                                    voucherList[index]['isChecked'] =
-                                        !voucherList[index]['isChecked'];
-                                    chosen = voucherList[index]['id'];
-                                    voucherController.setVoucher(chosen);
-                                    // value = false;
-                                  }
-                                else if (chosen != -1) {
-                                  
-                                    voucherList[index]['isChecked'] =
-                                        !voucherList[index]['isChecked'];
-                                    chosen = -1;
-                                    voucherController.setVoucher(chosen);
-                                    //
-                                }
-                              },
-                            );
-                          }
-                          
-                        },
-                      ),
-                    ),
-
-                    // Container(
-                    //   margin: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
-                    //   child: DecoratedBox(
-                    //     decoration: BoxDecoration(
-                    //       color: Color(0xFFF6F7FB),
-                    //       border: Border.all(color: Color(0xF6F7FB)),
-                    //       borderRadius: BorderRadius.circular(7.0),
-                    //     ),
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.all(10),
-                    //       child: CustomCheckboxVoucher(
-                    //         value: _isChecked2,
-                    //         chosen: chosen,
-                    //         image: 'assets/images/vc1.png',
-                    //         title: 'Disc 10% up to 20.000',
-                    //         description:
-                    //             'Minimal Spending of Rp 50.000. Rp 4.000 delivery discount.',
-                    //         onChanged: (value) {
-                    //           print(chosen);
-                    //           print(value);
-                    //           if (chosen == false && value == true) {
-                    //             value = false;
-                    //             chosen = true;
-                    //             setState(() {
-                    //               _isChecked2 = value ?? false;
-                    //               chosen = chosen;
-                    //             });
-                    //           } else if (chosen == true && value == false) {
-                    //             value = true;
-                    //             chosen = false;
-                    //             setState(() {
-                    //               _isChecked2 = value ?? false;
-                    //               chosen = chosen;
-                    //             });
-                    //           }
-                    //         },
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // Container(
-                    //   margin: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
-                    //   child: DecoratedBox(
-                    //     decoration: BoxDecoration(
-                    //       color: Color(0xFFF6F7FB),
-                    //       border: Border.all(color: Color(0xF6F7FB)),
-                    //       borderRadius: BorderRadius.circular(7.0),
-                    //     ),
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.all(10),
-                    //       child: CustomCheckboxVoucher(
-                    //         value: _isChecked2,
-                    //         image: 'assets/images/vc2.png',
-                    //         title: 'Disc 40% up to 30.000',
-                    //         description:
-                    //             'Minimal Spending of Rp 50.000. With SVB Payment. ',
-                    //         onChanged: (value) {
-                    //           setState(() {
-                    //             _isChecked2 = value ?? false;
-                    //           });
-                    //         },
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // Container(
-                    //   margin: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
-                    //   child: DecoratedBox(
-                    //     decoration: BoxDecoration(
-                    //       color: Color(0xFFF6F7FB),
-                    //       border: Border.all(color: Color(0xF6F7FB)),
-                    //       borderRadius: BorderRadius.circular(7.0),
-                    //     ),
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.all(10),
-                    //       child: CustomCheckboxVoucher(
-                    //         value: _isChecked2,
-                    //         image: 'assets/images/vc3.png',
-                    //         title: 'Disc 10% up to 80.000',
-                    //         description:
-                    //             'Minimal Spending of Rp 0. Rp 4.000 delivery discount.',
-                    //         onChanged: (value) {
-                    //           setState(() {
-                    //             _isChecked2 = value ?? false;
-                    //           });
-                    //         },
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // Container(
-                    //   margin: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
-                    //   child: DecoratedBox(
-                    //     decoration: BoxDecoration(
-                    //       color: Color(0xFFF6F7FB),
-                    //       border: Border.all(color: Color(0xF6F7FB)),
-                    //       borderRadius: BorderRadius.circular(7.0),
-                    //     ),
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.all(10),
-                    //       child: CustomCheckboxVoucher(
-                    //         value: _isChecked2,
-                    //         image: 'assets/images/vc4.png',
-                    //         title: 'Disc 50% up to 25.000',
-                    //         description:
-                    //             'Minimal Spending of Rp 80.000. Rp 8.000 delivery discount. With FWBenefit Payment.',
-                    //         onChanged: (value) {
-                    //           setState(() {
-                    //             _isChecked2 = value ?? false;
-                    //           });
-                    //         },
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    // Container(
-                    //   margin: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
-                    //   child: DecoratedBox(
-                    //     decoration: BoxDecoration(
-                    //       color: Color(0xFFF6F7FB),
-                    //       border: Border.all(color: Color(0xF6F7FB)),
-                    //       borderRadius: BorderRadius.circular(7.0),
-                    //     ),
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.all(10),
-                    //       child: CustomCheckboxVoucher(
-                    //         value: _isChecked2,
-                    //         image: 'assets/images/vc5.png',
-                    //         title: 'Disc 20% up to 40.000',
-                    //         description:
-                    //             'Minimal Spending of Rp 60.000. With FFS Payment.',
-                    //         onChanged: (value) {
-                    //           setState(() {
-                    //             _isChecked2 = value ?? false;
-                    //           });
-                    //         },
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
+                Expanded(
+                  child: ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(
+                        parent: BouncingScrollPhysics()),
+                    itemCount: voucherList.length,
+                    itemBuilder: (context, index) {
+                      if (chosen == index || chosen == -1) {
+                        return CustomCheckboxVoucher1(
+                          value: voucherList[index]['isChecked'],
+                          image: voucherList[index]['image'],
+                          title: voucherList[index]['name'],
+                          description: voucherList[index]['description'],
+                          voucherDetails: voucherList[index]['voucherDetails'],
+                          onChanged: (value) {
+                            if (chosen == -1) {
+                              voucherList[index]['isChecked'] =
+                                  !voucherList[index]['isChecked'];
+                              chosen = voucherList[index]['id'];
+                              voucherController.setVoucher(chosen);
+                              //
+                            } else if (chosen == index) {
+                              voucherList[index]['isChecked'] =
+                                  !voucherList[index]['isChecked'];
+                              chosen = -1;
+                              voucherController.setVoucher(chosen);
+                            }
+                          },
+                        );
+                      } else {
+                        return CustomCheckboxVoucher2(
+                          value: voucherList[index]['isChecked'],
+                          image: voucherList[index]['image'],
+                          title: voucherList[index]['name'],
+                          description: voucherList[index]['description'],
+                          onChanged: (value) {
+                            if (chosen == -1) {
+                              voucherList[index]['isChecked'] =
+                                  !voucherList[index]['isChecked'];
+                              chosen = voucherList[index]['id'];
+                              voucherController.setVoucher(chosen);
+                              // value = false;
+                            } else if (chosen != -1) {
+                              voucherList[index]['isChecked'] =
+                                  !voucherList[index]['isChecked'];
+                              chosen = -1;
+                              voucherController.setVoucher(chosen);
+                              //
+                            }
+                          },
+                        );
+                      }
+                    },
+                  ),
                 ),
-                Positioned(
-                  bottom:30,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 24),
-                    width: MediaQuery.of(context).size.width - 48,
-                    height: 44,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Get.offAll(() => const ProfilePage(),
-                        //     transition: Transition.fade);
-                        Get.back();
-                      },
-                      child: const Text(
-                        'Confirm Voucher',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Colors.white
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: const Color(0xff70cb88),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
+
+                // Container(
+                //   margin: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
+                //   child: DecoratedBox(
+                //     decoration: BoxDecoration(
+                //       color: Color(0xFFF6F7FB),
+                //       border: Border.all(color: Color(0xF6F7FB)),
+                //       borderRadius: BorderRadius.circular(7.0),
+                //     ),
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(10),
+                //       child: CustomCheckboxVoucher(
+                //         value: _isChecked2,
+                //         chosen: chosen,
+                //         image: 'assets/images/vc1.png',
+                //         title: 'Disc 10% up to 20.000',
+                //         description:
+                //             'Minimal Spending of Rp 50.000. Rp 4.000 delivery discount.',
+                //         onChanged: (value) {
+                //           print(chosen);
+                //           print(value);
+                //           if (chosen == false && value == true) {
+                //             value = false;
+                //             chosen = true;
+                //             setState(() {
+                //               _isChecked2 = value ?? false;
+                //               chosen = chosen;
+                //             });
+                //           } else if (chosen == true && value == false) {
+                //             value = true;
+                //             chosen = false;
+                //             setState(() {
+                //               _isChecked2 = value ?? false;
+                //               chosen = chosen;
+                //             });
+                //           }
+                //         },
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Container(
+                //   margin: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
+                //   child: DecoratedBox(
+                //     decoration: BoxDecoration(
+                //       color: Color(0xFFF6F7FB),
+                //       border: Border.all(color: Color(0xF6F7FB)),
+                //       borderRadius: BorderRadius.circular(7.0),
+                //     ),
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(10),
+                //       child: CustomCheckboxVoucher(
+                //         value: _isChecked2,
+                //         image: 'assets/images/vc2.png',
+                //         title: 'Disc 40% up to 30.000',
+                //         description:
+                //             'Minimal Spending of Rp 50.000. With SVB Payment. ',
+                //         onChanged: (value) {
+                //           setState(() {
+                //             _isChecked2 = value ?? false;
+                //           });
+                //         },
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Container(
+                //   margin: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
+                //   child: DecoratedBox(
+                //     decoration: BoxDecoration(
+                //       color: Color(0xFFF6F7FB),
+                //       border: Border.all(color: Color(0xF6F7FB)),
+                //       borderRadius: BorderRadius.circular(7.0),
+                //     ),
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(10),
+                //       child: CustomCheckboxVoucher(
+                //         value: _isChecked2,
+                //         image: 'assets/images/vc3.png',
+                //         title: 'Disc 10% up to 80.000',
+                //         description:
+                //             'Minimal Spending of Rp 0. Rp 4.000 delivery discount.',
+                //         onChanged: (value) {
+                //           setState(() {
+                //             _isChecked2 = value ?? false;
+                //           });
+                //         },
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Container(
+                //   margin: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
+                //   child: DecoratedBox(
+                //     decoration: BoxDecoration(
+                //       color: Color(0xFFF6F7FB),
+                //       border: Border.all(color: Color(0xF6F7FB)),
+                //       borderRadius: BorderRadius.circular(7.0),
+                //     ),
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(10),
+                //       child: CustomCheckboxVoucher(
+                //         value: _isChecked2,
+                //         image: 'assets/images/vc4.png',
+                //         title: 'Disc 50% up to 25.000',
+                //         description:
+                //             'Minimal Spending of Rp 80.000. Rp 8.000 delivery discount. With FWBenefit Payment.',
+                //         onChanged: (value) {
+                //           setState(() {
+                //             _isChecked2 = value ?? false;
+                //           });
+                //         },
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // Container(
+                //   margin: EdgeInsets.only(top: 10.0, left: 15.0, right: 15.0),
+                //   child: DecoratedBox(
+                //     decoration: BoxDecoration(
+                //       color: Color(0xFFF6F7FB),
+                //       border: Border.all(color: Color(0xF6F7FB)),
+                //       borderRadius: BorderRadius.circular(7.0),
+                //     ),
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(10),
+                //       child: CustomCheckboxVoucher(
+                //         value: _isChecked2,
+                //         image: 'assets/images/vc5.png',
+                //         title: 'Disc 20% up to 40.000',
+                //         description:
+                //             'Minimal Spending of Rp 60.000. With FFS Payment.',
+                //         onChanged: (value) {
+                //           setState(() {
+                //             _isChecked2 = value ?? false;
+                //           });
+                //         },
+                //       ),
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
+            Positioned(
+              bottom: 30,
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 24),
+                width: MediaQuery.of(context).size.width - 48,
+                height: 44,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Get.offAll(() => const ProfilePage(),
+                    //     transition: Transition.fade);
+                    Get.back();
+                  },
+                  child: const Text(
+                    'Confirm Voucher',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: const Color(0xff70cb88),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 ),
-              ],
+              ),
+            ),
+          ],
         )
 
             /*Container(
