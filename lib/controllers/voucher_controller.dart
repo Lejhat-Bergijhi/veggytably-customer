@@ -61,17 +61,18 @@ class VoucherController extends GetxController {
     },
   ];
 
-  int _selectedOption = -1.obs;
+  int _selectedOption = -1;
   int get selectedOption => _selectedOption;
 
   set selectedOption(int value) => _selectedOption = value;
 
   void setVoucher(int selectedOption) {
     this._selectedOption = selectedOption;
+    print(_selectedOption);
     update();
   }
-  int getIndex()
-  {
+
+  int getIndex() {
     return _selectedOption;
   }
 }
