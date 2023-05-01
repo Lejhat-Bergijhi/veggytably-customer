@@ -73,7 +73,7 @@ class _CartPageState extends State<CartPage> {
     if (index == -1)
       return CartWithoutVoucher();
     else
-      return CartWithVoucher(index:index);
+      return CartWithVoucher(index: index);
   }
 }
 
@@ -339,7 +339,7 @@ class CartWithoutVoucher extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Get.to(() => VoucherPage(),
-                          transition: Transition.rightToLeft);
+                            transition: Transition.rightToLeft);
                       },
                       child: Container(
                           padding: const EdgeInsets.all(15),
@@ -779,16 +779,16 @@ class CartWithVoucher extends StatelessWidget {
                     //
                     GestureDetector(
                       onTap: () {
-                       Get.to(() => VoucherPage(),
-                          transition: Transition.rightToLeft);
+                        Get.to(() => VoucherPage(),
+                            transition: Transition.rightToLeft);
                       },
                       child: CustomCheckboxVoucher1(
-                        value: true,
-                        image: voucherList[index]['image'],
-                        title: voucherList[index]['name'],
-                        description: voucherList[index]['description'],
-                        onChanged: null,
-                      ),
+                          value: true,
+                          image: voucherList[index]['image'],
+                          title: voucherList[index]['name'],
+                          description: voucherList[index]['description'],
+                          onChanged: null,
+                          voucherDetails: voucherList[index]['voucherDetails']),
                     ),
 
                     const SizedBox(height: 32),
