@@ -5,7 +5,7 @@ import '../views/list_menu_page.dart';
 
 import 'controllers/auth_controller.dart';
 import 'views/cart_page.dart';
-import 'views/voucher.dart';
+import 'views/voucher_page.dart';
 import 'views/restriction_page.dart';
 //import '../controllers/auth_controller.dart';
 

@@ -11,18 +11,54 @@ class VoucherController extends GetxController {
   int get selectedOption => _selectedOption;
 
   final RxList<Voucher> _voucherList = <Voucher>[].obs;
-  final Rx<Voucher?> _selectedVoucher = null.obs;
+  final Rx<Voucher> _selectedVoucher = Voucher(
+    customerId: "",
+    id: "init",
+    description: "",
+    discount: 0,
+    details: "",
+    expiryDate: "",
+    isUsed: false,
+    logo: "",
+    maximumDiscount: 0,
+    minimumPurchase: 0,
+    title: "",
+    isEligible: false,
+  ).obs;
 
   List<Voucher> get vouchers => _voucherList.toList();
-  Voucher? get selectedVoucher => _selectedVoucher.value;
+  Voucher get selectedVoucher => _selectedVoucher.value;
 
   RxBool isLoading = false.obs;
 
   set selectedOption(int value) => _selectedOption = value;
 
-  void setVoucher(int selectedOption) {
-    _selectedOption = selectedOption;
-    print(_selectedOption);
+  // void setVoucher(int selectedOption) {
+  //   _selectedOption = selectedOption;
+  //   print(_selectedOption);
+  //   update();
+  // }
+
+  void setVoucher(Voucher voucher) {
+    _selectedVoucher.value = voucher;
+    update();
+  }
+
+  void removeVoucher() {
+    _selectedVoucher.value = Voucher(
+      customerId: "",
+      id: "init",
+      description: "",
+      discount: 0,
+      details: "",
+      expiryDate: "",
+      isUsed: false,
+      logo: "",
+      maximumDiscount: 0,
+      minimumPurchase: 0,
+      title: "",
+      isEligible: false,
+    );
     update();
   }
 
