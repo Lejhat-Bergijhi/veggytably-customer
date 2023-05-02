@@ -92,6 +92,24 @@ class VoucherController extends GetxController {
     }
   }
 
+  int calculateDiscount(int totalPrice) {
+    if (_selectedVoucher.value.id == "init") {
+      return 0;
+    }
+
+    if (totalPrice < _selectedVoucher.value.minimumPurchase) {
+      return 0;
+    }
+
+    var discount = totalPrice * _selectedVoucher.value.discount;
+
+    if (discount > _selectedVoucher.value.maximumDiscount) {
+      return _selectedVoucher.value.maximumDiscount;
+    }
+
+    return discount.round();
+  }
+
   int getIndex() {
     return _selectedOption;
   }

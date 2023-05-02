@@ -12,6 +12,7 @@ import '../widgets/voucher_item.dart';
 
 class CartPage extends StatelessWidget {
   final VoucherController voucherController = Get.put(VoucherController());
+  final CartController cartController = Get.find();
 
   CartPage({super.key});
 
@@ -367,7 +368,42 @@ class CartPage extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    // check if voucher is selected
+                    Obx(
+                      () => voucherController.selectedVoucher.id != "init"
+                          ? Column(
+                              children: [
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      "Discount",
+                                      style: TextStyle(
+                                        color: Color(0xff4b875b),
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    GetBuilder<VoucherController>(
+                                        builder: (controller) {
+                                      // calculate discount
+                                      return Text(
+                                        "-${NumberFormatter.instance.idr(controller.calculateDiscount(cartController.totalPrice.value))}",
+                                        style: const TextStyle(
+                                          color: Color(0xff4b875b),
+                                          fontSize: 15,
+                                        ),
+                                      );
+                                    }),
+                                  ],
+                                ),
+                              ],
+                            )
+                          : const SizedBox(),
+                    ),
                   ],
                 ),
               ),
@@ -403,10 +439,13 @@ class CartPage extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    GetBuilder<CartController>(builder: (controller) {
+                    Obx(() {
                       return Text(
-                        NumberFormatter.instance
-                            .idr(controller.totalPrice.value + 10000),
+                        NumberFormatter.instance.idr(
+                            cartController.totalPrice.value -
+                                voucherController.calculateDiscount(
+                                    cartController.totalPrice.value) +
+                                10000),
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 22,
