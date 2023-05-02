@@ -14,8 +14,6 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(MerchantController());
     Get.put(SearchController());
-    double marginleft = 24;
-    double boxWidth = MediaQuery.of(context).size.width;
     double topPadding = MediaQuery.of(context).padding.top + 15;
 
     return Scaffold(

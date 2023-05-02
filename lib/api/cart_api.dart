@@ -59,4 +59,34 @@ class CartApi {
       return e;
     }
   }
+
+  Future<dynamic> getVouchersByCartId(
+    String merchantId,
+  ) async {
+    try {
+      String? refreshToken = await _storage.read(key: "refreshToken");
+
+      var headers = {
+        "Content-Type": "application/json",
+        "authorization": 'Bearer $refreshToken',
+      };
+
+      Response response = await Dio().get(
+        ApiEndPoints.baseUrl +
+            ApiEndPoints.customerEndpoints.getVouchersByCartId(
+              cartId: merchantId,
+            ),
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
 }

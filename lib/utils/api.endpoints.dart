@@ -1,5 +1,5 @@
 class ApiEndPoints {
-  static const String domain = "10.53.12.69";
+  static const String domain = "10.6.188.68";
   static const String baseUrl = 'http://$domain:5000/';
   static final _AuthEndPoints authEndpoints = _AuthEndPoints();
   static final _CustomerEndPoints customerEndpoints = _CustomerEndPoints();
@@ -47,6 +47,11 @@ class _CustomerEndPoints {
     String merchantId = "",
   }) =>
       "customers/cart/$merchantId";
+
+  String getVouchersByCartId({
+    String cartId = "",
+  }) =>
+      "customers/cart/$cartId/vouchers";
 }
 /**
  * query merchant
@@ -71,4 +76,9 @@ class _CustomerEndPoints {
 /**
  * update cart by merchant id
  * http://localhost:5000/customers/cart/64171e03c849eff0eeb7a441
+ */
+
+/**
+ * get vouchers by cart id
+ * http://localhost:5000/customers/cart/643b7e92182f159895ffdad7/vouchers
  */

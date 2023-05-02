@@ -9,6 +9,7 @@ import '../models/search_menu.dart';
 import 'auth_controller.dart';
 
 class CartController extends GetxController {
+  static CartController get to => Get.find();
   final Rx<Cart> _cart = Cart(
     id: "",
     merchantId: "",
