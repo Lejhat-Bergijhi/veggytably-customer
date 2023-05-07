@@ -12,7 +12,7 @@ import '../widgets/voucher_item.dart';
 
 class CartPage extends StatelessWidget {
   final VoucherController voucherController = Get.put(VoucherController());
-  final CartController cartController = Get.find();
+  final CartController cartController = Get.put( CartController());
 
   CartPage({super.key});
 
@@ -36,6 +36,8 @@ class CartPage extends StatelessWidget {
         titleSpacing: 0,
         title: Text(
           MerchantController.to.merchant.restaurantName,
+
+          // 'padang vegan',
           style: const TextStyle(
             color: Colors.black,
             fontSize: 22,
@@ -192,71 +194,71 @@ class CartPage extends StatelessWidget {
                         maxHeight: MediaQuery.of(context).size.height,
                         minHeight: 56.0,
                       ),
-                      child: GetBuilder<CartController>(
-                        builder: (controller) {
-                          if (controller.isLoading.value) {
-                            return SizedBox(
-                              width: MediaQuery.of(context).size.width,
-                              child: const Center(
-                                heightFactor: 2,
-                                widthFactor: 2,
-                                child: CircularProgressIndicator(),
-                              ),
-                            );
-                          }
+                        child: GetBuilder<CartController>(
+                          builder: (controller) {
+                            if (controller.isLoading.value) {
+                              return SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: const Center(
+                                  heightFactor: 2,
+                                  widthFactor: 2,
+                                  child: CircularProgressIndicator(),
+                                ),
+                              );
+                            }
 
-                          List<CartItem> cartItem = controller.cart.cartItem;
-                          return ListView.separated(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: cartItem.length,
-                              separatorBuilder: (context, index) {
-                                return const Divider(
-                                  color: Color(0xffd1d1d6),
-                                  thickness: 1,
-                                );
-                              },
-                              itemBuilder: (context, index) {
-                                return Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          cartItem[index].menu.name,
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15,
-                                            fontFamily: "Rubik",
-                                            fontWeight: FontWeight.bold,
+                            List<CartItem> cartItem = controller.cart.cartItem;
+                            return ListView.separated(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: cartItem.length,
+                                separatorBuilder: (context, index) {
+                                  return const Divider(
+                                    color: Color(0xffd1d1d6),
+                                    thickness: 1,
+                                  );
+                                },
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            cartItem[index].menu.name,
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15,
+                                              fontFamily: "Rubik",
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          NumberFormatter.instance.idr(
-                                              cartItem[index].menu.price *
-                                                  cartItem[index].quantity),
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 15,
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            NumberFormatter.instance.idr(
+                                                cartItem[index].menu.price *
+                                                    cartItem[index].quantity),
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 15,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    const Spacer(),
-                                    CounterMini(
-                                      cartIndex: index,
-                                    ),
-                                  ],
-                                );
-                              });
-                        },
-                      ),
+                                        ],
+                                      ),
+                                      const Spacer(),
+                                      CounterMini(
+                                        cartIndex: index,
+                                      ),
+                                    ],
+                                  );
+                                });
+                          },
+                        ),
                     ),
                     const SizedBox(height: 8),
                     //line
@@ -344,6 +346,7 @@ class CartPage extends StatelessWidget {
                             ),
                           );
                         }),
+                        // Text('10000'),
                       ],
                     ),
 
@@ -370,40 +373,196 @@ class CartPage extends StatelessWidget {
                       ],
                     ),
                     // check if voucher is selected
-                    Obx(
-                      () => voucherController.selectedVoucher.id != "init"
-                          ? Column(
-                              children: [
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  children: [
-                                    const Text(
-                                      "Discount",
-                                      style: TextStyle(
-                                        color: Color(0xff4b875b),
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    GetBuilder<VoucherController>(
-                                        builder: (controller) {
-                                      // calculate discount
-                                      return Text(
-                                        "-${NumberFormatter.instance.idr(controller.calculateDiscount(cartController.totalPrice.value))}",
-                                        style: const TextStyle(
+                      Obx(
+                        () => voucherController.selectedVoucher.id != "init"
+                            ? Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        "Discount",
+                                        style: TextStyle(
                                           color: Color(0xff4b875b),
                                           fontSize: 15,
                                         ),
-                                      );
-                                    }),
+                                      ),
+                                      const Spacer(),
+                                      GetBuilder<VoucherController>(
+                                          builder: (controller) {
+                                        // calculate discount
+                                        return Text(
+                                          "-${NumberFormatter.instance.idr(controller.calculateDiscount(cartController.totalPrice.value))}",
+                                          style: const TextStyle(
+                                            color: Color(0xff4b875b),
+                                            fontSize: 15,
+                                          ),
+                                        );
+                                      }),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            : const SizedBox(),
+                      ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    const Text(
+                      "PAYMENT METHOD",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xff9f9f9f),
+                        fontSize: 10,
+                        fontFamily: "Rubik",
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                          backgroundColor: Colors.white,
+                          isScrollControlled: true,
+                          useRootNavigator: true,
+                          enableDrag: true,
+                          isDismissible: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15),
+                            ),
+                          ),
+                          context: context,
+                          builder: (BuildContext context) {
+                            double boxWidth = MediaQuery.of(context).size.width;
+                            // var checked = true;
+                            return Stack(children: [
+                              Positioned(
+                                
+                                bottom: 30,
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(horizontal: 24),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Color(0xb2ffffff),
+                                            blurRadius: 30,
+                                            offset: Offset(0, 0),
+                                          ),
+                                        ],
+                                        color: const Color(0xff70cb88),
+                                      ),
+                                      width: MediaQuery.of(context).size.width -
+                                          48,
+                                      height: 44,
+                                      child: TextButton(
+                                        onPressed: () {},
+                                        child: const Text(
+                                          "Save Changes",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontFamily: "Rubik",
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                              ),
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.8,
+                                padding: EdgeInsets.only(
+                                    left: 25,
+                                    right: 25,
+                                    bottom: boxWidth * 0.15 + 45),
+                                child: ListView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  children: [
+                                    const SizedBox(height: 15),
+                                    //swipe up line
+                                    Center(
+                                      child: Container(
+                                        width: 100,
+                                        height: 5,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          color: const Color(0xffd1d1d6),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 40),
+
+                                    PaymentMethod(checked: true, type: 'Domvet'),
+                                    SizedBox(height: 12),
+                                    Container(
+                                      height: 1,
+                                      color : Color(0xffD1D1D6)
+                                    ),
+                                    SizedBox(height: 12),
+                                    PaymentMethod(checked: false, type: 'Cash'),
+
                                   ],
                                 ),
+                              ),
+                              
+                            ]
+                            );
+                          },
+                        );
+                      },
+                      child: Container(
+                        color: Colors.white,
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 46.17,
+                              height: 43.55,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Image.asset('/images/wallet.png'),
+                            ),
+                            const SizedBox(width: 12),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Domvet",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontFamily: "Rubik",
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "Balance: Rp123.456,00",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
                               ],
-                            )
-                          : const SizedBox(),
-                    ),
+                            ),
+                            const Spacer(),
+                            Container(
+                              width: 7.55,
+                              height: 12,
+                              child: Image.asset('/images/arrow-right.png'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -412,6 +571,7 @@ class CartPage extends StatelessWidget {
           Positioned(
             bottom: 0,
             child: Container(
+              
               decoration: const BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -446,6 +606,7 @@ class CartPage extends StatelessWidget {
                                 voucherController.calculateDiscount(
                                     cartController.totalPrice.value) +
                                 10000),
+                        // '10000',
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 22,
@@ -492,6 +653,99 @@ class CartPage extends StatelessWidget {
           ),
         ],
       )),
+    );
+  }
+}
+
+class PaymentMethod extends StatelessWidget {
+  final bool checked;
+  final String type;
+  PaymentMethod({
+    super.key,
+    required this.checked,
+    required this.type,
+  });
+  //dynamic array
+
+  Map <String, dynamic> paymentMethod = {
+    'Domvet': {
+      'image': '/images/wallet.png',
+      'subtitle': 'Balance: Rp123.456,00',
+      'desc': 'Say goodbye to the hassle of carrying cash and fumbling for change - with our secure and easy-to-use e-wallet payment options, you can make transactions with just a few taps on your smartphone, all while enjoying the convenience and peace of mind that comes with going cashless.'
+    },
+    'Cash':
+    {
+      'image': '/images/cash.png',
+      'subtitle': 'Exact change is appreciated!',
+      'desc': 'In a world of digital payments, sometimes cash is still best - choose our cash payment option for a traditional and time-tested way to make transactions.',
+  
+    }
+
+  };
+  
+  
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 46.17,
+                height: 43.55,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Image.asset(paymentMethod[type]['image']),
+              ),
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    type,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: "Rubik",
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    paymentMethod[type]['subtitle'],
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
+              const Spacer(),
+             Checkbox(
+                onChanged: (value) {
+                },
+                value: checked,
+                activeColor: const Color.fromARGB(255, 112, 203, 136),
+             )
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            paymentMethod[type]['desc'],
+            style: TextStyle(
+              color: Color(0xff9f9f9f),
+              fontSize: 12,
+              fontFamily: 'Rubik',
+            ),
+          ),
+
+          
+        ],
+      ),
     );
   }
 }
