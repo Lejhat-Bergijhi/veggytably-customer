@@ -1,8 +1,10 @@
 class ApiEndPoints {
-  static const String domain = "10.6.188.68";
+  static const String domain = "192.168.88.143";
   static const String baseUrl = 'http://$domain:5000/';
   static final _AuthEndPoints authEndpoints = _AuthEndPoints();
   static final _CustomerEndPoints customerEndpoints = _CustomerEndPoints();
+  static final _TransactionEndPoints transactionEndpoints =
+      _TransactionEndPoints();
 }
 
 class _AuthEndPoints {
@@ -52,6 +54,10 @@ class _CustomerEndPoints {
     String cartId = "",
   }) =>
       "customers/cart/$cartId/vouchers";
+}
+
+class _TransactionEndPoints {
+  final String getDomvetBalance = "transactions/wallet";
 }
 /**
  * query merchant
