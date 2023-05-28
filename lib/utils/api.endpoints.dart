@@ -1,7 +1,7 @@
 class ApiEndPoints {
-  static const String domain = "10.6.178.141";
-  // static const String baseUrl = 'http://$domain:5000/';
-  static const String baseUrl = 'https://2675-149-113-6-220.ngrok-free.app/';
+  static const String domain = "192.168.88.143";
+  static const String baseUrl = 'http://$domain:5000/';
+  // static const String baseUrl = 'https://2675-149-113-6-220.ngrok-free.app/';
   static final _AuthEndPoints authEndpoints = _AuthEndPoints();
   static final _CustomerEndPoints customerEndpoints = _CustomerEndPoints();
   static final _TransactionEndPoints transactionEndpoints =
@@ -59,6 +59,7 @@ class _CustomerEndPoints {
 
 class _TransactionEndPoints {
   final String getDomvetBalance = "transactions/wallet";
+  final String postTransaction = "transactions";
 }
 /**
  * query merchant

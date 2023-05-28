@@ -656,7 +656,11 @@ class CartPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width - 48,
                   height: 44,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      transactionController.postTransaction(
+                        paymentMethod: paymentMethod.value,
+                      );
+                    },
                     child: const Text(
                       "Confirm Order",
                       textAlign: TextAlign.center,

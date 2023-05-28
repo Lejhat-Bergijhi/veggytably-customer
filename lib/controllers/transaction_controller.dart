@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:veggytably_customer/controllers/cart_controller.dart';
+import 'package:veggytably_customer/controllers/geo_controller.dart';
 
 import '../api/transaction_api.dart';
 import '../models/exception_response.dart';
@@ -51,6 +53,44 @@ class TransactionController extends GetxController {
       Get.snackbar("Failed to domvet balance", e.toString());
     } finally {
       isLoading.value = false;
+      update();
+    }
+  }
+
+  Future<void> postTransaction({required String paymentMethod}) async {
+    try {
+      isLoading(true);
+      update();
+
+      var currentPosition = GeoController.to.currentPosition;
+
+      Map<String, dynamic> body = {
+        "cartId": CartController.to.cart.id,
+        "merchantId": CartController.to.cart.merchantId,
+        "customerAddress": {
+          "coordinates": {
+            "latitude": currentPosition.latitude,
+            "longitude": currentPosition.longitude,
+          }
+        },
+        "paymentMethod": paymentMethod == 'Domvet' ? 'WALLET' : 'CASH',
+      };
+
+      Response response = await TransactionApi.instance.postTransaction(body);
+
+      if (response.statusCode != 200) {
+        String errorMessage = ExceptionResponse.getMessage(response.data);
+        throw Exception(errorMessage);
+      }
+
+      // if success connect to socket
+
+      print(response);
+    } catch (e) {
+      print(e);
+      Get.snackbar("Failed to post transaction", e.toString());
+    } finally {
+      isLoading(false);
       update();
     }
   }

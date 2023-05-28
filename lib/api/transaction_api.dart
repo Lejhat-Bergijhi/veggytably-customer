@@ -89,4 +89,31 @@ class TransactionApi {
       return e;
     }
   }
+
+  Future<dynamic> postTransaction(Map<String, dynamic> body) async {
+    try {
+      String? refreshToken = await _storage.read(key: "refreshToken");
+
+      var headers = {
+        "Content-Type": "application/json",
+        "authorization": 'Bearer $refreshToken',
+      };
+
+      Response response = await Dio().post(
+        ApiEndPoints.baseUrl +
+            ApiEndPoints.transactionEndpoints.postTransaction,
+        options: Options(
+          headers: headers,
+        ),
+        data: body,
+      );
+
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
 }
