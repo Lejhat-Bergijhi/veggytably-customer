@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:veggytably_customer/widgets/bottom_navbar.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({super.key});

@@ -1,6 +1,6 @@
 import 'package:veggytably_customer/widgets/background_wave.dart';
+import 'package:flutter/material.dart' hide SearchBar;
 import 'package:veggytably_customer/widgets/search_bar.dart';
-import 'package:flutter/material.dart';
 
 class SliverSearchAppBar extends SliverPersistentHeaderDelegate {
   const SliverSearchAppBar();
@@ -9,7 +9,7 @@ class SliverSearchAppBar extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     var adjustedShrinkOffset =
-    shrinkOffset > minExtent ? minExtent : shrinkOffset;
+        shrinkOffset > minExtent ? minExtent : shrinkOffset;
     double offset = (minExtent - adjustedShrinkOffset) * 0.6;
     double topPadding = MediaQuery.of(context).padding.top + 56;
 
@@ -20,11 +20,10 @@ class SliverSearchAppBar extends SliverPersistentHeaderDelegate {
         ),
         Positioned(
           top: topPadding + offset,
-          child: const SearchBar(),
           left: 16,
           right: 16,
+          child: const SearchBar(),
         ),
-        
       ],
     );
   }

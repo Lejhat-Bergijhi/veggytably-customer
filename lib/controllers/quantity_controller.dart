@@ -1,12 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:veggytably_customer/api/search_api.dart';
 import 'package:veggytably_customer/models/search_menu.dart';
 
-import '../api/merchant_api.dart';
-import '../models/search_merchant.dart';
 import '../controllers/merchant_controller.dart';
 
 class Restaurant {

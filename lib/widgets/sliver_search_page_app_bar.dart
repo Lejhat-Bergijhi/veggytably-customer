@@ -1,5 +1,4 @@
 import 'package:veggytably_customer/widgets/background_wave.dart';
-import 'package:veggytably_customer/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'search_bar2.dart';

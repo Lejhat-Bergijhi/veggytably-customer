@@ -1,24 +1,21 @@
 //template
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class Filterfood extends StatelessWidget {
-  
   final String title;
   final String imagepath;
   final double querywidth;
-  
+
   const Filterfood(this.querywidth, this.imagepath, this.title, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkResponse(
-      onTap: () {
-      },
+      onTap: () {},
       child: Material(
         type: MaterialType.transparency,
         child: Container(
-            width: (querywidth-24*2-13.5*2)/3,
+            width: (querywidth - 24 * 2 - 13.5 * 2) / 3,
             height: 89.33,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
@@ -38,7 +35,11 @@ class Filterfood extends StatelessWidget {
                 Container(
                   height: 35,
                   width: 35,
-                  child: Image.asset(imagepath,  fit: BoxFit.contain,),),
+                  child: Image.asset(
+                    imagepath,
+                    fit: BoxFit.contain,
+                  ),
+                ),
                 SizedBox(height: 6),
                 Text(
                   title,
@@ -56,4 +57,3 @@ class Filterfood extends StatelessWidget {
     );
   }
 }
-

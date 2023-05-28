@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/controllers/restriction_controller.dart';
 import 'package:veggytably_customer/views/home_page_user.dart';
-import 'package:veggytably_customer/views/profile_page.dart';
 
 import '../widgets/custom_checkbox.dart';
-import '/widgets/input_text.dart';
 
 class RestrictionPage extends StatelessWidget {
   const RestrictionPage({super.key});

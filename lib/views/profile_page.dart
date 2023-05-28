@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:veggytably_customer/views/login_page.dart';
 import 'package:veggytably_customer/views/restriction_page1.dart';
-import 'package:veggytably_customer/widgets/bottom_navbar.dart';
 import 'package:veggytably_customer/widgets/profile_menu.dart';
 import 'package:veggytably_customer/views/edit_profile.dart';
 

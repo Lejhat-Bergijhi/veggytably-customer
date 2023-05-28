@@ -6,10 +6,10 @@ import '../controllers/auth_controller.dart';
 import '/widgets/input_text.dart';
 
 class SignUpPage extends StatelessWidget {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   SignUpPage({super.key});
 
   @override

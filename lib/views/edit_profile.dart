@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:veggytably_customer/views/landing_page.dart';
-import 'package:veggytably_customer/views/profile_page.dart';
-import 'package:veggytably_customer/widgets/upload_pic.dart';
 import 'package:veggytably_customer/widgets/input_text.dart';
 
 import '../controllers/auth_controller.dart';

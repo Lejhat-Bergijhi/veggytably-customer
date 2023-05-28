@@ -1,10 +1,9 @@
 //template
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class FilterButton extends StatelessWidget {
-  double sizetext = 10;
-  Map<String, dynamic> style = {
+  final double sizetext = 10;
+  final Map<String, dynamic> style = {
     "MEAT-FREE": BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       color: Color(0xffffd2dc),
@@ -42,7 +41,7 @@ class FilterButton extends StatelessWidget {
 
       width: title.length * 7.0,
       decoration: style[title],
-      padding: EdgeInsets.symmetric(horizontal: sizetext*0.2, vertical: 1),
+      padding: EdgeInsets.symmetric(horizontal: sizetext * 0.2, vertical: 1),
       child: Center(
         child: Text(
           title,

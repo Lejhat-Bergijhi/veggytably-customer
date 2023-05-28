@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:veggytably_customer/views/deliver_order.dart';
 import 'package:veggytably_customer/views/login_page.dart';
 
 import 'controllers/auth_controller.dart';
@@ -16,10 +15,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: BindingsBuilder(() {
-        // Get.put(AuthController());
+        Get.put(AuthController());
       }),
       debugShowCheckedModeBanner: false,
-      home: DeliverOrderPage(),
+      home: LoginPage(),
     );
   }
 }

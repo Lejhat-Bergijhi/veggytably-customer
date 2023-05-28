@@ -9,9 +9,7 @@ class Counter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double boxWidth = MediaQuery.of(context).size.width;
-    return Container(
-        child: Row(children: [
+    return Row(children: [
       Container(
         width: 31,
         height: 31,
@@ -99,6 +97,6 @@ class Counter extends StatelessWidget {
               ]),
         ),
       ),
-    ]));
+    ]);
   }
 }

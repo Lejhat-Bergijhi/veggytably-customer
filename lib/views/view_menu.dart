@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:veggytably_customer/views/restriction_page1.dart';
-import 'package:veggytably_customer/widgets/filter_button.dart';
 import 'package:veggytably_customer/widgets/food_card.dart';
 import 'package:veggytably_customer/widgets/sliver_search_app_bar.dart';
 import 'package:veggytably_customer/widgets/filter_card.dart';
@@ -119,7 +118,6 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 12,
                   ),
-                  
                 ],
               ),
             ),

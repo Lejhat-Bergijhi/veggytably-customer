@@ -4,7 +4,6 @@ import 'package:veggytably_customer/controllers/merchant_controller.dart';
 import 'package:veggytably_customer/widgets/filter_button.dart';
 
 import '../controllers/cart_controller.dart';
-import '../models/cart.dart';
 import '../models/search_menu.dart';
 import '../utils/number_formatter.dart';
 import '../widgets/counter_button.dart';
