@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide SearchController;
 import 'package:get/get.dart';
 import 'package:veggytably_customer/controllers/search_controller.dart';
 import 'package:veggytably_customer/widgets/sliver_search_page_app_bar.dart';

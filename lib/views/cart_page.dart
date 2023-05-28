@@ -739,7 +739,7 @@ class PaymentMethod extends StatelessWidget {
                     paymentMethod[type]['subtitle'],
                     style: TextStyle(
                       color: type == 'Cash' ||
-                              balance >= cartController.totalPrice.value
+                              balance >= cartController.totalPrice.value + 10000
                           ? Colors.black
                           : Colors.red,
                       fontSize: 15,
@@ -751,7 +751,7 @@ class PaymentMethod extends StatelessWidget {
               Obx(
                 () => Checkbox(
                   onChanged: type == 'Cash' ||
-                          balance >= cartController.totalPrice.value
+                          balance >= cartController.totalPrice.value + 10000
                       ? (value) {
                           selectedMethod.value = type;
                         }
