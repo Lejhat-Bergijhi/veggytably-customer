@@ -641,38 +641,44 @@ class CartPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0xb2ffffff),
-                        blurRadius: 30,
-                        offset: Offset(0, 0),
-                      ),
-                    ],
-                    color: const Color(0xff70cb88),
-                  ),
-                  width: MediaQuery.of(context).size.width - 48,
-                  height: 44,
-                  child: TextButton(
-                    onPressed: () {
-                      transactionController.postTransaction(
-                        paymentMethod: paymentMethod.value,
-                      );
-                    },
-                    child: const Text(
-                      "Confirm Order",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
+                Obx(
+                  () => transactionController.isLoading.value
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0xb2ffffff),
+                                blurRadius: 30,
+                                offset: Offset(0, 0),
+                              ),
+                            ],
+                            color: const Color(0xff70cb88),
+                          ),
+                          width: MediaQuery.of(context).size.width - 48,
+                          height: 44,
+                          child: TextButton(
+                            onPressed: () {
+                              transactionController.postTransaction(
+                                paymentMethod: paymentMethod.value,
+                              );
+                            },
+                            child: const Text(
+                              "Confirm Order",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontFamily: "Rubik",
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                )
               ]),
             ),
           ),

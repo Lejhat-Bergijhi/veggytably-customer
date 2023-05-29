@@ -12,7 +12,7 @@ class Transaction {
   late Cart cart;
   late num totalPrice;
   late num deliveryFee;
-  late Driver? driver;
+  Driver? driver;
 
   Transaction({
     required this.transactionId,

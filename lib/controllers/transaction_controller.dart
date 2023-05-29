@@ -3,6 +3,7 @@ import 'package:get/get.dart' hide Response;
 import 'package:veggytably_customer/controllers/cart_controller.dart';
 import 'package:veggytably_customer/controllers/geo_controller.dart';
 import 'package:veggytably_customer/utils/socket_service.dart';
+import 'package:veggytably_customer/views/deliver_order.dart';
 
 import '../api/transaction_api.dart';
 import '../models/driver_model.dart';
@@ -102,6 +103,8 @@ class TransactionController extends GetxController {
       Transaction transaction = Transaction.fromJson(response.data["data"]);
 
       setTransaction(transaction);
+
+      Get.to(() => DeliverOrderPage());
     } catch (e) {
       print(e);
       Get.snackbar("Failed to create order!", e.toString());

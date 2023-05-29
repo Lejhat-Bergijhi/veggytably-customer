@@ -6,6 +6,7 @@ class NumberFormatter {
   var currencyFormatter = NumberFormat.currency(
     locale: "id",
     symbol: "Rp ",
+    decimalDigits: 0,
   );
 
   String idr(int number) {
