@@ -11,6 +11,7 @@ dependencies:
   dotted_border: ^2.0.0+3
   flutter:
     sdk: flutter
+  flutter_map: ^4.0.0
   flutter_markdown: ^0.6.9
   flutter_secure_storage: ^8.0.0
   geolocator: ^9.0.2

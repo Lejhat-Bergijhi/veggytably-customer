@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:veggytably_customer/utils/number_formatter.dart';
 
 import '../controllers/transaction_controller.dart';
@@ -16,13 +18,52 @@ class DeliverOrderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var customerPosition = transactionController.transaction!.customerAddress;
+    var merchantPosition = transactionController.transaction!.merchantAddress;
+    var markers = <Marker>[
+      // customer
+      Marker(
+        width: 80.0,
+        height: 80.0,
+        point: LatLng(customerPosition.latitude, customerPosition.longitude),
+        builder: (ctx) => const Icon(
+          Icons.location_on,
+          color: Colors.blue,
+          size: 40,
+        ),
+      ),
+      // merchant
+      Marker(
+        width: 80.0,
+        height: 80.0,
+        point: LatLng(merchantPosition.latitude, merchantPosition.longitude),
+        builder: (ctx) => const Icon(
+          Icons.location_on,
+          color: Colors.red,
+          size: 40,
+        ),
+      ),
+    ];
     return Scaffold(
       body: Stack(
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child:
-                Image.asset('assets/images/Background.png', fit: BoxFit.cover),
+          FlutterMap(
+            options: MapOptions(
+              center: LatLng(customerPosition.latitude - 0.008,
+                  customerPosition.longitude),
+              zoom: 13.0,
+            ),
+            children: [
+              // Map Layer
+              TileLayer(
+                urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+              ),
+              // Marker
+              MarkerLayer(
+                markers: markers,
+              ),
+            ],
           ),
           DraggableScrollableSheet(
             controller: dragController,
