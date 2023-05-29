@@ -15,7 +15,7 @@ class SocketService {
 
   SocketService._internal() {
     // namespace: https://domain:port/driver
-    socket = IO.io("${ApiEndPoints.baseUrl}driver", <String, dynamic>{
+    socket = IO.io("${ApiEndPoints.baseUrl}customer", <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
     });
@@ -28,44 +28,14 @@ class SocketService {
         // retry after 1 second
         Future.delayed(const Duration(seconds: 1), () {
           print("retry");
-          socket.emit('subscribe', userId);
+          socket.emit('subscribe-customer', userId);
         });
       }
-      socket.emit('subscribe', userId);
+      socket.emit('subscribe-customer', userId);
     });
 
-    // socket.on('location', (data) {
-    //   // print(data);
-    //   Handshake handshake = Handshake.fromJson(data);
-
-    //   // send back location and data to server
-    //   var currentPosition = GeoController.to.currentPosition;
-    //   var response = {
-    //     "userId": AuthController.to.user.id,
-    //     "location": {
-    //       "latitude": currentPosition.latitude,
-    //       "longitude": currentPosition.longitude,
-    //     },
-    //     "transactionId": handshake.transactionId,
-    //     "address": {
-    //       "customerAddress": handshake.customerAddress,
-    //       "merchantAddress": handshake.merchantAddress,
-    //     }
-    //   };
-
-    //   socket.emit('handshake', response);
-    // });
-
-    // socket.on('newOrder', (data) {
-    //   // parse data
-    //   Transaction transaction = Transaction.fromJson(data);
-    //   // set new order received to true in order controller
-    //   print(transaction);
-    //   OrderController.to.receiveOrder(transaction);
-    // });
-
     socket.onDisconnect((_) => print('disconnect'));
-    socket.on('fromServer', (_) => print(_));
+    // socket.on('fromServer', (_) => print(_));
   }
 
   IO.Socket getInstance() {

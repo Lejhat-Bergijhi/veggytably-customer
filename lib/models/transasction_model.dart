@@ -1,152 +1,90 @@
-import 'package:veggytably_customer/models/user_model.dart';
+import 'package:veggytably_customer/models/search_merchant.dart';
 
 import 'cart.dart';
 
 class Transaction {
-  late String id;
-  late String date;
-  late String status;
-  late String paymentMethod;
-  late String pickupAddressId;
-  late String customerAddressId;
-  late String cartId;
-  late String customerId;
-  late String merchantId;
-  late String? driverId;
-  late Cart cart;
-  late Customer customer;
+  late String transactionId;
+  late Address merchantAddress;
+  late Address customerAddress;
+  late double estimatedDeliveryTime;
   late Merchant merchant;
-  late Driver? driver;
+  late Cart cart;
+  late num totalPrice;
+  late num deliveryFee;
 
   Transaction({
-    required this.id,
-    required this.date,
-    required this.status,
-    required this.paymentMethod,
-    required this.pickupAddressId,
-    required this.customerAddressId,
-    required this.cartId,
-    required this.customerId,
-    required this.merchantId,
-    this.driverId,
-    required this.cart,
-    required this.customer,
+    required this.transactionId,
+    required this.merchantAddress,
+    required this.customerAddress,
+    required this.estimatedDeliveryTime,
     required this.merchant,
-    this.driver,
+    required this.cart,
+    required this.totalPrice,
+    required this.deliveryFee,
   });
 
-  Transaction.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    date = json['date'];
-    status = json['status'];
-    paymentMethod = json['paymentMethod'];
-    pickupAddressId = json['pickupAddressId'];
-    customerAddressId = json['customerAddressId'];
-    cartId = json['cartId'];
-    customerId = json['customerId'];
-    merchantId = json['merchantId'];
-    driverId = json['driverId'];
-    cart = (json['cart'] != null ? Cart.fromJson(json['cart']) : null)!;
-    customer = (json['customer'] != null
-        ? Customer.fromJson(json['customer'])
-        : null)!;
-    merchant = (json['merchant'] != null
-        ? Merchant.fromJson(json['merchant'])
-        : null)!;
-    driver = json['driver'];
+  factory Transaction.fromJson(Map<String, dynamic> body) {
+    return Transaction(
+      transactionId: body['transactionId'],
+      merchantAddress: Address.fromJson(body['merchantAddress']),
+      customerAddress: Address.fromJson(body['customerAddress']),
+      estimatedDeliveryTime: body['estimatedDeliveryTime'],
+      merchant: Merchant.fromJson(body['merchant']),
+      cart: Cart.fromJson(body['cart']),
+      totalPrice: body['totalPrice'],
+      deliveryFee: body['deliveryFee'],
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['date'] = date;
-    data['status'] = status;
-    data['paymentMethod'] = paymentMethod;
-    data['pickupAddressId'] = pickupAddressId;
-    data['customerAddressId'] = customerAddressId;
-    data['cartId'] = cartId;
-    data['customerId'] = customerId;
-    data['merchantId'] = merchantId;
-    data['driverId'] = driverId;
-    data['cart'] = cart.toJson();
-    data['customer'] = customer.toJson();
-    data['merchant'] = merchant.toJson();
-    data['driver'] = driver;
-    return data;
+  @override
+  String toString() {
+    return 'Transaction{transactionId: $transactionId, merchantAddress: $merchantAddress, customerAddress: $customerAddress, estimatedDeliveryTime: $estimatedDeliveryTime, merchant: $merchant, cart: $cart, totalPrice: $totalPrice, deliveryFee: $deliveryFee}';
   }
 }
 
-class Customer {
+class Address {
   late String id;
-  late String? address;
-  late List<dynamic> restrictions;
-  late String userId;
-  late User user;
+  late String address;
+  late String? postalCode;
+  late String? city;
+  late String? province;
+  late double latitude;
+  late double longitude;
 
-  Customer({
+  Address({
     required this.id,
-    this.address,
-    required this.restrictions,
-    required this.userId,
-    required this.user,
+    required this.address,
+    this.postalCode,
+    this.city,
+    this.province,
+    required this.latitude,
+    required this.longitude,
   });
 
-  Customer.fromJson(Map<String, dynamic> json) {
+  Address.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     address = json['address'];
-    if (json['restrictions'] != null) {
-      restrictions = List<dynamic>.empty(growable: true);
-      json['restrictions'].forEach((v) {
-        restrictions.add(v);
-      });
-    }
-    userId = json['userId'];
-    user = (json['user'] != null ? User.fromJson(json['user']) : null)!;
+    postalCode = json['postalCode'];
+    city = json['city'];
+    province = json['province'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['address'] = address;
-    data['restrictions'] = restrictions.map((v) => v.toJson()).toList();
-    data['userId'] = userId;
-    data['user'] = user.toJson();
+    data['postalCode'] = postalCode;
+    data['city'] = city;
+    data['province'] = province;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
     return data;
   }
-}
 
-class Merchant {
-  late String id;
-  late String restaurantName;
-  late String restaurantAddress;
-  late double rating;
-  late String userId;
-
-  Merchant({
-    required this.id,
-    required this.restaurantName,
-    required this.restaurantAddress,
-    required this.rating,
-    required this.userId,
-  });
-
-  Merchant.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    restaurantName = json['restaurantName'];
-    restaurantAddress = json['restaurantAddress'];
-    rating = json['rating'];
-    userId = json['userId'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['restaurantName'] = restaurantName;
-    data['restaurantAddress'] = restaurantAddress;
-    data['rating'] = rating;
-    data['userId'] = userId;
-    return data;
+  @override
+  String toString() {
+    return 'Address{id: $id, address: $address, latitude: $latitude, longitude: $longitude}';
   }
 }
-
-class Driver {}

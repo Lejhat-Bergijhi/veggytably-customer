@@ -30,10 +30,10 @@ class Merchant {
   late String id;
   late String restaurantName;
   late String restaurantAddress;
-  late int rating;
+  late num rating;
   late String userId;
-  late int price;
-  late int duration;
+  late num? price;
+  late num? duration;
 
   Merchant({
     required this.id,
@@ -41,8 +41,8 @@ class Merchant {
     required this.restaurantAddress,
     required this.rating,
     required this.userId,
-    required this.price,
-    required this.duration,
+    this.price,
+    this.duration,
   });
 
   Merchant.fromJson(Map<String, dynamic> json) {

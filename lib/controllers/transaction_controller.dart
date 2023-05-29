@@ -5,9 +5,11 @@ import 'package:veggytably_customer/controllers/geo_controller.dart';
 
 import '../api/transaction_api.dart';
 import '../models/exception_response.dart';
+import '../models/transasction_model.dart';
 
 class TransactionController extends GetxController {
   static TransactionController get to => Get.find();
+  Transaction? transaction;
 
   final RxDouble _domvetBalance = 0.0.obs;
 
@@ -17,6 +19,11 @@ class TransactionController extends GetxController {
 
   void setDompetBalance(double dompetBalance) {
     _domvetBalance.value = dompetBalance;
+    update();
+  }
+
+  void setTransaction(Transaction transaction) {
+    this.transaction = transaction;
     update();
   }
 
@@ -84,11 +91,12 @@ class TransactionController extends GetxController {
       }
 
       // if success connect to socket
+      Transaction transaction = Transaction.fromJson(response.data["data"]);
 
-      print(response);
+      setTransaction(transaction);
     } catch (e) {
       print(e);
-      Get.snackbar("Failed to post transaction", e.toString());
+      Get.snackbar("Failed to create order!", e.toString());
     } finally {
       isLoading(false);
       update();
