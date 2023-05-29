@@ -1,7 +1,8 @@
 // ignore: library_prefixes
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:veggytably_customer/controllers/transaction_controller.dart';
+import 'package:veggytably_customer/models/driver_model.dart';
 
-import '../controllers/auth_controller.dart';
 import 'api.endpoints.dart';
 
 class SocketService {
@@ -14,7 +15,7 @@ class SocketService {
   }
 
   SocketService._internal() {
-    // namespace: https://domain:port/driver
+    // namespace: https://domain:port/customer
     socket = IO.io("${ApiEndPoints.baseUrl}customer", <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
@@ -22,20 +23,27 @@ class SocketService {
     socket.onConnect((_) {
       print('connected to server');
 
-      var userId = AuthController.to.user.id;
-      // specify user id
-      if (userId == "") {
-        // retry after 1 second
-        Future.delayed(const Duration(seconds: 1), () {
-          print("retry");
-          socket.emit('subscribe-customer', userId);
-        });
+      var transaction = TransactionController.to.transaction;
+
+      if (transaction == null) {
+        return;
       }
-      socket.emit('subscribe-customer', userId);
+
+      var transactionId = transaction.transactionId;
+      // specify user id
+
+      socket.emit('subscribe', transactionId);
+    });
+
+    socket.on('driver-found', (data) {
+      Driver driver = Driver.fromJson(data);
+      TransactionController.to.setDriver(driver);
+
+      print(TransactionController.to.transaction!.driver!);
     });
 
     socket.onDisconnect((_) => print('disconnect'));
-    // socket.on('fromServer', (_) => print(_));
+    socket.on('fromServer', (_) => print(_));
   }
 
   IO.Socket getInstance() {

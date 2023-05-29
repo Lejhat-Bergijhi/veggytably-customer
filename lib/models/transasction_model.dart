@@ -1,3 +1,4 @@
+import 'package:veggytably_customer/models/driver_model.dart';
 import 'package:veggytably_customer/models/search_merchant.dart';
 
 import 'cart.dart';
@@ -11,6 +12,7 @@ class Transaction {
   late Cart cart;
   late num totalPrice;
   late num deliveryFee;
+  late Driver? driver;
 
   Transaction({
     required this.transactionId,

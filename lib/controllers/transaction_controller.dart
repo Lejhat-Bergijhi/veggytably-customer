@@ -2,8 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:veggytably_customer/controllers/cart_controller.dart';
 import 'package:veggytably_customer/controllers/geo_controller.dart';
+import 'package:veggytably_customer/utils/socket_service.dart';
 
 import '../api/transaction_api.dart';
+import '../models/driver_model.dart';
 import '../models/exception_response.dart';
 import '../models/transasction_model.dart';
 
@@ -24,6 +26,11 @@ class TransactionController extends GetxController {
 
   void setTransaction(Transaction transaction) {
     this.transaction = transaction;
+    update();
+  }
+
+  void setDriver(Driver driver) {
+    transaction!.driver = driver;
     update();
   }
 
@@ -91,6 +98,7 @@ class TransactionController extends GetxController {
       }
 
       // if success connect to socket
+      SocketService().connect();
       Transaction transaction = Transaction.fromJson(response.data["data"]);
 
       setTransaction(transaction);
