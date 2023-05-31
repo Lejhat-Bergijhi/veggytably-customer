@@ -1,5 +1,5 @@
 class ApiEndPoints {
-  static const String domain = "192.168.88.143";
+  static const String domain = "10.6.186.210";
   static const String baseUrl = 'http://$domain:5000/';
   // static const String baseUrl = 'https://2675-149-113-6-220.ngrok-free.app/';
   static final _AuthEndPoints authEndpoints = _AuthEndPoints();

@@ -5,6 +5,7 @@ import 'cart.dart';
 
 class Transaction {
   late String transactionId;
+  late String status;
   late Address merchantAddress;
   late Address customerAddress;
   late double estimatedDeliveryTime;
@@ -16,6 +17,7 @@ class Transaction {
 
   Transaction({
     required this.transactionId,
+    required this.status,
     required this.merchantAddress,
     required this.customerAddress,
     required this.estimatedDeliveryTime,
@@ -28,6 +30,7 @@ class Transaction {
   factory Transaction.fromJson(Map<String, dynamic> body) {
     return Transaction(
       transactionId: body['transactionId'],
+      status: body['status'],
       merchantAddress: Address.fromJson(body['merchantAddress']),
       customerAddress: Address.fromJson(body['customerAddress']),
       estimatedDeliveryTime: body['estimatedDeliveryTime'],
@@ -40,7 +43,7 @@ class Transaction {
 
   @override
   String toString() {
-    return 'Transaction{transactionId: $transactionId, merchantAddress: $merchantAddress, customerAddress: $customerAddress, estimatedDeliveryTime: $estimatedDeliveryTime, merchant: $merchant, cart: $cart, totalPrice: $totalPrice, deliveryFee: $deliveryFee}';
+    return 'Transaction{transactionId: $transactionId, status: $status, merchantAddress: $merchantAddress, customerAddress: $customerAddress, estimatedDeliveryTime: $estimatedDeliveryTime, merchant: $merchant, cart: $cart, totalPrice: $totalPrice, deliveryFee: $deliveryFee}';
   }
 }
 

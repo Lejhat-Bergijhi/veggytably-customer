@@ -2,7 +2,6 @@ import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart" hide Response;
 import 'package:dio/dio.dart';
-import "package:veggytably_customer/views/cart_page.dart";
 import "package:veggytably_customer/views/landing_page.dart";
 import "../api/auth_api.dart";
 import "../models/authentication_response.dart";
@@ -43,8 +42,7 @@ class AuthController extends GetxController {
       );
     } else {
       Get.offAll(
-        // () => LoginPage(),
-        () => CartPage(),
+        () => LoginPage(),
         transition: Transition.rightToLeft,
       );
     }

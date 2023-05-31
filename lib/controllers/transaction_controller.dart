@@ -4,6 +4,7 @@ import 'package:veggytably_customer/controllers/cart_controller.dart';
 import 'package:veggytably_customer/controllers/geo_controller.dart';
 import 'package:veggytably_customer/utils/socket_service.dart';
 import 'package:veggytably_customer/views/deliver_order.dart';
+import 'package:veggytably_customer/views/landing_page.dart';
 
 import '../api/transaction_api.dart';
 import '../models/driver_model.dart';
@@ -32,6 +33,24 @@ class TransactionController extends GetxController {
 
   void setDriver(Driver driver) {
     transaction!.driver = driver;
+    update();
+  }
+
+  void updateStatus(String status) {
+    transaction!.status = status;
+
+    if (status == "FINISHED") {
+      SocketService().disconnect();
+      finishTransaction();
+    }
+    update();
+  }
+
+  void finishTransaction() {
+    Get.to(() => LandingPage(initialIndex: 0));
+    transaction = null;
+    Get.snackbar('Order completed!', 'Enjoy your meal');
+    CartController.to.clearCart();
     update();
   }
 

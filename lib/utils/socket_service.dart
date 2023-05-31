@@ -42,6 +42,11 @@ class SocketService {
       print(TransactionController.to.transaction!.driver!);
     });
 
+    socket.on('status-update', (data) {
+      print(data);
+      TransactionController.to.updateStatus(data['status']);
+    });
+
     socket.onDisconnect((_) => print('disconnect'));
     socket.on('fromServer', (_) => print(_));
   }

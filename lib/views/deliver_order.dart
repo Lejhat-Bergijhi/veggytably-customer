@@ -44,6 +44,10 @@ class DeliverOrderPage extends StatelessWidget {
         ),
       ),
     ];
+    if (transactionController.transaction == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -136,14 +140,49 @@ class DeliverOrderPage extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            "We Are Getting Your Food Ready!",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 15,
-                                              fontFamily: "Rubik",
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                          GetBuilder<TransactionController>(
+                                            builder: (controller) {
+                                              if (controller.transaction!
+                                                          .status ==
+                                                      "PROCESSING" ||
+                                                  controller.transaction!
+                                                          .status ==
+                                                      "RECEIVED") {
+                                                return const Text(
+                                                  "We Are Getting Your Food Ready!",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontFamily: "Rubik",
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                );
+                                              }
+
+                                              if (controller
+                                                      .transaction!.status ==
+                                                  "ON_DELIVERY") {
+                                                return const Text(
+                                                  "Your Food Is On The Way!",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 15,
+                                                    fontFamily: "Rubik",
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                );
+                                              }
+
+                                              return const Text(
+                                                "Your order is complete!",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontFamily: "Rubik",
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              );
+                                            },
                                           ),
                                           RichText(
                                             text: TextSpan(
@@ -423,74 +462,70 @@ class DeliverOrderPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 5),
 
-                              Flexible(
-                                fit: FlexFit.loose,
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemCount: transactionController
-                                      .transaction!.cart.cartItem.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    var cartItem = transactionController
-                                        .transaction!.cart.cartItem[index];
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 4, bottom: 4),
-                                      child: Column(children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              flex: 2,
-                                              child: Text(
-                                                '${cartItem.quantity}x',
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontFamily: "Rubik",
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                                textAlign: TextAlign.center,
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: transactionController
+                                    .transaction!.cart.cartItem.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  var cartItem = transactionController
+                                      .transaction!.cart.cartItem[index];
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 4, bottom: 4),
+                                    child: Column(children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              '${cartItem.quantity}x',
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontFamily: "Rubik",
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 5,
+                                            child: Text(
+                                              // order
+                                              //     .orderList[index].menu.name,
+                                              cartItem.menu.name,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontFamily: "Rubik",
+                                                fontWeight: FontWeight.normal,
                                               ),
                                             ),
-                                            Expanded(
-                                              flex: 5,
-                                              child: Text(
-                                                // order
-                                                //     .orderList[index].menu.name,
-                                                cartItem.menu.name,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontFamily: "Rubik",
-                                                  fontWeight: FontWeight.normal,
-                                                ),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              NumberFormatter.instance
+                                                  .idr(cartItem.menu.price),
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 15,
+                                                fontFamily: "Rubik",
+                                                fontWeight: FontWeight.normal,
                                               ),
                                             ),
-                                            Expanded(
-                                              flex: 2,
-                                              child: Text(
-                                                NumberFormatter.instance
-                                                    .idr(cartItem.menu.price),
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontFamily: "Rubik",
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        const Divider(
-                                          thickness: 1,
-                                        ),
-                                      ]),
-                                    );
-                                  },
-                                ),
+                                          )
+                                        ],
+                                      ),
+                                      const Divider(
+                                        thickness: 1,
+                                      ),
+                                    ]),
+                                  );
+                                },
                               ),
                               //orders
 
@@ -612,9 +647,33 @@ class DeliverOrderPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              const SizedBox(height: 52),
-
                               //payment
+                              const SizedBox(height: 25),
+                              // Finished button
+                              transactionController.transaction!.status ==
+                                      "FINISHED"
+                                  ? ElevatedButton(
+                                      onPressed: () {
+                                        transactionController
+                                            .finishTransaction();
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.green,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                      child: const Text(
+                                        "FINISHED",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontFamily: "Rubik",
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ))
+                                  : const SizedBox(),
                             ]),
                       )));
             },
